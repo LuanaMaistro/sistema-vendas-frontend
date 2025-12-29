@@ -7,8 +7,9 @@ function App() {
   const appRouter = (
     <BrowserRouter>
       <Routes>
-
-        <Route path='/' element={ <CustomerCrudPage /> }/>
+        <Route path="/">
+          <Route path="/customers" element={ <CustomerCrudPage /> }/>
+        </Route>
 
       </Routes>
     </BrowserRouter>
