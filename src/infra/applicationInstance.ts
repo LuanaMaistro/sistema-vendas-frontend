@@ -1,5 +1,5 @@
 import { createApplicationInstance } from "@dibimo/core-lib";
-import { serviceFactory } from "./serviceFactiory";
+import { serviceFactory } from "./servicesImp/serviceFactiory";
 
 const application = createApplicationInstance(serviceFactory)
 
