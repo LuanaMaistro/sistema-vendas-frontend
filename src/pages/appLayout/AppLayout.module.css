@@ -1,15 +1,32 @@
 .layoutContainer{
-
+  display: flex;
+  width: 100%;
+  height: 100%
 }
 
 .sidebar {
+  background-color: tomato;
+  width: 75px
+}
+
+.contentContainer {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+
+  --topBarHeight: 60px;
+
+  .topbar {
+    background-color: #232323;
+    width: 100%;
+    height: var(--topBarHeight)
+  }
+  .contentPage {
+    background-color: #6f6f6f;
+    width: 100%;
+    height: calc(100% - var(--topBarHeight))
+  }
 
 }
 
-.topbar {
 
-}
-
-.contentePage {
-
-}
