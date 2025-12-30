@@ -1,4 +1,4 @@
-import { Button, Card, Flex, Form, Select } from 'antd'
+import { Button, Card, Flex, Form, Select, Table, type TableColumnsType } from 'antd'
 import styles from './CustomerCrudPage.module.css'
 import Title from 'antd/es/typography/Title'
 import Paragraph from 'antd/es/typography/Paragraph'
@@ -32,6 +32,13 @@ export default function CustomerCrudPage() {
     getCustomers()
   })
 
+  const columns: TableColumnsType<Customer> = [
+    {
+      title: 'Nome',
+      dataIndex: 'name'
+    }
+  ]
+
   return (
     <div className={styles.customerCrudPage}>
       <header className={styles.crudPageHeader}>
@@ -54,9 +61,10 @@ export default function CustomerCrudPage() {
       </Card>
 
       <div className="customers">
-        {clientes.map(c => (
-          <div>{c.name}</div>
-        ))}
+        <Table<Customer>
+          columns={columns}
+          dataSource={clientes}
+        />
       </div>
     </div>
   )
