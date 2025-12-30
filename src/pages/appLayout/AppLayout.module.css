@@ -14,12 +14,10 @@
   --topBarHeight: 60px;
 
   .topbar {
-    background-color: #232323;
     width: 100%;
     height: var(--topBarHeight)
   }
   .contentPage {
-    background-color: #6f6f6f;
     width: 100%;
     height: calc(100% - var(--topBarHeight))
   }
