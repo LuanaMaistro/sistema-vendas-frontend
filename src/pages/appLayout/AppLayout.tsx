@@ -9,7 +9,9 @@ export default function AppLayout() {
       <AppLayoutSidebar />
       <div className={styles.contentContainer}>
         <AppLayoutTopbar className={styles.topbar} />
-        <div className={styles.contentPage}></div>
+        <div className={styles.contentPage}>
+          <Outlet />
+        </div>
       </div>
     </main>
   )
