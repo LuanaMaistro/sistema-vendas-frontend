@@ -10,8 +10,22 @@ export default class CustomerServiceImp implements CustomerService {
   Update(entity: Customer): Result {
     throw new Error("Method not implemented.");
   }
+
   List(): Result<Customer[]> {
-    throw new Error("Method not implemented.");
+    return {
+      data: [
+        this.createRandomCustomer()
+      ],
+      success: true,
+      code: 200,
+    }
+  }
+
+  private createRandomCustomer(): Customer {
+    return {
+      id: '1',
+      name: 'Esse é um cliente de teste fixo apenas'
+    }
   }
   GetById(id: string): Result<Customer> {
     throw new Error("Method not implemented.");
