@@ -1,4 +1,4 @@
-import { Button, Card, Flex, Form, Select, Table, type TableColumnsType } from 'antd'
+import { Button, Card, Drawer, Flex, Form, Select, Table, type TableColumnsType } from 'antd'
 import styles from './CustomerCrudPage.module.css'
 import Title from 'antd/es/typography/Title'
 import Paragraph from 'antd/es/typography/Paragraph'
@@ -20,6 +20,16 @@ export default function CustomerCrudPage() {
   ]
 
   const [clientes, setClientes] = useState<Array<Customer>>([])
+
+  const [addCustomerOpen, setAddCustomerOpen] = useState(false)
+
+  const showAddCustomer = () => {
+    setAddCustomerOpen(true)
+  }
+
+  const closeAddCustomer = () => {
+    setAddCustomerOpen(true)
+  }
 
   const getCustomers = async () => {
     const response = await application.ListCustomers.execute()
@@ -56,7 +66,13 @@ export default function CustomerCrudPage() {
         </Flex>
 
         <div>
-          <Button variant="solid" color="primary">+ Novo Cliente</Button>
+          <Button
+            variant="solid"
+            color="primary"
+            onClick={() => showAddCustomer()}
+          >
+            + Novo Cliente
+          </Button>
         </div>
       </header>
 
@@ -75,6 +91,13 @@ export default function CustomerCrudPage() {
         dataSource={clientes}
       />
 
+      <Drawer
+        title="Adicionar novo Cliente"
+        open={addCustomerOpen}
+        onClose={closeAddCustomer}
+      >
+        Aqui vai o formulário para adicionar clientes
+      </Drawer>
     </div>
   )
 }
