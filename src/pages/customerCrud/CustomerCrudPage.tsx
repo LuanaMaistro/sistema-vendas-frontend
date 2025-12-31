@@ -76,6 +76,7 @@ export default function CustomerCrudPage() {
         </div>
       </header>
 
+      {/*esse é o card para filtros*/}
       <Card>
         <Form>
           <Form.Item label="Tipo de cliente">
