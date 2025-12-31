@@ -26,6 +26,10 @@ export default class CustomerServiceImp implements CustomerService {
       id: '1',
       name: 'Esse é um cliente de teste fixo apenas',
       Cnpj: CNPJ.create("47.185.159/0001-91"),
+      CustomerContact: {
+        email: 'diogobissolimoreno@gmail.com',
+        phone: ''
+      }
     }
   }
   GetById(id: string): Result<Customer> {
