@@ -30,7 +30,7 @@ export default function CustomerCrudPage() {
 
   useEffect(() => {
     getCustomers()
-  })
+  }, [])
 
   const columns: TableColumnsType<Customer> = [
     {
