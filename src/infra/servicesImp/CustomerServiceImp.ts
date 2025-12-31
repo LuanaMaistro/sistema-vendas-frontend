@@ -1,4 +1,4 @@
-import type { Customer, CustomerService, Result } from "@dibimo/core-lib";
+import { CNPJ, type Customer, type CustomerService, type Result } from "@dibimo/core-lib";
 
 export default class CustomerServiceImp implements CustomerService {
   Add(entity: Customer): Result {
@@ -24,7 +24,8 @@ export default class CustomerServiceImp implements CustomerService {
   private createRandomCustomer(): Customer {
     return {
       id: '1',
-      name: 'Esse é um cliente de teste fixo apenas'
+      name: 'Esse é um cliente de teste fixo apenas',
+      Cnpj: CNPJ.create("47.185.159/0001-91"),
     }
   }
   GetById(id: string): Result<Customer> {
