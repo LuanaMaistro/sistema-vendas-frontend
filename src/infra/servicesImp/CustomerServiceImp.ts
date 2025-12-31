@@ -23,7 +23,12 @@ const mockCustomers = [
 
 export default class CustomerServiceImp implements CustomerService {
   Add(entity: Customer): Result {
-    throw new Error("Method not implemented.");
+    mockCustomers.push(entity)
+
+    return {
+      code: 200,
+      success: true,
+    }
   }
   Remove(id: string): Result {
     throw new Error("Method not implemented.");
