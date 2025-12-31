@@ -36,6 +36,14 @@ export default function CustomerCrudPage() {
     {
       title: 'Nome',
       dataIndex: 'name'
+    },
+    {
+      title: 'E-mail',
+      dataIndex: ['CustomerContact', 'email'],
+    },
+    {
+      title: 'Cnpj',
+      dataIndex: ['Cnpj', 'Value']
     }
   ]
 
