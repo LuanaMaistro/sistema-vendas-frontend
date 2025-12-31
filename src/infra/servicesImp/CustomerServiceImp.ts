@@ -35,24 +35,13 @@ export default class CustomerServiceImp implements CustomerService {
   List(): Result<Customer[]> {
     return {
       data: [
-        this.createRandomCustomer()
+        ...mockCustomers
       ],
       success: true,
       code: 200,
     }
   }
 
-  private createRandomCustomer(): Customer {
-    return {
-      id: '1',
-      name: 'Esse é um cliente de teste fixo apenas',
-      Cnpj: CNPJ.create("47.185.159/0001-91"),
-      CustomerContact: {
-        email: 'diogobissolimoreno@gmail.com',
-        phone: ''
-      }
-    }
-  }
   GetById(id: string): Result<Customer> {
     throw new Error("Method not implemented.");
   }
