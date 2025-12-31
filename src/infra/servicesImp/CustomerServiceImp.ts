@@ -1,6 +1,6 @@
 import { CNPJ, type Customer, type CustomerService, type Result } from "@dibimo/core-lib";
 
-function createRandomCustomer() {
+function createRandomCustomer(): Customer {
 
   return {
     id: '1',
