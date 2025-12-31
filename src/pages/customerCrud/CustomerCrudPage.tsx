@@ -68,12 +68,13 @@ export default function CustomerCrudPage() {
         </Form>
       </Card>
 
-      <div className="customers">
-        <Table<Customer>
-          columns={columns}
-          dataSource={clientes}
-        />
-      </div>
+
+      <Table<Customer>
+        className={styles.customersTable}
+        columns={columns}
+        dataSource={clientes}
+      />
+
     </div>
   )
 }
