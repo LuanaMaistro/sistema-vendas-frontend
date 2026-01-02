@@ -4,20 +4,10 @@ import Title from 'antd/es/typography/Title'
 import Paragraph from 'antd/es/typography/Paragraph'
 import application from '../../infra/applicationInstance'
 import { useEffect, useState } from 'react'
-import { fold, type Customer } from '@dibimo/core-lib'
+import { CustomerType, fold, type Customer } from '@dibimo/core-lib'
+import { CustomerTypeOptions } from '../../types/enums/customer'
 
 export default function CustomerCrudPage() {
-  //TODO: converter para um Enum depois
-  const customerTypes = [
-    {
-      value: 0,
-      label: "Físico"
-    },
-    {
-      value: 1,
-      label: "Jurídico"
-    }
-  ]
 
   const [clientes, setClientes] = useState<Array<Customer>>([])
 
@@ -57,7 +47,7 @@ export default function CustomerCrudPage() {
     }
   ]
 
-  const [addType, setAddType] = useState(0)
+  const [addCustomerType, setAddType] = useState(CustomerType.NATURAL_PERSON)
 
   const changeAddCustomerType = (e: RadioChangeEvent) => {
     setAddType(e.target.value!)
@@ -85,7 +75,7 @@ export default function CustomerCrudPage() {
       <Card>
         <Form>
           <Form.Item label="Tipo de cliente">
-            <Select options={customerTypes}/>
+            <Select options={CustomerTypeOptions}/>
           </Form.Item>
         </Form>
       </Card>
@@ -103,7 +93,7 @@ export default function CustomerCrudPage() {
         onClose={closeAddCustomer}
       >
         <Radio.Group
-          options={customerTypes}
+          options={CustomerTypeOptions}
           optionType='button'
           buttonStyle='solid'
           value={addType}
