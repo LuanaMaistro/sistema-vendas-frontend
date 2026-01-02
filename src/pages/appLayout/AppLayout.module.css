@@ -1,27 +1,24 @@
 .layoutContainer{
   display: flex;
   width: 100%;
-  height: 100%
+  height: 100%;
 }
-
-
 
 .contentContainer {
   flex: 1;
   height: 100%;
   width: 100%;
-
-  --topBarHeight: 60px;
-
-  .topbar {
-    width: 100%;
-    height: var(--topBarHeight)
-  }
-  .contentPage {
-    width: 100%;
-    height: calc(100% - var(--topBarHeight))
-  }
-
+  display: flex;
+  flex-direction: column;
 }
 
+.topbar {
+  width: 100%;
+  height: 60px;
+}
+
+.contentPage {
+  width: 100%;
+  height: 100%;
+}
 
