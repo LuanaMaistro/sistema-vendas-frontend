@@ -1,3 +1,4 @@
+import { CustomerType } from "@dibimo/core-lib";
 import { Col, Form, Input, Row } from "antd";
 
 interface CustomerFormProps {
