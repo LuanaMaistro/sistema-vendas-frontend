@@ -96,7 +96,7 @@ export default function CustomerCrudPage() {
           options={CustomerTypeOptions}
           optionType='button'
           buttonStyle='solid'
-          value={addType}
+          value={addCustomerType}
           onChange={changeAddCustomerType}
         />
 
