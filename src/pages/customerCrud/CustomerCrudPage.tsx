@@ -79,11 +79,15 @@ export default function CustomerCrudPage() {
       </Card>
 
       {/*TODO: Existe um margin na páginação da table que faz a página scrollar, depois tem que ver como que faz para resolver corretamente*/}
-      <Table<Customer>
+      <div
         className={styles.customersTable}
-        columns={columns}
-        dataSource={clientes}
-      />
+      >
+        <Table<Customer>
+          columns={columns}
+          dataSource={clientes}
+        />
+      </div>
+
 
       <AddCustomerDrawer
         open={addCustomerOpen}
