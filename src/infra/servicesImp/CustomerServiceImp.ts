@@ -44,7 +44,11 @@ export default class CustomerServiceImp implements CustomerService {
   }
 
   GetById(id: string): Result<Customer> {
-    throw new Error("Method not implemented.");
+    return {
+      success: true,
+      code: 200,
+      data: mockCustomers[this.getCustomerIndex(id)]
+    }
   }
 
   private getCustomerIndex(customerId: string) {
