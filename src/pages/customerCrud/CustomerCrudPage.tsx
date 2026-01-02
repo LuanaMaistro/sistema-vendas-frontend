@@ -16,6 +16,7 @@ import application from '../../infra/applicationInstance'
 import { useEffect, useState } from 'react'
 import { CustomerType, fold, type Customer } from '@dibimo/core-lib'
 import { CustomerTypeOptions } from '../../types/enums/customer'
+import CustomerForm from './components/CustomerForm/CustomerForm'
 
 export default function CustomerCrudPage() {
 
@@ -110,33 +111,7 @@ export default function CustomerCrudPage() {
           onChange={changeAddCustomerType}
         />
 
-        <div>
-          <Form
-            layout='vertical'
-          >
-            <Row gutter={16}>
-
-              <Col span={12}>
-                <Form.Item label="Razão social">
-                  <Input />
-                </Form.Item>
-              </Col>
-
-              <Col span={12}>
-                <Form.Item label="CNPJ">
-                  <Input />
-                </Form.Item>
-              </Col>
-
-              <Col span={24}>
-                <Form.Item label="E-mail">
-                  <Input />
-                </Form.Item>
-              </Col>
-
-            </Row>
-          </Form>
-        </div>
+        <CustomerForm />
       </Drawer>
     </div>
   )
