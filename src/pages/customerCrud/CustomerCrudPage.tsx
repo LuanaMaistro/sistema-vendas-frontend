@@ -1,4 +1,4 @@
-import { Button, Card, Col, Drawer, Flex, Form, Input, Row, Select, Table, type TableColumnsType } from 'antd'
+import { Button, Card, Col, Drawer, Flex, Form, Input, Radio, Row, Select, Table, type RadioChangeEvent, type TableColumnsType } from 'antd'
 import styles from './CustomerCrudPage.module.css'
 import Title from 'antd/es/typography/Title'
 import Paragraph from 'antd/es/typography/Paragraph'
@@ -57,6 +57,11 @@ export default function CustomerCrudPage() {
     }
   ]
 
+  const [addType, setAddType] = useState(0)
+
+  const changeAddCustomerType = (e: RadioChangeEvent) => {
+    setAddType(e.target.value!)
+  }
   return (
     <div className={styles.customerCrudPage}>
       <header className={styles.crudPageHeader}>
@@ -97,31 +102,41 @@ export default function CustomerCrudPage() {
         open={addCustomerOpen}
         onClose={closeAddCustomer}
       >
-        <Form
-          layout='vertical'
-        >
-          <Row gutter={16}>
+        <Radio.Group
+          options={customerTypes}
+          optionType='button'
+          buttonStyle='solid'
+          value={addType}
+          onChange={changeAddCustomerType}
+        />
 
-            <Col span={12}>
-              <Form.Item label="Razão social">
-                <Input />
-              </Form.Item>
-            </Col>
+        <div>
+          <Form
+            layout='vertical'
+          >
+            <Row gutter={16}>
 
-            <Col span={12}>
-              <Form.Item label="CNPJ">
-                <Input />
-              </Form.Item>
-            </Col>
+              <Col span={12}>
+                <Form.Item label="Razão social">
+                  <Input />
+                </Form.Item>
+              </Col>
 
-            <Col span={24}>
-              <Form.Item label="E-mail">
-                <Input />
-              </Form.Item>
-            </Col>
+              <Col span={12}>
+                <Form.Item label="CNPJ">
+                  <Input />
+                </Form.Item>
+              </Col>
 
-          </Row>
-        </Form>
+              <Col span={24}>
+                <Form.Item label="E-mail">
+                  <Input />
+                </Form.Item>
+              </Col>
+
+            </Row>
+          </Form>
+        </div>
       </Drawer>
     </div>
   )
