@@ -47,5 +47,10 @@ export default class CustomerServiceImp implements CustomerService {
     throw new Error("Method not implemented.");
   }
 
+  private getCustomerIndex(customerId: string) {
+    const result = mockCustomers.findIndex((c) => c.id! == customerId)
+    if(result < 0) throw 'cliente não encontrado'
+    return result
+  }
 }
 
