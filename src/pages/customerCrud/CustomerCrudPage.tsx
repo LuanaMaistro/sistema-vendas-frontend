@@ -1,12 +1,9 @@
 import { Button,
   Card,
-  Drawer,
   Flex,
   Form,
-  Radio,
   Select,
   Table,
-  type RadioChangeEvent,
   type TableColumnsType
 } from 'antd'
 import styles from './CustomerCrudPage.module.css'
@@ -14,23 +11,18 @@ import Title from 'antd/es/typography/Title'
 import Paragraph from 'antd/es/typography/Paragraph'
 import application from '../../infra/applicationInstance'
 import { useEffect, useState } from 'react'
-import { CustomerType, fold, type Customer } from '@dibimo/core-lib'
+import { fold, type Customer } from '@dibimo/core-lib'
 import { CustomerTypeOptions } from '../../types/enums/customer'
-import CustomerForm from './components/CustomerForm/CustomerForm'
+import AddCustomerDrawer from './components/AddCustomerDrawer/AddCustomerDrawer'
 
 export default function CustomerCrudPage() {
 
   const [clientes, setClientes] = useState<Array<Customer>>([])
 
   const [addCustomerOpen, setAddCustomerOpen] = useState(false)
+  const showAddCustomer = () => setAddCustomerOpen(true)
+  const closeAddCustomer = () => setAddCustomerOpen(false)
 
-  const showAddCustomer = () => {
-    setAddCustomerOpen(true)
-  }
-
-  const closeAddCustomer = () => {
-    setAddCustomerOpen(false)
-  }
 
   const getCustomers = async () => {
     const response = await application.ListCustomers.execute()
@@ -58,12 +50,7 @@ export default function CustomerCrudPage() {
     }
   ]
 
-  const [addCustomerType, setAddType] = useState(CustomerType.NATURAL_PERSON)
-
-  const changeAddCustomerType = (e: RadioChangeEvent) => {
-    setAddType(e.target.value!)
-  }
-  return (
+ return (
     <div className={styles.customerCrudPage}>
       <header className={styles.crudPageHeader}>
         <Flex vertical>
@@ -98,21 +85,10 @@ export default function CustomerCrudPage() {
         dataSource={clientes}
       />
 
-      <Drawer
-        title="Adicionar novo Cliente"
+      <AddCustomerDrawer
         open={addCustomerOpen}
         onClose={closeAddCustomer}
-      >
-        <Radio.Group
-          options={CustomerTypeOptions}
-          optionType='button'
-          buttonStyle='solid'
-          value={addCustomerType}
-          onChange={changeAddCustomerType}
-        />
-
-        <CustomerForm customerType={addCustomerType} />
-      </Drawer>
+      />
     </div>
   )
 }
