@@ -19,7 +19,7 @@ const mockCustomers = Array.from({ length: 15 }, createRandomCustomer)
 
 export default class CustomerServiceImp implements CustomerService {
   Add(entity: Customer): Result {
-    mockCustomers.push(entity)
+    mockCustomers.unshift(entity)
 
     return {
       code: 200,
