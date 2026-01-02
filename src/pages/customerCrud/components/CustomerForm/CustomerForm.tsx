@@ -1,6 +1,10 @@
 import { Col, Form, Input, Row } from "antd";
 
-export default function CustomerForm() {
+interface CustomerFormProps {
+  customerType: CustomerType
+}
+
+export default function CustomerForm({ customerType }: CustomerFormProps) {
   return (
 
     <div>
