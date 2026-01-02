@@ -111,7 +111,7 @@ export default function CustomerCrudPage() {
           onChange={changeAddCustomerType}
         />
 
-        <CustomerForm />
+        <CustomerForm customerType={addCustomerType} />
       </Drawer>
     </div>
   )
