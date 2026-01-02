@@ -85,7 +85,7 @@ export default function CustomerCrudPage() {
         </Form>
       </Card>
 
-
+      {/*TODO: Existe um margin na páginação da table que faz a página scrollar, depois tem que ver como que faz para resolver corretamente*/}
       <Table<Customer>
         className={styles.customersTable}
         columns={columns}
