@@ -28,7 +28,7 @@ export default function CustomerCrudPage() {
   }
 
   const closeAddCustomer = () => {
-    setAddCustomerOpen(true)
+    setAddCustomerOpen(false)
   }
 
   const getCustomers = async () => {
