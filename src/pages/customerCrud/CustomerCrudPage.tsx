@@ -1,4 +1,4 @@
-import { Button, Card, Drawer, Flex, Form, Select, Table, type TableColumnsType } from 'antd'
+import { Button, Card, Col, Drawer, Flex, Form, Input, Row, Select, Table, type TableColumnsType } from 'antd'
 import styles from './CustomerCrudPage.module.css'
 import Title from 'antd/es/typography/Title'
 import Paragraph from 'antd/es/typography/Paragraph'
@@ -97,7 +97,31 @@ export default function CustomerCrudPage() {
         open={addCustomerOpen}
         onClose={closeAddCustomer}
       >
-        Aqui vai o formulário para adicionar clientes
+        <Form
+          layout='vertical'
+        >
+          <Row gutter={16}>
+
+            <Col span={12}>
+              <Form.Item label="Razão social">
+                <Input />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item label="CNPJ">
+                <Input />
+              </Form.Item>
+            </Col>
+
+            <Col span={24}>
+              <Form.Item label="E-mail">
+                <Input />
+              </Form.Item>
+            </Col>
+
+          </Row>
+        </Form>
       </Drawer>
     </div>
   )
