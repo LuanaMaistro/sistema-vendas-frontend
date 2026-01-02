@@ -1,25 +1,21 @@
+import { fakerPT_BR as faker } from '@faker-js/faker'
 import { CNPJ, type Customer, type CustomerService, type Result } from "@dibimo/core-lib";
+
+faker.seed(123)
 
 function createRandomCustomer(): Customer {
 
   return {
-    id: '1',
-    name: 'Esse é um cliente de teste fixo apenas',
-    Cnpj: CNPJ.create("47.185.159/0001-91"),
+    id: faker.string.uuid(),
+    name: faker.company.name(),
+    Cnpj: CNPJ.create("15.250.180/0001-37"),
     CustomerContact: {
-      email: 'diogobissolimoreno@gmail.com',
-      phone: ''
+      email: faker.internet.email(),
+      phone: faker.phone.number({ style: "national" })
     }
   }
 }
-const mockCustomers = [
-  createRandomCustomer(),
-  createRandomCustomer(),
-  createRandomCustomer(),
-  createRandomCustomer(),
-  createRandomCustomer(),
-  createRandomCustomer(),
-]
+const mockCustomers = Array.from({ length: 15 }, createRandomCustomer)
 
 export default class CustomerServiceImp implements CustomerService {
   Add(entity: Customer): Result {
