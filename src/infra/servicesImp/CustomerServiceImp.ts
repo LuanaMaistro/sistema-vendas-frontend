@@ -1,5 +1,5 @@
 import { fakerPT_BR as faker } from '@faker-js/faker'
-import { CNPJ, type Customer, type CustomerService, type Result } from "@dibimo/core-lib";
+import { CNPJ, CPF, type Customer, type CustomerService, type Result } from "@dibimo/core-lib";
 
 faker.seed(123)
 
@@ -30,7 +30,26 @@ export default class CustomerServiceImp implements CustomerService {
     throw new Error("Method not implemented.");
   }
   Update(entity: Customer): Result {
-    throw new Error("Method not implemented.");
+    const customerIndex = this.getCustomerIndex(entity.id!)
+    const customer = { ...mockCustomers[customerIndex] }
+    customer.Cpf = entity.Cpf
+    customer.Cnpj = entity.Cnpj
+    customer.name = entity.name
+    if(!customer.CustomerContact) {
+      customer.CustomerContact = {
+        email: entity.CustomerContact?.email,
+        phone: entity.CustomerContact?.phone,
+      }
+    }
+    else {
+      customer.CustomerContact!.email = entity.CustomerContact?.email
+      customer.CustomerContact!.phone = entity.CustomerContact?.phone
+
+    }
+    return {
+      code: 200,
+      success: true,
+    }
   }
 
   List(): Result<Customer[]> {
