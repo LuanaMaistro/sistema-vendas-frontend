@@ -1,9 +1,10 @@
 import { CustomerType } from "@dibimo/core-lib";
 import { Col, Form, Input, Row, type FormInstance, type FormProps } from "antd";
+import type AddCustomerForm from "../../types/AddCustomerForm";
 
 interface CustomerFormProps {
   customerType: CustomerType
-  form: FormInstance
+  form: FormInstance<AddCustomerForm>
   onFinish: FormProps['onFinish']
 }
 
