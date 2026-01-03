@@ -26,9 +26,7 @@ export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerPr
       cnpj: customerData.cpnj,
       cpf: customerData.cpf,
     })
-    console.log(response)
     const message = fold(response, (erro: Error) => erro.message, () => 'deu tudo certo')
-    console.log(message)
   }
 
   const mountCustomerName = (customerData: CustomerFormFields): string => {
