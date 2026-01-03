@@ -1,4 +1,4 @@
-export default interface AddCustomerForm {
+export default interface CustomerFormFields {
   name?: string,
   surname?: string,
   email?: string,

@@ -4,7 +4,7 @@ import { CustomerTypeOptions } from "../../../../types/enums/customer";
 import { CustomerType, fold } from "@dibimo/core-lib";
 import { useState } from "react";
 import application from "../../../../infra/applicationInstance";
-import type AddCustomerForm from "../../types/AddCustomerForm";
+import type CustomerFormFields from "../../types/CustomerFormFields";
 
 interface AddCustomerDrawerProps {
   open: boolean,
@@ -15,9 +15,9 @@ export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerPr
   const [addCustomerType, setAddType] = useState(CustomerType.NATURAL_PERSON)
   const changeAddCustomerType = (e: RadioChangeEvent) => setAddType(e.target.value!)
 
-  const [formAdd] = Form.useForm<AddCustomerForm>()
+  const [formAdd] = Form.useForm<CustomerFormFields>()
 
-  const addCustomer = async (customerData: AddCustomerForm) => {
+  const addCustomer = async (customerData: CustomerFormFields) => {
     const customerName = mountCustomerName(customerData)
     const response = await application.AddCustomer.execute({
       name: customerName,
@@ -31,7 +31,7 @@ export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerPr
     console.log(message)
   }
 
-  const mountCustomerName = (customerData: AddCustomerForm): string => {
+  const mountCustomerName = (customerData: CustomerFormFields): string => {
     if(customerData.cpf) return `${customerData.name} ${customerData.surname}`
     return customerData.corporativeName || 'Error'
   }
