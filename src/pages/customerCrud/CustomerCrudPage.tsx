@@ -3,6 +3,7 @@ import { Button,
   Flex,
   Form,
   Select,
+  Space,
   Table,
   type TableColumnsType
 } from 'antd'
@@ -10,10 +11,12 @@ import styles from './CustomerCrudPage.module.css'
 import Title from 'antd/es/typography/Title'
 import Paragraph from 'antd/es/typography/Paragraph'
 import { useEffect, useState } from 'react'
-import { type Customer } from '@dibimo/core-lib'
+import { CustomerType, type Customer } from '@dibimo/core-lib'
 import { CustomerTypeOptions } from '../../types/enums/customer'
 import AddCustomerDrawer from './components/AddCustomerDrawer/AddCustomerDrawer'
 import { useCustomerCrudStore } from './CustomerCrudStore'
+import UpdateCustomerDrawer from './components/UpdateCustomerDrawer/UpdateCustomerDrawer'
+import type CustomerFormFields from './types/CustomerFormFields'
 
 export default function CustomerCrudPage() {
 
@@ -22,6 +25,11 @@ export default function CustomerCrudPage() {
   const [addCustomerOpen, setAddCustomerOpen] = useState(false)
   const showAddCustomer = () => setAddCustomerOpen(true)
   const closeAddCustomer = () => setAddCustomerOpen(false)
+
+  const [updateCustomerOpen, setUpdateCustomerOpen] = useState(false)
+  const showUpdateCustomer = () => setUpdateCustomerOpen(true)
+  const closeUpdateCustomer = () => setUpdateCustomerOpen(false)
+
 
 
   useEffect(() => {
@@ -40,8 +48,39 @@ export default function CustomerCrudPage() {
     {
       title: 'Cnpj',
       dataIndex: ['Cnpj', 'Value']
-    }
+    },
+    {
+      title: 'Ações',
+      key: 'actions',
+      render: (_, customer) =>  (
+        <Space>
+          <a onClick={() => editCustomer(customer)}>Editar</a>
+          <a onClick={() => editCustomer(customer)}>Deletar</a>
+        </Space>
+      )
+    },
   ]
+
+  const [editForm] = Form.useForm<CustomerFormFields>()
+  const editCustomer = (customer: Customer) => {
+    editForm.setFieldsValue({
+      name: customer.name,
+      phone: customer.CustomerContact?.phone,
+      email: customer.CustomerContact?.email,
+      cpf: customer.Cpf?.Value,
+      cpnj: customer.Cnpj?.Value,
+      id: customer.id,
+      corporativeName: customer.name,
+      customerType: getCustomerType(customer),
+      surname: customer.name,
+    })
+    showUpdateCustomer()
+  }
+
+  const getCustomerType = (customer: Customer): CustomerType => {
+    if (customer.Cnpj) return CustomerType.LEGAL_PERSON
+    return CustomerType.NATURAL_PERSON
+  }
 
  return (
     <div className={styles.customerCrudPage}>
@@ -84,6 +123,12 @@ export default function CustomerCrudPage() {
       <AddCustomerDrawer
         open={addCustomerOpen}
         onClose={closeAddCustomer}
+      />
+
+      <UpdateCustomerDrawer
+        open={updateCustomerOpen}
+        onClose={closeUpdateCustomer}
+        customerForm={editForm}
       />
     </div>
   )
