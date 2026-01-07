@@ -9,16 +9,14 @@ import { Button,
 import styles from './CustomerCrudPage.module.css'
 import Title from 'antd/es/typography/Title'
 import Paragraph from 'antd/es/typography/Paragraph'
-import application from '../../infra/applicationInstance'
 import { useEffect, useState } from 'react'
-import { fold, type Customer } from '@dibimo/core-lib'
+import { type Customer } from '@dibimo/core-lib'
 import { CustomerTypeOptions } from '../../types/enums/customer'
 import AddCustomerDrawer from './components/AddCustomerDrawer/AddCustomerDrawer'
 import { useCustomerCrudStore } from './CustomerCrudStore'
 
 export default function CustomerCrudPage() {
 
-  const [clientes, setClientes] = useState<Array<Customer>>([])
   const { customers, loadCustomers } = useCustomerCrudStore()
 
   const [addCustomerOpen, setAddCustomerOpen] = useState(false)
@@ -26,15 +24,7 @@ export default function CustomerCrudPage() {
   const closeAddCustomer = () => setAddCustomerOpen(false)
 
 
-  const getCustomers = async () => {
-    const response = await application.ListCustomers.execute()
-    const customers = fold(response, () => [], (customers: Customer[]) => customers)
-
-    setClientes(customers)
-  }
-
   useEffect(() => {
-    // getCustomers()
     loadCustomers()
   }, [])
 
