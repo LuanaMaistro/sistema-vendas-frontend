@@ -14,10 +14,12 @@ import { useEffect, useState } from 'react'
 import { fold, type Customer } from '@dibimo/core-lib'
 import { CustomerTypeOptions } from '../../types/enums/customer'
 import AddCustomerDrawer from './components/AddCustomerDrawer/AddCustomerDrawer'
+import { useCustomerCrudStore } from './CustomerCrudStore'
 
 export default function CustomerCrudPage() {
 
   const [clientes, setClientes] = useState<Array<Customer>>([])
+  const { customers, loadCustomers } = useCustomerCrudStore()
 
   const [addCustomerOpen, setAddCustomerOpen] = useState(false)
   const showAddCustomer = () => setAddCustomerOpen(true)
@@ -32,7 +34,8 @@ export default function CustomerCrudPage() {
   }
 
   useEffect(() => {
-    getCustomers()
+    // getCustomers()
+    loadCustomers()
   }, [])
 
   const columns: TableColumnsType<Customer> = [
@@ -83,7 +86,7 @@ export default function CustomerCrudPage() {
         <Table<Customer>
           scroll={{ y: 55 * 7 }}
           columns={columns}
-          dataSource={clientes}
+          dataSource={customers}
         />
       </div>
 
