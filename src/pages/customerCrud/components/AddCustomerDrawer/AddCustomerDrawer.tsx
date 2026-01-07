@@ -37,9 +37,9 @@ export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerPr
     }
   }
 
-  const mountCustomerName = (customerData: CustomerFormFields): string => {
-    if(customerData.cpf) return `${customerData.name} ${customerData.surname}`
-    return customerData.corporativeName || 'Error'
+  const mountCustomerName = (customerFormData: CustomerFormFields): string => {
+    if(customerFormData.cpf) return `${customerFormData.name} ${customerFormData.surname}`
+    return customerFormData.corporativeName || 'Error'
   }
 
 
