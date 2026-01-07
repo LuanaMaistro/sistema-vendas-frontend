@@ -1,0 +1,67 @@
+import { Button, Drawer, Space, type FormInstance } from "antd";
+import CustomerForm from "../CustomerForm/CustomerForm";
+import { fold } from "@dibimo/core-lib";
+import application from "../../../../infra/applicationInstance";
+import type CustomerFormFields from "../../types/CustomerFormFields";
+import { useCustomerCrudStore } from "../../CustomerCrudStore";
+import { eitherToBoolean } from "../../../../tools/either";
+
+interface UpdateCustomerDrawerProps {
+  open: boolean,
+  onClose: () => void,
+  customerForm: FormInstance<CustomerFormFields>
+}
+
+export default function UpdateCustomerDrawer({ open, onClose, customerForm }: UpdateCustomerDrawerProps) {
+
+  const { loadCustomers } = useCustomerCrudStore()
+
+  const updateCustomer = async (customerFormData: CustomerFormFields) => {
+    const response = await application.UpdateCustomer.execute({
+      id: customerFormData.id!,
+      cnpj: customerFormData.cpnj,
+      cpf: customerFormData.cpf,
+      email: customerFormData.email,
+      phone: customerFormData.phone,
+      name: customerFormData.name,
+
+    })
+
+    const message = fold(response, (erro: Error) => erro.message, () => 'deu tudo certo')
+    const success = eitherToBoolean(response)
+
+    if(success) {
+      loadCustomers()
+      onClose()
+    }
+  }
+
+  const mountCustomerName = (customerFormData: CustomerFormFields): string => {
+    if(customerFormData.cpf) return `${customerFormData.name} ${customerFormData.surname}`
+    return customerFormData.corporativeName || 'Error'
+  }
+
+
+  const extraActions = (
+    <Space>
+      <Button onClick={() => customerForm.submit()}>
+        Adicionar
+      </Button>
+    </Space>
+  )
+  return (
+    <Drawer
+      title="Adicionar novo Cliente"
+      open={open}
+      onClose={onClose}
+      extra={extraActions}
+    >
+
+      <CustomerForm
+        form={customerForm}
+        customerType={customerForm.getFieldValue('customerType')}
+        onFinish={updateCustomer}
+      />
+    </Drawer>
+  )
+}
