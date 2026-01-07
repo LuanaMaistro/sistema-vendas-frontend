@@ -19,15 +19,16 @@ export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerPr
 
   const [formAdd] = Form.useForm<CustomerFormFields>()
   const { loadCustomers } = useCustomerCrudStore()
-  const addCustomer = async (customerData: CustomerFormFields) => {
-    const customerName = mountCustomerName(customerData)
+
+  const addCustomer = async (customerFormData: CustomerFormFields) => {
     const response = await application.AddCustomer.execute({
-      name: customerName,
-      email: customerData.email,
-      phone: customerData.phone,
-      cnpj: customerData.cpnj,
-      cpf: customerData.cpf,
+      name: mountCustomerName(customerFormData),
+      email: customerFormData.email,
+      phone: customerFormData.phone,
+      cnpj: customerFormData.cpnj,
+      cpf: customerFormData.cpf,
     })
+
     const message = fold(response, (erro: Error) => erro.message, () => 'deu tudo certo')
     const success = eitherToBoolean(response)
 
