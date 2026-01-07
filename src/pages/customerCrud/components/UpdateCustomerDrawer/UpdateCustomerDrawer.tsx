@@ -45,13 +45,13 @@ export default function UpdateCustomerDrawer({ open, onClose, customerForm }: Up
   const extraActions = (
     <Space>
       <Button onClick={() => customerForm.submit()}>
-        Adicionar
+        Atualizar
       </Button>
     </Space>
   )
   return (
     <Drawer
-      title="Adicionar novo Cliente"
+      title="Atualizar Cliente"
       open={open}
       onClose={onClose}
       extra={extraActions}
