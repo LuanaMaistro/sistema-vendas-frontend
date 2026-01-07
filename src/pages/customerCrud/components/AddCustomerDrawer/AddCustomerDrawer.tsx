@@ -5,6 +5,8 @@ import { CustomerType, fold } from "@dibimo/core-lib";
 import { useState } from "react";
 import application from "../../../../infra/applicationInstance";
 import type CustomerFormFields from "../../types/CustomerFormFields";
+import { useCustomerCrudStore } from "../../CustomerCrudStore";
+import { eitherToBoolean } from "../../../../tools/either";
 
 interface AddCustomerDrawerProps {
   open: boolean,
@@ -16,7 +18,7 @@ export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerPr
   const changeAddCustomerType = (e: RadioChangeEvent) => setAddType(e.target.value!)
 
   const [formAdd] = Form.useForm<CustomerFormFields>()
-
+  const { loadCustomers } = useCustomerCrudStore()
   const addCustomer = async (customerData: CustomerFormFields) => {
     const customerName = mountCustomerName(customerData)
     const response = await application.AddCustomer.execute({
@@ -27,6 +29,12 @@ export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerPr
       cpf: customerData.cpf,
     })
     const message = fold(response, (erro: Error) => erro.message, () => 'deu tudo certo')
+    const success = eitherToBoolean(response)
+
+    if(success) {
+      loadCustomers()
+      onClose()
+    }
   }
 
   const mountCustomerName = (customerData: CustomerFormFields): string => {
