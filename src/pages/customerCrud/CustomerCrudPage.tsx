@@ -81,6 +81,7 @@ export default function CustomerCrudPage() {
         className={styles.customersTable}
       >
         <Table<Customer>
+          scroll={{ y: 55 * 7 }}
           columns={columns}
           dataSource={clientes}
         />
