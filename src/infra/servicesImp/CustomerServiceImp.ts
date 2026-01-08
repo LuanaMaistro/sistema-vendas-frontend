@@ -18,6 +18,7 @@ function createRandomCustomer(): Customer {
 let mockCustomers = Array.from({ length: 15 }, createRandomCustomer)
 
 export default class CustomerServiceImp implements CustomerService {
+
   Add(entity: Customer): Result {
     mockCustomers.unshift(entity)
 
@@ -26,6 +27,7 @@ export default class CustomerServiceImp implements CustomerService {
       success: true,
     }
   }
+
   Remove(id: string): Result {
     const customerIndex = this.getCustomerIndex(id)
     delete mockCustomers[customerIndex]
@@ -35,6 +37,7 @@ export default class CustomerServiceImp implements CustomerService {
       success: true,
     }
   }
+
   Update(entity: Customer): Result {
     const customerIndex = this.getCustomerIndex(entity.id!)
     const customerUpdated = { ...mockCustomers[customerIndex] }
