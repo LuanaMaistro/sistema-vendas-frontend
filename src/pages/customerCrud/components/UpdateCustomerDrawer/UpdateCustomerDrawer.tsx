@@ -9,11 +9,10 @@ import { eitherToBoolean } from "../../../../tools/either";
 interface UpdateCustomerDrawerProps {
   open: boolean,
   onClose: () => void,
-  customerForm: FormInstance<CustomerFormFields>,
   customer: Customer
 }
 
-export default function UpdateCustomerDrawer({ open, onClose, customerForm, customer }: UpdateCustomerDrawerProps) {
+export default function UpdateCustomerDrawer({ open, onClose, customer }: UpdateCustomerDrawerProps) {
 
   const { loadCustomers } = useCustomerCrudStore()
 
@@ -67,7 +66,7 @@ export default function UpdateCustomerDrawer({ open, onClose, customerForm, cust
 
   const extraActions = (
     <Space>
-      <Button onClick={() => customerForm.submit()}>
+      <Button onClick={() => editForm.submit()}>
         Atualizar
       </Button>
     </Space>
@@ -81,8 +80,8 @@ export default function UpdateCustomerDrawer({ open, onClose, customerForm, cust
     >
 
       <CustomerForm
-        form={customerForm}
-        customerType={customerForm.getFieldValue('customerType')}
+        form={editForm}
+        customerType={getCustomerType(customer)}
         onFinish={updateCustomer}
       />
     </Drawer>
