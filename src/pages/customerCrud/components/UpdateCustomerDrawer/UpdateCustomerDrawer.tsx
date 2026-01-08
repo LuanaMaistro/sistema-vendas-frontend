@@ -54,7 +54,7 @@ export default function UpdateCustomerDrawer({ open, onClose, customer }: Update
       cpf: customerFormData.cpf,
       email: customerFormData.email,
       phone: customerFormData.phone,
-      name: customerFormData.name,
+      name: mountCustomerName(customerFormData),
 
     })
 
