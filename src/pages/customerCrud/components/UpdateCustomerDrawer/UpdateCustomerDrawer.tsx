@@ -10,7 +10,7 @@ import { useEffect } from "react";
 interface UpdateCustomerDrawerProps {
   open: boolean,
   onClose: () => void,
-  customer: Customer
+  customer: Customer | undefined
 }
 
 export default function UpdateCustomerDrawer({ open, onClose, customer }: UpdateCustomerDrawerProps) {
@@ -25,6 +25,8 @@ export default function UpdateCustomerDrawer({ open, onClose, customer }: Update
   }, [customer])
 
   const customerToForm = () => {
+    if(!customer) return
+
     editForm.setFieldsValue({
       name: customer.name,
       phone: customer.CustomerContact?.phone,
@@ -38,6 +40,8 @@ export default function UpdateCustomerDrawer({ open, onClose, customer }: Update
   }
 
   const getCustomerType = (): CustomerType => {
+    if(!customer) return CustomerType.NATURAL_PERSON
+
     if (customer.Cnpj) return CustomerType.LEGAL_PERSON
     return CustomerType.NATURAL_PERSON
   }
