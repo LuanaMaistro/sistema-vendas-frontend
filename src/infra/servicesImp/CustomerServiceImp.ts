@@ -1,5 +1,5 @@
 import { fakerPT_BR as faker } from '@faker-js/faker'
-import { CNPJ, CPF, type Customer, type CustomerService, type Result } from "@dibimo/core-lib";
+import { CNPJ, type Customer, type CustomerService, type Result } from "@dibimo/core-lib";
 
 faker.seed(123)
 
