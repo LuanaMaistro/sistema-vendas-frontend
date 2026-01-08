@@ -62,6 +62,7 @@ export default function CustomerCrudPage() {
   ]
 
   const editCustomer = (customer: Customer) => {
+    setCustomerToEdit(customer)
     showUpdateCustomer()
   }
 
