@@ -49,7 +49,7 @@ export default function UpdateCustomerDrawer({ open, onClose, customer }: Update
 
   const updateCustomer = async (customerFormData: CustomerFormFields) => {
     const response = await application.UpdateCustomer.execute({
-      id: customerFormData.id!,
+      id: customer?.id!,
       cnpj: customerFormData.cnpj,
       cpf: customerFormData.cpf,
       email: customerFormData.email,
