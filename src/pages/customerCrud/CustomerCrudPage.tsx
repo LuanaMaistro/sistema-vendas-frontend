@@ -16,7 +16,6 @@ import { CustomerTypeOptions } from '../../types/enums/customer'
 import AddCustomerDrawer from './components/AddCustomerDrawer/AddCustomerDrawer'
 import { useCustomerCrudStore } from './CustomerCrudStore'
 import UpdateCustomerDrawer from './components/UpdateCustomerDrawer/UpdateCustomerDrawer'
-import type CustomerFormFields from './types/CustomerFormFields'
 
 export default function CustomerCrudPage() {
 
@@ -62,19 +61,7 @@ export default function CustomerCrudPage() {
     },
   ]
 
-  const [editForm] = Form.useForm<CustomerFormFields>()
   const editCustomer = (customer: Customer) => {
-    editForm.setFieldsValue({
-      name: customer.name,
-      phone: customer.CustomerContact?.phone,
-      email: customer.CustomerContact?.email,
-      cpf: customer.Cpf?.Value,
-      cpnj: customer.Cnpj?.Value,
-      id: customer.id,
-      corporativeName: customer.name,
-      customerType: getCustomerType(customer),
-      surname: customer.name,
-    })
     showUpdateCustomer()
   }
 
