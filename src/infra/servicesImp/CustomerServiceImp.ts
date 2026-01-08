@@ -31,19 +31,19 @@ export default class CustomerServiceImp implements CustomerService {
   }
   Update(entity: Customer): Result {
     const customerIndex = this.getCustomerIndex(entity.id!)
-    const customer = { ...mockCustomers[customerIndex] }
-    customer.Cpf = entity.Cpf
-    customer.Cnpj = entity.Cnpj
-    customer.name = entity.name
-    if(!customer.CustomerContact) {
-      customer.CustomerContact = {
+    const customerUpdated = { ...mockCustomers[customerIndex] }
+    customerUpdated.Cpf = entity.Cpf
+    customerUpdated.Cnpj = entity.Cnpj
+    customerUpdated.name = entity.name
+    if(!customerUpdated.CustomerContact) {
+      customerUpdated.CustomerContact = {
         email: entity.CustomerContact?.email,
         phone: entity.CustomerContact?.phone,
       }
     }
     else {
-      customer.CustomerContact!.email = entity.CustomerContact?.email
-      customer.CustomerContact!.phone = entity.CustomerContact?.phone
+      customerUpdated.CustomerContact!.email = entity.CustomerContact?.email
+      customerUpdated.CustomerContact!.phone = entity.CustomerContact?.phone
 
     }
     return {
