@@ -11,7 +11,7 @@ import styles from './CustomerCrudPage.module.css'
 import Title from 'antd/es/typography/Title'
 import Paragraph from 'antd/es/typography/Paragraph'
 import { useEffect, useState } from 'react'
-import { CustomerType, type Customer } from '@dibimo/core-lib'
+import { type Customer } from '@dibimo/core-lib'
 import { CustomerTypeOptions } from '../../types/enums/customer'
 import AddCustomerDrawer from './components/AddCustomerDrawer/AddCustomerDrawer'
 import { useCustomerCrudStore } from './CustomerCrudStore'
@@ -66,10 +66,6 @@ export default function CustomerCrudPage() {
     showUpdateCustomer()
   }
 
-  const getCustomerType = (customer: Customer): CustomerType => {
-    if (customer.Cnpj) return CustomerType.LEGAL_PERSON
-    return CustomerType.NATURAL_PERSON
-  }
 
  return (
     <div className={styles.customerCrudPage}>
