@@ -27,7 +27,13 @@ export default class CustomerServiceImp implements CustomerService {
     }
   }
   Remove(id: string): Result {
-    throw new Error("Method not implemented.");
+    const customerIndex = this.getCustomerIndex(id)
+    delete mockCustomers[customerIndex]
+    mockCustomers = mockCustomers.filter(Boolean)
+    return {
+      code: 200,
+      success: true,
+    }
   }
   Update(entity: Customer): Result {
     const customerIndex = this.getCustomerIndex(entity.id!)
