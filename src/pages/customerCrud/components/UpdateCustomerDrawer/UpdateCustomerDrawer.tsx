@@ -1,6 +1,6 @@
 import { Button, Drawer, Form, Space, type FormInstance } from "antd";
 import CustomerForm from "../CustomerForm/CustomerForm";
-import { fold, type Customer } from "@dibimo/core-lib";
+import { CustomerType, fold, type Customer } from "@dibimo/core-lib";
 import application from "../../../../infra/applicationInstance";
 import type CustomerFormFields from "../../types/CustomerFormFields";
 import { useCustomerCrudStore } from "../../CustomerCrudStore";
@@ -32,6 +32,12 @@ export default function UpdateCustomerDrawer({ open, onClose, customerForm, cust
       surname: customer.name,
     })
   }
+
+  const getCustomerType = (customer: Customer): CustomerType => {
+    if (customer.Cnpj) return CustomerType.LEGAL_PERSON
+    return CustomerType.NATURAL_PERSON
+  }
+
 
   const updateCustomer = async (customerFormData: CustomerFormFields) => {
     const response = await application.UpdateCustomer.execute({
