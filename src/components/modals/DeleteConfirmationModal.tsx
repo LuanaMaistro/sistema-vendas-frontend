@@ -4,7 +4,7 @@ interface DeleteConfirmationModalProps {
   title: string,
   message?: string,
   onConfirmClick: () => void,
-  onCancelClick: () => void,
+  onCancelClick?: () => void,
   show: boolean,
 }
 
