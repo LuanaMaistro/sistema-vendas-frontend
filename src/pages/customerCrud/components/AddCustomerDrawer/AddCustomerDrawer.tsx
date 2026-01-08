@@ -25,7 +25,7 @@ export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerPr
       name: mountCustomerName(customerFormData),
       email: customerFormData.email,
       phone: customerFormData.phone,
-      cnpj: customerFormData.cpnj,
+      cnpj: customerFormData.cnpj,
       cpf: customerFormData.cpf,
     })
 

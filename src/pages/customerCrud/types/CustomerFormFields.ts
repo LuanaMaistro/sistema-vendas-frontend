@@ -4,7 +4,7 @@ export default interface CustomerFormFields {
   email?: string,
   phone?: string,
   corporativeName?: string,
-  cpnj?: string,
+  cnpj?: string,
   cpf?: string,
   id?: string,
 }
