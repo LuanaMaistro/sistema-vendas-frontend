@@ -129,7 +129,6 @@ export default function CustomerCrudPage() {
       <UpdateCustomerDrawer
         open={updateCustomerOpen}
         onClose={closeUpdateCustomer}
-        customerForm={editForm}
         customer={customerToEdit!}
       />
     </div>
