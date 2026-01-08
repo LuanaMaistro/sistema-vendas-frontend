@@ -1,4 +1,4 @@
-import { Button, Drawer, Form, Space, type FormInstance } from "antd";
+import { Button, Drawer, Form, Space } from "antd";
 import CustomerForm from "../CustomerForm/CustomerForm";
 import { CustomerType, fold, type Customer } from "@dibimo/core-lib";
 import application from "../../../../infra/applicationInstance";
