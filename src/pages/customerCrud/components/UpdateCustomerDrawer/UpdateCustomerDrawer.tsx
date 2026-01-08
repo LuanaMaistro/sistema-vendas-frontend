@@ -64,7 +64,7 @@ export default function UpdateCustomerDrawer({ open, onClose, customer }: Update
   }
 
   const mountCustomerName = (customerFormData: CustomerFormFields): string => {
-    if(customerFormData.cpf) return `${customerFormData.name} ${customerFormData.surname}`
+    if(getCustomerType() == CustomerType.NATURAL_PERSON) return `${customerFormData.name} ${customerFormData.surname}`
     return customerFormData.corporativeName || 'Error'
   }
 
