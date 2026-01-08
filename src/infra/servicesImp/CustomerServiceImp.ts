@@ -15,7 +15,7 @@ function createRandomCustomer(): Customer {
     }
   }
 }
-const mockCustomers = Array.from({ length: 15 }, createRandomCustomer)
+let mockCustomers = Array.from({ length: 15 }, createRandomCustomer)
 
 export default class CustomerServiceImp implements CustomerService {
   Add(entity: Customer): Result {
