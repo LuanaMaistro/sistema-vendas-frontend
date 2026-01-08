@@ -130,6 +130,7 @@ export default function CustomerCrudPage() {
         open={updateCustomerOpen}
         onClose={closeUpdateCustomer}
         customerForm={editForm}
+        customer={customerToEdit!}
       />
     </div>
   )
