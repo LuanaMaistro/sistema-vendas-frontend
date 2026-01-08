@@ -1,4 +1,4 @@
-import { Button, Drawer, Space, type FormInstance } from "antd";
+import { Button, Drawer, Form, Space, type FormInstance } from "antd";
 import CustomerForm from "../CustomerForm/CustomerForm";
 import { fold, type Customer } from "@dibimo/core-lib";
 import application from "../../../../infra/applicationInstance";
@@ -16,6 +16,8 @@ interface UpdateCustomerDrawerProps {
 export default function UpdateCustomerDrawer({ open, onClose, customerForm, customer }: UpdateCustomerDrawerProps) {
 
   const { loadCustomers } = useCustomerCrudStore()
+
+  const [editForm] = Form.useForm<CustomerFormFields>()
 
   const updateCustomer = async (customerFormData: CustomerFormFields) => {
     const response = await application.UpdateCustomer.execute({
