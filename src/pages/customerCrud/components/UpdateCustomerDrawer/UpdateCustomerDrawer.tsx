@@ -5,6 +5,7 @@ import application from "../../../../infra/applicationInstance";
 import type CustomerFormFields from "../../types/CustomerFormFields";
 import { useCustomerCrudStore } from "../../CustomerCrudStore";
 import { eitherToBoolean } from "../../../../tools/either";
+import { useEffect } from "react";
 
 interface UpdateCustomerDrawerProps {
   open: boolean,
@@ -17,6 +18,11 @@ export default function UpdateCustomerDrawer({ open, onClose, customer }: Update
   const { loadCustomers } = useCustomerCrudStore()
 
   const [editForm] = Form.useForm<CustomerFormFields>()
+
+  useEffect(() => {
+    customerToForm()
+
+  }, [customer])
 
   const customerToForm = () => {
     editForm.setFieldsValue({
