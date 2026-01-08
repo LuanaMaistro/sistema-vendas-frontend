@@ -19,6 +19,20 @@ export default function UpdateCustomerDrawer({ open, onClose, customerForm, cust
 
   const [editForm] = Form.useForm<CustomerFormFields>()
 
+  const customerToForm = () => {
+    editForm.setFieldsValue({
+      name: customer.name,
+      phone: customer.CustomerContact?.phone,
+      email: customer.CustomerContact?.email,
+      cpf: customer.Cpf?.Value,
+      cpnj: customer.Cnpj?.Value,
+      id: customer.id,
+      corporativeName: customer.name,
+      customerType: getCustomerType(customer),
+      surname: customer.name,
+    })
+  }
+
   const updateCustomer = async (customerFormData: CustomerFormFields) => {
     const response = await application.UpdateCustomer.execute({
       id: customerFormData.id!,
