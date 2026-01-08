@@ -1,6 +1,6 @@
 import { Button, Drawer, Space, type FormInstance } from "antd";
 import CustomerForm from "../CustomerForm/CustomerForm";
-import { fold } from "@dibimo/core-lib";
+import { fold, type Customer } from "@dibimo/core-lib";
 import application from "../../../../infra/applicationInstance";
 import type CustomerFormFields from "../../types/CustomerFormFields";
 import { useCustomerCrudStore } from "../../CustomerCrudStore";
@@ -9,10 +9,11 @@ import { eitherToBoolean } from "../../../../tools/either";
 interface UpdateCustomerDrawerProps {
   open: boolean,
   onClose: () => void,
-  customerForm: FormInstance<CustomerFormFields>
+  customerForm: FormInstance<CustomerFormFields>,
+  customer: Customer
 }
 
-export default function UpdateCustomerDrawer({ open, onClose, customerForm }: UpdateCustomerDrawerProps) {
+export default function UpdateCustomerDrawer({ open, onClose, customerForm, customer }: UpdateCustomerDrawerProps) {
 
   const { loadCustomers } = useCustomerCrudStore()
 
