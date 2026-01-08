@@ -1,5 +1,3 @@
-import type { CustomerType } from "@dibimo/core-lib";
-
 export default interface CustomerFormFields {
   name?: string,
   surname?: string,
@@ -9,5 +7,4 @@ export default interface CustomerFormFields {
   cpnj?: string,
   cpf?: string,
   id?: string,
-  customerType?: CustomerType,
 }
