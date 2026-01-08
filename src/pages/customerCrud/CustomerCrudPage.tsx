@@ -11,11 +11,14 @@ import styles from './CustomerCrudPage.module.css'
 import Title from 'antd/es/typography/Title'
 import Paragraph from 'antd/es/typography/Paragraph'
 import { useEffect, useState } from 'react'
-import { type Customer } from '@dibimo/core-lib'
+import { fold, type Customer } from '@dibimo/core-lib'
 import { CustomerTypeOptions } from '../../types/enums/customer'
 import AddCustomerDrawer from './components/AddCustomerDrawer/AddCustomerDrawer'
 import { useCustomerCrudStore } from './CustomerCrudStore'
 import UpdateCustomerDrawer from './components/UpdateCustomerDrawer/UpdateCustomerDrawer'
+import { DeleteConfirmationModal } from '../../components/modals/DeleteConfirmationModal'
+import application from '../../infra/applicationInstance'
+import { eitherToBoolean } from '../../tools/either'
 
 export default function CustomerCrudPage() {
 
@@ -55,7 +58,7 @@ export default function CustomerCrudPage() {
       render: (_, customer) =>  (
         <Space>
           <a onClick={() => editCustomer(customer)}>Editar</a>
-          <a onClick={() => editCustomer(customer)}>Deletar</a>
+          <a onClick={() => confirmCustomerDelete(customer)}>Deletar</a>
         </Space>
       )
     },
@@ -66,6 +69,35 @@ export default function CustomerCrudPage() {
     showUpdateCustomer()
   }
 
+  const [showDeleteCustomerModal, setShowDeleteCustomerModal] = useState(false)
+  const [customerToDelete, setCustomerToDelete] = useState<Customer>()
+
+  const confirmCustomerDelete = (customer: Customer) => {
+    setCustomerToDelete(customer)
+    setShowDeleteCustomerModal(true)
+  }
+
+  const deleteCustomer = async () => {
+    const response = await application.RemoveCustomer.execute({
+      id: customerToDelete!.id!
+    })
+
+    const success = eitherToBoolean(response)
+    const message = fold(response, (err: Error) => err.message, () => '')
+
+    setShowDeleteCustomerModal(false)
+    loadCustomers()
+
+    if(success) {
+      console.log('deu tudo certinho')
+    }
+    else
+      console.log(message)
+  }
+
+  const cancelCustomerDelete = () => {
+    setShowDeleteCustomerModal(false)
+  }
 
  return (
     <div className={styles.customerCrudPage}>
@@ -115,6 +147,15 @@ export default function CustomerCrudPage() {
         onClose={closeUpdateCustomer}
         customer={customerToEdit!}
       />
+
+      <DeleteConfirmationModal
+        show={showDeleteCustomerModal}
+        title='Deletar cliente?'
+        message='Deseja mesmo deletar o cliente?'
+        onConfirmClick={deleteCustomer}
+        onCancelClick={cancelCustomerDelete}
+      />
+
     </div>
   )
 }
