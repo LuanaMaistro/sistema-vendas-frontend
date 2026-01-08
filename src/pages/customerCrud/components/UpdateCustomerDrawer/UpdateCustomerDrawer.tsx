@@ -27,12 +27,11 @@ export default function UpdateCustomerDrawer({ open, onClose, customer }: Update
       cpnj: customer.Cnpj?.Value,
       id: customer.id,
       corporativeName: customer.name,
-      customerType: getCustomerType(customer),
       surname: customer.name,
     })
   }
 
-  const getCustomerType = (customer: Customer): CustomerType => {
+  const getCustomerType = (): CustomerType => {
     if (customer.Cnpj) return CustomerType.LEGAL_PERSON
     return CustomerType.NATURAL_PERSON
   }
@@ -81,7 +80,7 @@ export default function UpdateCustomerDrawer({ open, onClose, customer }: Update
 
       <CustomerForm
         form={editForm}
-        customerType={getCustomerType(customer)}
+        customerType={getCustomerType()}
         onFinish={updateCustomer}
       />
     </Drawer>
