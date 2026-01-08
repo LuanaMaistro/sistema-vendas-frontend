@@ -46,6 +46,7 @@ export default class CustomerServiceImp implements CustomerService {
       customerUpdated.CustomerContact!.phone = entity.CustomerContact?.phone
 
     }
+    mockCustomers[customerIndex] = customerUpdated
     return {
       code: 200,
       success: true,
