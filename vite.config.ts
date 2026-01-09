@@ -18,7 +18,7 @@ export default defineConfig({
             'right',
             'left'
           ],
-          './src/tools/either': ['eitherToBoolean']
+          './src/tools/either': ['eitherToBoolean', 'operationResultToNotification']
 
         },
       ]
