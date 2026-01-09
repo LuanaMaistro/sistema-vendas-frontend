@@ -11,7 +11,16 @@ export default defineConfig({
       ],
 
       imports: [
-        'react'
+        'react',
+        {
+          '@dibimo/core-lib': [
+            'fold',
+            'right',
+            'left'
+          ],
+          './src/tools/either': ['eitherToBoolean']
+
+        },
       ]
     })
   ],
