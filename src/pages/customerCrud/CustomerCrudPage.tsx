@@ -51,11 +51,11 @@ export default function CustomerCrudPage() {
 
 
   const deleteCustomer = async () => {
-    const response = await application.RemoveCustomer.execute({
+    const result = await application.RemoveCustomer.execute({
       id: customerToDelete!.id!
     })
 
-    notify(operationResultToNotification(response))
+    notify(operationResultToNotification(result))
 
     setShowDeleteCustomerModal(false)
     loadCustomers()
