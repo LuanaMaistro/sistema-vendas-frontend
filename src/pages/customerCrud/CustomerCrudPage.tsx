@@ -18,6 +18,7 @@ import UpdateCustomerDrawer from './components/UpdateCustomerDrawer/UpdateCustom
 import { DeleteConfirmationModal } from '../../components/modals/DeleteConfirmationModal'
 import application from '../../infra/applicationInstance'
 import useNotification from '../../hooks/notification/notification'
+import CustomerTable from './components/CustomerTable/CustomerTable'
 
 export default function CustomerCrudPage() {
 
@@ -120,16 +121,10 @@ export default function CustomerCrudPage() {
         </Form>
       </Card>
 
-      <div
-        className={styles.customersTable}
-      >
-        <Table<Customer>
-          scroll={{ y: 55 * 7 }}
-          columns={columns}
-          dataSource={customers}
-        />
-      </div>
-
+      <CustomerTable
+        editCustomer={editCustomer}
+        deleteCustomer={confirmCustomerDelete}
+      />
 
       <AddCustomerDrawer
         open={addCustomerOpen}
