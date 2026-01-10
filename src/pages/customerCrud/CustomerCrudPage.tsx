@@ -17,6 +17,7 @@ import { useCustomerCrudStore } from './CustomerCrudStore'
 import UpdateCustomerDrawer from './components/UpdateCustomerDrawer/UpdateCustomerDrawer'
 import { DeleteConfirmationModal } from '../../components/modals/DeleteConfirmationModal'
 import application from '../../infra/applicationInstance'
+import useNotification from '../../hooks/notification/notification'
 
 export default function CustomerCrudPage() {
 
@@ -73,11 +74,14 @@ export default function CustomerCrudPage() {
     setShowDeleteCustomerModal(true)
   }
 
+  const [notify, contextHolder] = useNotification()
+
   const deleteCustomer = async () => {
     const response = await application.RemoveCustomer.execute({
       id: customerToDelete!.id!
     })
 
+    notify(operationResultToNotification(response))
     const success = eitherToBoolean(response)
     const message = fold(response, (err: Error) => err.message, () => '')
 
@@ -97,6 +101,7 @@ export default function CustomerCrudPage() {
 
  return (
     <div className={styles.customerCrudPage}>
+      {contextHolder}
       <header className={styles.crudPageHeader}>
         <Flex vertical>
           <Title level={2}>Clientes</Title>
