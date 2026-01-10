@@ -82,17 +82,10 @@ export default function CustomerCrudPage() {
     })
 
     notify(operationResultToNotification(response))
-    const success = eitherToBoolean(response)
-    const message = fold(response, (err: Error) => err.message, () => '')
 
     setShowDeleteCustomerModal(false)
     loadCustomers()
 
-    if(success) {
-      console.log('deu tudo certinho')
-    }
-    else
-      console.log(message)
   }
 
   const cancelCustomerDelete = () => {
