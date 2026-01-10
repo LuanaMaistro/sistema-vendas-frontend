@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import AutoImport from 'unplugin-auto-import/vite'
+import path from 'path'
 
 export default defineConfig({
   plugins: [
@@ -18,10 +19,15 @@ export default defineConfig({
             'right',
             'left'
           ],
-          './src/tools/either': ['eitherToBoolean', 'operationResultToNotification']
+          '@/tools/either': ['eitherToBoolean', 'operationResultToNotification']
 
         },
       ]
     })
   ],
+  resolve: {
+    alias: {
+      '@':  path.resolve(__dirname, './src')
+    }
+  }
 })
