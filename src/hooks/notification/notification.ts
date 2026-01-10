@@ -7,7 +7,7 @@ export interface Notification {
   description: string
 }
 
-export default function useNotification() {
+export default function useNotification(): [(n: Notification) => void, React.ReactElement] {
 
   const [api, contextHolder] = notification.useNotification()
 
