@@ -2,9 +2,7 @@ import { Button,
   Card,
   Flex,
   Form,
-  Select,
-  Space,
-  type TableColumnsType
+  Select
 } from 'antd'
 import styles from './CustomerCrudPage.module.css'
 import Title from 'antd/es/typography/Title'
