@@ -10,7 +10,12 @@ interface CustomerTableProps {
 
 export default function CustomerTable({ editCustomer, deleteCustomer }: CustomerTableProps) {
 
-  const { customers } = useCustomerCrudStore()
+  const { customers, loadCustomers } = useCustomerCrudStore()
+
+  useEffect(() => {
+    loadCustomers()
+  }, [])
+
 
   const columns: TableColumnsType<Customer> = [
     {
