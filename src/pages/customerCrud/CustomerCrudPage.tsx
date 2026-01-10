@@ -4,7 +4,6 @@ import { Button,
   Form,
   Select,
   Space,
-  Table,
   type TableColumnsType
 } from 'antd'
 import styles from './CustomerCrudPage.module.css'
