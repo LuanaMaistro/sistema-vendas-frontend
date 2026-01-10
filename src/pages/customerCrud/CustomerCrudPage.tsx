@@ -31,31 +31,6 @@ export default function CustomerCrudPage() {
     loadCustomers()
   }, [])
 
-  const columns: TableColumnsType<Customer> = [
-    {
-      title: 'Nome',
-      dataIndex: 'name'
-    },
-    {
-      title: 'E-mail',
-      dataIndex: ['CustomerContact', 'email'],
-    },
-    {
-      title: 'Cnpj',
-      dataIndex: ['Cnpj', 'Value']
-    },
-    {
-      title: 'Ações',
-      key: 'actions',
-      render: (_, customer) =>  (
-        <Space>
-          <a onClick={() => editCustomer(customer)}>Editar</a>
-          <a onClick={() => confirmCustomerDelete(customer)}>Deletar</a>
-        </Space>
-      )
-    },
-  ]
-
   const [updateCustomerOpen, setUpdateCustomerOpen] = useState(false)
   const [customerToEdit, setCustomerToEdit] = useState<Customer>()
   const showUpdateCustomer = () => setUpdateCustomerOpen(true)
