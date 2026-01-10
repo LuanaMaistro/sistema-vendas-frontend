@@ -21,7 +21,7 @@ import CustomerTable from './components/CustomerTable/CustomerTable'
 
 export default function CustomerCrudPage() {
 
-  const { customers, loadCustomers } = useCustomerCrudStore()
+  const { loadCustomers } = useCustomerCrudStore()
 
   const [addCustomerOpen, setAddCustomerOpen] = useState(false)
   const showAddCustomer = () => setAddCustomerOpen(true)
