@@ -20,6 +20,8 @@ import CustomerTable from './components/CustomerTable/CustomerTable'
 export default function CustomerCrudPage() {
 
   const { loadCustomers } = useCustomerCrudStore()
+  const [notify, contextHolder] = useNotification()
+
 
   const [addCustomerOpen, setAddCustomerOpen] = useState(false)
   const showAddCustomer = () => setAddCustomerOpen(true)
@@ -47,7 +49,6 @@ export default function CustomerCrudPage() {
     setShowDeleteCustomerModal(true)
   }
 
-  const [notify, contextHolder] = useNotification()
 
   const deleteCustomer = async () => {
     const response = await application.RemoveCustomer.execute({
