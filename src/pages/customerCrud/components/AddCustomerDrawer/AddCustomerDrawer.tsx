@@ -1,7 +1,7 @@
 import { Button, Drawer, Form, Radio, Space, type RadioChangeEvent } from "antd";
 import CustomerForm from "../CustomerForm/CustomerForm";
 import { CustomerTypeOptions } from "../../../../types/enums/customer";
-import { CustomerType, fold } from "@dibimo/core-lib";
+import { CustomerType } from "@dibimo/core-lib";
 import { useState } from "react";
 import application from "../../../../infra/applicationInstance";
 import type CustomerFormFields from "../../types/CustomerFormFields";
@@ -29,7 +29,6 @@ export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerPr
       cpf: customerFormData.cpf,
     })
 
-    const message = fold(response, (erro: Error) => erro.message, () => 'deu tudo certo')
     const success = eitherToBoolean(response)
 
     if(success) {
