@@ -8,10 +8,10 @@ interface DeleteConfirmationModalProps {
   show: boolean,
 }
 
- export function DeleteConfirmationModal({ show, title, message, onCancelClick, onConfirmClick }: DeleteConfirmationModalProps) {
+export function DeleteConfirmationModal({ show, title, message, onCancelClick, onConfirmClick }: DeleteConfirmationModalProps) {
   const modalMessage = message || 'Deseja mesmo deletar esse item? Essa ação não pode ser desfeita'
 
-   return (
+  return (
     <Modal
       open={show}
       title={title}
@@ -23,5 +23,5 @@ interface DeleteConfirmationModalProps {
       </p>
 
     </Modal>
-   )
- }
+  )
+}
