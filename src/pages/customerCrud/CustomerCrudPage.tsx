@@ -49,6 +49,9 @@ export default function CustomerCrudPage() {
     setShowDeleteCustomerModal(true)
   }
 
+  const cancelCustomerDelete = () => {
+    setShowDeleteCustomerModal(false)
+  }
 
   const deleteCustomer = async () => {
     const result = await application.RemoveCustomer.execute({
@@ -62,9 +65,6 @@ export default function CustomerCrudPage() {
 
   }
 
-  const cancelCustomerDelete = () => {
-    setShowDeleteCustomerModal(false)
-  }
 
  return (
     <div className={styles.customerCrudPage}>
