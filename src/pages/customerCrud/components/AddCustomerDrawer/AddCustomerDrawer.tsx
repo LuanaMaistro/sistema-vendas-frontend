@@ -14,12 +14,12 @@ interface AddCustomerDrawerProps {
 }
 
 export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerProps) {
+  const { loadCustomers } = useCustomerCrudStore()
+
   const [addCustomerType, setAddType] = useState(CustomerType.NATURAL_PERSON)
   const changeAddCustomerType = (e: RadioChangeEvent) => setAddType(e.target.value!)
 
   const [formAdd] = Form.useForm<CustomerFormFields>()
-  const { loadCustomers } = useCustomerCrudStore()
-
   const addCustomer = async (customerFormData: CustomerFormFields) => {
     const response = await application.AddCustomer.execute({
       name: mountCustomerName(customerFormData),
