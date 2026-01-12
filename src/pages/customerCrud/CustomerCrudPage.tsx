@@ -15,11 +15,13 @@ import { DeleteConfirmationModal } from '../../components/modals/DeleteConfirmat
 import CustomerTable from './components/CustomerTable/CustomerTable'
 import useDeleteCustomer from './hooks/useDeleteCustomer'
 import useAddCustomer from './hooks/useAddCustomer'
+import useEditCustomer from './hooks/useEditCustomer'
 
 export default function CustomerCrudPage() {
 
   const addCustomer = useAddCustomer()
   const deleteCustomer = useDeleteCustomer()
+  const editCustomer1 = useEditCustomer()
 
   const [updateCustomerOpen, setUpdateCustomerOpen] = useState(false)
   const [customerToEdit, setCustomerToEdit] = useState<Customer>()
