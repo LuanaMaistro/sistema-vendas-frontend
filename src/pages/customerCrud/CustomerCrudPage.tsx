@@ -10,18 +10,13 @@ import Paragraph from 'antd/es/typography/Paragraph'
 import { type Customer } from '@dibimo/core-lib'
 import { CustomerTypeOptions } from '../../types/enums/customer'
 import AddCustomerDrawer from './components/AddCustomerDrawer/AddCustomerDrawer'
-import { useCustomerCrudStore } from './CustomerCrudStore'
 import UpdateCustomerDrawer from './components/UpdateCustomerDrawer/UpdateCustomerDrawer'
 import { DeleteConfirmationModal } from '../../components/modals/DeleteConfirmationModal'
-import application from '../../infra/applicationInstance'
-import useNotification from '../../hooks/notification/notification'
 import CustomerTable from './components/CustomerTable/CustomerTable'
 import useDeleteCustomer from './hooks/useDeleteCustomer'
 
 export default function CustomerCrudPage() {
 
-  const { loadCustomers } = useCustomerCrudStore()
-  const { notify, contextHolder } = useNotification()
   const deleteCustomer1 = useDeleteCustomer()
 
   const [addCustomerOpen, setAddCustomerOpen] = useState(false)
@@ -39,34 +34,11 @@ export default function CustomerCrudPage() {
     showUpdateCustomer()
   }
 
-  const [showDeleteCustomerModal, setShowDeleteCustomerModal] = useState(false)
-  const [customerToDelete, setCustomerToDelete] = useState<Customer>()
-
-  const confirmCustomerDelete = (customer: Customer) => {
-    setCustomerToDelete(customer)
-    setShowDeleteCustomerModal(true)
-  }
-
-  const cancelCustomerDelete = () => {
-    setShowDeleteCustomerModal(false)
-  }
-
-  const deleteCustomer = async () => {
-    const result = await application.RemoveCustomer.execute({
-      id: customerToDelete!.id!
-    })
-
-    notify(operationResultToNotification(result))
-
-    setShowDeleteCustomerModal(false)
-    loadCustomers()
-
-  }
-
-
  return (
     <div className={styles.customerCrudPage}>
+
       {deleteCustomer1.contextHolder}
+
       <header className={styles.crudPageHeader}>
         <Flex vertical>
           <Title level={2}>Clientes</Title>
