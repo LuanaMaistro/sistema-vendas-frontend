@@ -15,6 +15,7 @@ import CustomerTable from './components/CustomerTable/CustomerTable'
 import useDeleteCustomer from './hooks/useDeleteCustomer'
 import useAddCustomer from './hooks/useAddCustomer'
 import useEditCustomer from './hooks/useEditCustomer'
+import CustomerFilters from './components/CustomerFilters/CustomerFilters'
 
 export default function CustomerCrudPage() {
 
@@ -45,13 +46,7 @@ export default function CustomerCrudPage() {
         </div>
       </header>
 
-      <Card>
-        <Form>
-          <Form.Item label="Tipo de cliente">
-            <Select options={CustomerTypeOptions}/>
-          </Form.Item>
-        </Form>
-      </Card>
+      <CustomerFilters />
 
       <CustomerTable
         editCustomer={editCustomer.open}
