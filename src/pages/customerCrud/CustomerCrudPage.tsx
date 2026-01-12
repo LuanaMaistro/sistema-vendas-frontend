@@ -20,7 +20,7 @@ export default function CustomerCrudPage() {
 
   const addCustomer = useAddCustomer()
   const deleteCustomer = useDeleteCustomer()
-  const editCustomer1 = useEditCustomer()
+  const editCustomer = useEditCustomer()
 
 
  return (
@@ -54,7 +54,7 @@ export default function CustomerCrudPage() {
       </Card>
 
       <CustomerTable
-        editCustomer={editCustomer1.open}
+        editCustomer={editCustomer.open}
         deleteCustomer={deleteCustomer.confirm}
       />
 
@@ -64,9 +64,9 @@ export default function CustomerCrudPage() {
       />
 
       <UpdateCustomerDrawer
-        open={editCustomer1.show}
-        onClose={editCustomer1.close}
-        customer={editCustomer1.customer!}
+        open={editCustomer.show}
+        onClose={editCustomer.close}
+        customer={editCustomer.customer!}
       />
 
       <DeleteConfirmationModal
