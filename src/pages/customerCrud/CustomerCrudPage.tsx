@@ -17,7 +17,7 @@ import useDeleteCustomer from './hooks/useDeleteCustomer'
 
 export default function CustomerCrudPage() {
 
-  const deleteCustomer1 = useDeleteCustomer()
+  const deleteCustomer = useDeleteCustomer()
 
   const [addCustomerOpen, setAddCustomerOpen] = useState(false)
   const showAddCustomer = () => setAddCustomerOpen(true)
@@ -37,7 +37,7 @@ export default function CustomerCrudPage() {
  return (
     <div className={styles.customerCrudPage}>
 
-      {deleteCustomer1.contextHolder}
+      {deleteCustomer.contextHolder}
 
       <header className={styles.crudPageHeader}>
         <Flex vertical>
@@ -66,7 +66,7 @@ export default function CustomerCrudPage() {
 
       <CustomerTable
         editCustomer={editCustomer}
-        deleteCustomer={deleteCustomer1.confirm}
+        deleteCustomer={deleteCustomer.confirm}
       />
 
       <AddCustomerDrawer
@@ -81,11 +81,11 @@ export default function CustomerCrudPage() {
       />
 
       <DeleteConfirmationModal
-        show={deleteCustomer1.showConfirm}
+        show={deleteCustomer.showConfirm}
         title='Deletar cliente?'
         message='Deseja mesmo deletar o cliente?'
-        onConfirmClick={deleteCustomer1.deleteCustoner}
-        onCancelClick={deleteCustomer1.cancel}
+        onConfirmClick={deleteCustomer.deleteCustoner}
+        onCancelClick={deleteCustomer.cancel}
       />
 
     </div>
