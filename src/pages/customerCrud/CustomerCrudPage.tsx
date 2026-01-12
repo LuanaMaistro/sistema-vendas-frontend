@@ -21,11 +21,6 @@ export default function CustomerCrudPage() {
   const addCustomer = useAddCustomer()
   const deleteCustomer = useDeleteCustomer()
 
-  const [addCustomerOpen, setAddCustomerOpen] = useState(false)
-  const showAddCustomer = () => setAddCustomerOpen(true)
-  const closeAddCustomer = () => setAddCustomerOpen(false)
-
-
   const [updateCustomerOpen, setUpdateCustomerOpen] = useState(false)
   const [customerToEdit, setCustomerToEdit] = useState<Customer>()
   const showUpdateCustomer = () => setUpdateCustomerOpen(true)
