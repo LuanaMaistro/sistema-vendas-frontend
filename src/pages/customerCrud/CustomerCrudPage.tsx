@@ -11,6 +11,7 @@ import useDeleteCustomer from './hooks/useDeleteCustomer'
 import useAddCustomer from './hooks/useAddCustomer'
 import useEditCustomer from './hooks/useEditCustomer'
 import CustomerFilters from './components/CustomerFilters/CustomerFilters'
+import CrudHeader from '../../components/headers/CrudHeader/CrudHeader'
 
 export default function CustomerCrudPage() {
 
@@ -24,22 +25,12 @@ export default function CustomerCrudPage() {
 
       {deleteCustomer.contextHolder}
 
-      <header className={styles.crudPageHeader}>
-        <Flex vertical>
-          <Title level={2}>Clientes</Title>
-          <Paragraph>Gerencie os clientes do sistema</Paragraph>
-        </Flex>
-
-        <div>
-          <Button
-            variant="solid"
-            color="primary"
-            onClick={addCustomer.open}
-          >
-            + Novo Cliente
-          </Button>
-        </div>
-      </header>
+      <CrudHeader
+        addButtonAction={addCustomer.open}
+        addButtonText='Adicionar cliente'
+        description='Gerencie os clientes do sistema'
+        title='Cliente'
+      />
 
       <CustomerFilters />
 
