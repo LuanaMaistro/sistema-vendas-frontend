@@ -14,9 +14,11 @@ import UpdateCustomerDrawer from './components/UpdateCustomerDrawer/UpdateCustom
 import { DeleteConfirmationModal } from '../../components/modals/DeleteConfirmationModal'
 import CustomerTable from './components/CustomerTable/CustomerTable'
 import useDeleteCustomer from './hooks/useDeleteCustomer'
+import useAddCustomer from './hooks/useAddCustomer'
 
 export default function CustomerCrudPage() {
 
+  const addCustomer = useAddCustomer()
   const deleteCustomer = useDeleteCustomer()
 
   const [addCustomerOpen, setAddCustomerOpen] = useState(false)
@@ -49,7 +51,7 @@ export default function CustomerCrudPage() {
           <Button
             variant="solid"
             color="primary"
-            onClick={() => showAddCustomer()}
+            onClick={addCustomer.open}
           >
             + Novo Cliente
           </Button>
@@ -70,8 +72,8 @@ export default function CustomerCrudPage() {
       />
 
       <AddCustomerDrawer
-        open={addCustomerOpen}
-        onClose={closeAddCustomer}
+        open={addCustomer.show}
+        onClose={addCustomer.close}
       />
 
       <UpdateCustomerDrawer
