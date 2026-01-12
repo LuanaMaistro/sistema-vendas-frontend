@@ -1,8 +1,4 @@
-import { Button,
-  Flex} from 'antd'
 import styles from './CustomerCrudPage.module.css'
-import Title from 'antd/es/typography/Title'
-import Paragraph from 'antd/es/typography/Paragraph'
 import AddCustomerDrawer from './components/AddCustomerDrawer/AddCustomerDrawer'
 import UpdateCustomerDrawer from './components/UpdateCustomerDrawer/UpdateCustomerDrawer'
 import { DeleteConfirmationModal } from '../../components/modals/DeleteConfirmationModal'
