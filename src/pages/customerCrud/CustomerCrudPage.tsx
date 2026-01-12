@@ -16,12 +16,13 @@ import { DeleteConfirmationModal } from '../../components/modals/DeleteConfirmat
 import application from '../../infra/applicationInstance'
 import useNotification from '../../hooks/notification/notification'
 import CustomerTable from './components/CustomerTable/CustomerTable'
+import useDeleteCustomer from './hooks/useDeleteCustomer'
 
 export default function CustomerCrudPage() {
 
   const { loadCustomers } = useCustomerCrudStore()
   const { notify, contextHolder } = useNotification()
-
+  const deleteCustomer = useDeleteCustomer()
 
   const [addCustomerOpen, setAddCustomerOpen] = useState(false)
   const showAddCustomer = () => setAddCustomerOpen(true)
