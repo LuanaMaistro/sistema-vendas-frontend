@@ -7,7 +7,9 @@ export interface Notification {
   description: string
 }
 
-export default function useNotification(): [(n: Notification) => void, React.ReactElement] {
+type useNotificationReturn = { notify: (n: Notification) => void, contextHolder: React.ReactElement }
+
+export default function useNotification(): useNotificationReturn  {
 
   const [api, contextHolder] = notification.useNotification()
 
@@ -20,5 +22,5 @@ export default function useNotification(): [(n: Notification) => void, React.Rea
 
   }
 
-  return [notify, contextHolder]
+  return { notify, contextHolder }
 }
