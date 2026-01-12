@@ -20,7 +20,7 @@ import CustomerTable from './components/CustomerTable/CustomerTable'
 export default function CustomerCrudPage() {
 
   const { loadCustomers } = useCustomerCrudStore()
-  const [notify, contextHolder] = useNotification()
+  const { notify, contextHolder } = useNotification()
 
 
   const [addCustomerOpen, setAddCustomerOpen] = useState(false)
