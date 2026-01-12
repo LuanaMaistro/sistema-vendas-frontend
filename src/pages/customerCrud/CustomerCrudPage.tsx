@@ -7,7 +7,6 @@ import { Button,
 import styles from './CustomerCrudPage.module.css'
 import Title from 'antd/es/typography/Title'
 import Paragraph from 'antd/es/typography/Paragraph'
-import { type Customer } from '@dibimo/core-lib'
 import { CustomerTypeOptions } from '../../types/enums/customer'
 import AddCustomerDrawer from './components/AddCustomerDrawer/AddCustomerDrawer'
 import UpdateCustomerDrawer from './components/UpdateCustomerDrawer/UpdateCustomerDrawer'
@@ -23,15 +22,6 @@ export default function CustomerCrudPage() {
   const deleteCustomer = useDeleteCustomer()
   const editCustomer1 = useEditCustomer()
 
-  const [updateCustomerOpen, setUpdateCustomerOpen] = useState(false)
-  const [customerToEdit, setCustomerToEdit] = useState<Customer>()
-  const showUpdateCustomer = () => setUpdateCustomerOpen(true)
-  const closeUpdateCustomer = () => setUpdateCustomerOpen(false)
-
-  const editCustomer = (customer: Customer) => {
-    setCustomerToEdit(customer)
-    showUpdateCustomer()
-  }
 
  return (
     <div className={styles.customerCrudPage}>
