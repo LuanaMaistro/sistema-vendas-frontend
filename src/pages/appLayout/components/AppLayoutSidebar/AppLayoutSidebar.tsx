@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import type RouteConfig from '../../../../routes/RouteConfig'
 import { routesConfigs } from '../../../../routes/routes'
 import styles from './AppLayoutSidebar.module.css'
+import { Tooltip } from 'antd'
 
 export default function AppLayoutSidebar() {
 
@@ -13,11 +14,18 @@ export default function AppLayoutSidebar() {
 
   const toLink = (config: RouteConfig) => {
     return (
-      <Link className={styles.sidebarItem} key={config.path} to={config.path}>
-        <span className={styles.itemIcon}>
-          {config.icon}
-        </span>
-      </Link>
+      <Tooltip
+        title={config.title}
+        placement='right'
+        mouseEnterDelay={0.6}
+        key={config.path}
+      >
+        <Link className={styles.sidebarItem} to={config.path}>
+          <span className={styles.itemIcon}>
+            {config.icon}
+          </span>
+        </Link>
+      </Tooltip>
     )
   }
 
