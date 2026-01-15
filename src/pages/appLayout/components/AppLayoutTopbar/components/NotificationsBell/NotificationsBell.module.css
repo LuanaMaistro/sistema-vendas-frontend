@@ -1,0 +1,9 @@
+.notificationsContainer {
+  cursor: pointer;
+  transition: .4s
+}
+
+.notificationsContainer:hover {
+  color: var(--ant-color-primary)
+}
+
