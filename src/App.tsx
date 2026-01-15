@@ -1,9 +1,11 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AppLayout from './pages/appLayout/AppLayout'
-import { App as AntDApp, ConfigProvider,  type ThemeConfig } from 'antd'
+import { App as AntDApp, ConfigProvider,  theme,  type ThemeConfig } from 'antd'
 import { routesConfigs } from './routes/routes'
 import type RouteConfig from './routes/RouteConfig'
+import { useTheme } from './hooks/useTheme'
+import { darkTheme, lightTheme } from './config/theme'
 
 function App() {
 
@@ -28,7 +30,9 @@ function App() {
     </BrowserRouter>
   )
 
-  const theme = {
+  const { theme: currentTheme } = useTheme()
+
+  const theme2 = {
     token: {
       colorPrimary: "#13C2C2",
       colorBgLayout: "#F5F5F5",
@@ -55,9 +59,10 @@ function App() {
       marginLG: 24,
     },
   } as ThemeConfig
+
   return (
     <>
-      <ConfigProvider theme={theme}>
+      <ConfigProvider theme={currentTheme === 'dark' ? darkTheme : lightTheme}>
         <AntDApp>
           {appRouter}
         </AntDApp>
