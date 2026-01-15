@@ -1,8 +1,10 @@
+import styles from './AppLayoutTopbar.module.css'
+
 interface AppLayoutTopbarProps {
   className: string
 }
 export default function AppLayoutTopbar({ className }: AppLayoutTopbarProps) {
   return (
-    <div className={className}></div>
+    <div className={styles.topbar}></div>
   )
 }
