@@ -1,8 +1,8 @@
 import { UserOutlined } from "@ant-design/icons";
 import CustomerCrudPage from "../pages/customerCrud/CustomerCrudPage";
-import type AppRoute from "./AppRoute";
+import type RouteConfig from "./RouteConfig";
 
-export const routesConfigs: Array<AppRoute> = [
+export const routesConfigs: Array<RouteConfig> = [
   {
     path: 'customers',
     title: 'Gestão de clientes',

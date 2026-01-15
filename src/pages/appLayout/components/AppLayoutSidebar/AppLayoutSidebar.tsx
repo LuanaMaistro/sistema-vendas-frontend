@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import type AppRoute from '../../../../routes/AppRoute'
+import type RouteConfig from '../../../../routes/RouteConfig'
 import { routesConfigs } from '../../../../routes/routes'
 import styles from './AppLayoutSidebar.module.css'
 
@@ -11,7 +11,7 @@ export default function AppLayoutSidebar() {
     </div>
   )
 
-  const toLink = (config: AppRoute) => {
+  const toLink = (config: RouteConfig) => {
     return (
       <Link key={config.path} to={config.path}>
         {config.icon}

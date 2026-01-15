@@ -3,11 +3,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AppLayout from './pages/appLayout/AppLayout'
 import { App as AntDApp, ConfigProvider,  type ThemeConfig } from 'antd'
 import { routesConfigs } from './routes/routes'
-import type AppRoute from './routes/AppRoute'
+import type RouteConfig from './routes/RouteConfig'
 
 function App() {
 
-  const configToRoute = (routeConfig: AppRoute) => {
+  const configToRoute = (routeConfig: RouteConfig) => {
     return (
       <Route
         key={routeConfig.path}
