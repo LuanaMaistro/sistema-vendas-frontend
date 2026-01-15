@@ -26,7 +26,7 @@ export default function AppLayoutSidebar() {
         {systemLogo}
       </div>
 
-      <nav className={styles.routesContainer}>
+      <nav className={styles.sidebarItemsContainer}>
         {routesConfigs.map(toLink)}
       </nav>
 
