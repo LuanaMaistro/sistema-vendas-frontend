@@ -13,7 +13,7 @@ export default function AppLayoutSidebar() {
 
   const toLink = (config: RouteConfig) => {
     return (
-      <Link key={config.path} to={config.path}>
+      <Link className={styles.sidebarItem} key={config.path} to={config.path}>
         {config.icon}
       </Link>
     )
