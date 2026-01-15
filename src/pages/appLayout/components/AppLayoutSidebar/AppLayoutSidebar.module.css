@@ -1,3 +1,17 @@
+.systemLogoContainer {
+
+}
+
+.systemLogo {
+  height: 64px;
+  width: 64px;
+  background-color: var(--ant-color-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white
+}
+
 .sidebar {
   background-color: tomato;
   width: 75px
