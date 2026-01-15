@@ -14,7 +14,9 @@ export default function AppLayoutSidebar() {
   const toLink = (config: RouteConfig) => {
     return (
       <Link className={styles.sidebarItem} key={config.path} to={config.path}>
-        {config.icon}
+        <span className={styles.itemIcon}>
+          {config.icon}
+        </span>
       </Link>
     )
   }

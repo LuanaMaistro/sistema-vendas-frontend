@@ -34,6 +34,10 @@
   color: var(--ant-color-primary);
 }
 
+.itemIcon {
+  font-size: 24px;
+}
+
 .sidebarItem:hover {
   background-color: var(--ant-color-primary);
   color: white;
