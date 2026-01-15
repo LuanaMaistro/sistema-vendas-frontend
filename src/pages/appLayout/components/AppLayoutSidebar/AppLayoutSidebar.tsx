@@ -22,7 +22,7 @@ export default function AppLayoutSidebar() {
   }
 
   return (
-    <div>
+    <div className={styles.sidebar}>
 
       <div className={styles.systemLogoContainer}>
         {systemLogo}
