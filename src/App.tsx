@@ -6,15 +6,12 @@ import { App as AntDApp, ConfigProvider,  type ThemeConfig } from 'antd'
 
 function App() {
 
-  const teste = (
-    <div>teste</div>
-  )
+
   const appRouter = (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={ teste } />
-        <Route path="/layout" element={ <AppLayout /> }>
-          <Route path="/layout/customers" element={ <CustomerCrudPage /> }/>
+        <Route path="/" element={ <AppLayout /> }>
+          <Route path="customers" element={ <CustomerCrudPage /> }/>
         </Route>
 
       </Routes>
