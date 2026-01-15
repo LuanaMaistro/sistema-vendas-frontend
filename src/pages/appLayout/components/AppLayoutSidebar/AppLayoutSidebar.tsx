@@ -14,7 +14,7 @@ export default function AppLayoutSidebar() {
   const toLink = (config: AppRoute) => {
     return (
       <Link key={config.path} to={config.path}>
-        {config.title}
+        {config.icon}
       </Link>
     )
   }
