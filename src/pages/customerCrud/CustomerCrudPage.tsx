@@ -19,8 +19,6 @@ export default function CustomerCrudPage() {
  return (
     <div className={styles.customerCrudPage}>
 
-      {deleteCustomer.contextHolder}
-
       <CrudHeader
         addButtonAction={addCustomer.open}
         addButtonText='Adicionar cliente'

@@ -2,7 +2,7 @@ import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import CustomerCrudPage from './pages/customerCrud/CustomerCrudPage'
 import AppLayout from './pages/appLayout/AppLayout'
-import { ConfigProvider, type ThemeConfig } from 'antd'
+import { App as AntDApp, ConfigProvider,  type ThemeConfig } from 'antd'
 
 function App() {
 
@@ -51,7 +51,9 @@ function App() {
   return (
     <>
       <ConfigProvider theme={theme}>
-        {appRouter}
+        <AntDApp>
+          {appRouter}
+        </AntDApp>
       </ConfigProvider>
     </>
   )
