@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom'
+import type AppRoute from '../../../../routes/AppRoute'
+import { routesConfigs } from '../../../../routes/routes'
 import styles from './AppLayoutSidebar.module.css'
 
 export default function AppLayoutSidebar() {
@@ -8,6 +11,14 @@ export default function AppLayoutSidebar() {
     </div>
   )
 
+  const toLink = (config: AppRoute) => {
+    return (
+      <Link key={config.path} to={config.path}>
+        {config.title}
+      </Link>
+    )
+  }
+
   return (
     <div>
 
@@ -15,6 +26,9 @@ export default function AppLayoutSidebar() {
         {systemLogo}
       </div>
 
+      <nav>
+        {routesConfigs.map(toLink)}
+      </nav>
 
     </div>
   )
