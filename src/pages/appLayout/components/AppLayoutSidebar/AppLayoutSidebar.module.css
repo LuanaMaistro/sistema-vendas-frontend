@@ -12,7 +12,7 @@
   color: white
 }
 
-.routesContainer {
+.sidebarItemsContainer {
   display: flex;
   flex-direction: column;
   height: 100%;
