@@ -1,17 +1,27 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import CustomerCrudPage from './pages/customerCrud/CustomerCrudPage'
 import AppLayout from './pages/appLayout/AppLayout'
 import { App as AntDApp, ConfigProvider,  type ThemeConfig } from 'antd'
+import { routesConfigs } from './routes/routes'
+import type AppRoute from './routes/AppRoute'
 
 function App() {
 
+  const configToRoute = (routeConfig: AppRoute) => {
+    return (
+      <Route
+        key={routeConfig.path}
+        path={routeConfig.path}
+        element={routeConfig.element}
+      />
+    )
+  }
 
   const appRouter = (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={ <AppLayout /> }>
-          <Route path="customers" element={ <CustomerCrudPage /> }/>
+          { routesConfigs.map(configToRoute) }
         </Route>
 
       </Routes>
