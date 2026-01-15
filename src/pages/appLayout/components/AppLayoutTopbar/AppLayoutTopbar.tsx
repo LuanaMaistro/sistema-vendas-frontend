@@ -1,12 +1,13 @@
-import { BellOutlined, UserOutlined } from '@ant-design/icons'
+import { UserOutlined } from '@ant-design/icons'
 import styles from './AppLayoutTopbar.module.css'
 import { Avatar } from 'antd'
 import SwitchTheme from './components/SwitchTheme'
+import NotificationsBell from './components/NotificationsBell/NotificationsBell'
 
 export default function AppLayoutTopbar() {
   return (
     <div className={styles.topbarContainer}>
-      <BellOutlined />
+      <NotificationsBell />
       <SwitchTheme />
       <Avatar icon={<UserOutlined />} />
     </div>
