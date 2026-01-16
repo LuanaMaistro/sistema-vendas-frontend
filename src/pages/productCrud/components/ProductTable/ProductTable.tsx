@@ -57,7 +57,6 @@ export default function ProductTable({ editProduct, deleteProduct }: ProductTabl
       className={styles.productsTable}
     >
       <Table<Product>
-        scroll={{ y: 55 * 7 }}
         columns={columns}
         dataSource={products}
       />

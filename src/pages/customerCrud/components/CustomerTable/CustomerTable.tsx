@@ -48,7 +48,6 @@ export default function CustomerTable({ editCustomer, deleteCustomer }: Customer
       className={styles.customersTable}
     >
       <Table<Customer>
-        scroll={{ y: 55 * 7 }}
         columns={columns}
         dataSource={customers}
       />
