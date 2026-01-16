@@ -42,7 +42,6 @@ export default class ProductServiceImp implements ProductService {
     const productUpdated = { ...mockProducts[productIndex] }
     productUpdated.name = entity.name
     productUpdated.description = entity.description
-    productUpdated.code = entity.code
     productUpdated.price = entity.price
     productUpdated.quantity = entity.quantity
 
