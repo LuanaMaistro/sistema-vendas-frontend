@@ -4,7 +4,7 @@ import application from "../../../../infra/applicationInstance";
 import type ProductFormFields from "../../types/ProductFormFields";
 import { useProductCrudStore } from "../../ProductCrudStore";
 import { eitherToBoolean } from "../../../../tools/either";
-import { Price, Quantity, type Product } from "@dibimo/core-lib";
+import { type Product } from "@dibimo/core-lib";
 
 interface UpdateProductDrawerProps {
   open: boolean,
@@ -31,12 +31,11 @@ export default function UpdateProductDrawer({ open, onClose, product }: UpdatePr
 
   const updateProduct = async (productFormData: ProductFormFields) => {
     const response = await application.UpdateProduct.execute({
-      id: product.id,
+      id: product.id!,
       name: productFormData.name!,
       description: productFormData.description!,
-      code: productFormData.code!,
-      price: Price.create(productFormData.price!),
-      quantity: Quantity.create(productFormData.quantity!),
+      price: productFormData.price!,
+      quantity: productFormData.quantity!,
     })
 
     const success = eitherToBoolean(response)
