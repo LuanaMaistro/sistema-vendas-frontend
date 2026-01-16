@@ -6,6 +6,7 @@ import { routesConfigs } from './routes/routes'
 import type RouteConfig from './routes/RouteConfig'
 import { useTheme } from './hooks/useTheme'
 import { darkTheme, lightTheme } from './config/theme'
+import styles  from './App.module.css'
 
 function App() {
 
@@ -35,7 +36,7 @@ function App() {
   return (
     <>
       <ConfigProvider theme={currentTheme === 'dark' ? darkTheme : lightTheme}>
-        <AntDApp>
+        <AntDApp className={styles.antdApp}>
           {appRouter}
         </AntDApp>
       </ConfigProvider>
