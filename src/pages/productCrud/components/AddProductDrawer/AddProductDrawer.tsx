@@ -53,6 +53,7 @@ export default function AddProductDrawer({ open, onClose }: AddProductDrawerProp
       <ProductForm
         form={formAdd}
         onFinish={addProduct}
+        isEdit={false}
       />
     </Drawer>
   )

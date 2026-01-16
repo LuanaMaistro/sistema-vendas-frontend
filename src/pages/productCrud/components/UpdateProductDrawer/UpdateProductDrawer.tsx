@@ -65,6 +65,7 @@ export default function UpdateProductDrawer({ open, onClose, product }: UpdatePr
       <ProductForm
         form={formUpdate}
         onFinish={updateProduct}
+        isEdit
       />
     </Drawer>
   )

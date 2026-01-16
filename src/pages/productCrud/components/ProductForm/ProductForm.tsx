@@ -4,9 +4,10 @@ import type ProductFormFields from "../../types/ProductFormFields";
 interface ProductFormProps {
   form: FormInstance<ProductFormFields>
   onFinish: FormProps['onFinish']
+  isEdit: boolean
 }
 
-export default function ProductForm({ form, onFinish }: ProductFormProps) {
+export default function ProductForm({ form, onFinish, isEdit }: ProductFormProps) {
 
   return (
     <div>
@@ -24,7 +25,7 @@ export default function ProductForm({ form, onFinish }: ProductFormProps) {
 
           <Col span={12}>
             <Form.Item name="code" label="Código">
-              <Input />
+              <Input disabled={isEdit} />
             </Form.Item>
           </Col>
 
