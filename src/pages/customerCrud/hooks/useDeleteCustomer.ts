@@ -6,7 +6,7 @@ import { useCustomerCrudStore } from "../CustomerCrudStore"
 const useDeleteCustomer = () => {
 
   const { loadCustomers } = useCustomerCrudStore()
-  const { notify, contextHolder } = useNotification()
+  const { notify } = useNotification()
 
   const [showConfirm, setShowConfirm] = useState(false)
   const [customer, setCustomerToDelete] = useState<Customer>()
@@ -33,7 +33,6 @@ const useDeleteCustomer = () => {
   }
 
   return {
-    contextHolder,
     deleteCustoner,
     cancel,
     confirm,
