@@ -43,6 +43,7 @@ export default function UpdateProductDrawer({ open, onClose, product }: UpdatePr
     if(success) {
       loadProducts()
       onClose()
+      formUpdate.resetFields()
     }
   }
 
