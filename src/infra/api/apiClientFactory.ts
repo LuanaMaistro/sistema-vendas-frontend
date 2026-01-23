@@ -16,7 +16,7 @@ const createApiClients = <T extends ApiClients[]>(...clients: T) => {
 }
 
 const createClient = <K extends ApiClients>(client: K): InstanceOfClient<K> => {
-  return new api[client](undefined, 'teste') as InstanceOfClient<K>
+  return new api[client]() as InstanceOfClient<K>
 }
 
 
