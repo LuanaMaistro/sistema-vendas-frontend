@@ -27,8 +27,13 @@ export default function CustomerTable({ editCustomer, deleteCustomer }: Customer
       dataIndex: ['CustomerContact', 'email'],
     },
     {
-      title: 'Cnpj',
-      dataIndex: ['Cnpj', 'Value']
+      title: 'Documento',
+      render: (_, record) => {
+        const document = record.Cpf?.Value || record.Cnpj?.Value
+        return (
+          <p>{document}</p>
+        )
+      }
     },
     {
       title: 'Ações',
