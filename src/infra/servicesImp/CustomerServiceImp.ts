@@ -1,6 +1,7 @@
 import { fakerPT_BR as faker } from '@faker-js/faker'
 import { CNPJ, CPF, type Customer, type CustomerService, type Result } from "@dibimo/core-lib";
 import { ClientesApi, type ClienteDTO } from '../api';
+import createApiClients from '../api/apiClientFactory';
 
 faker.seed(123)
 
@@ -66,8 +67,9 @@ export default class CustomerServiceImp implements CustomerService {
   async List(): Promise<Result<Customer[]>> {
 
 
-    const client = new ClientesApi()
-    const resultApi = await client.apiClientesGet()
+    const [customerApi] = createApiClients('ClientesApi')
+
+    const resultApi = await customerApi.apiClientesGet()
 
     const toCustomer = (dto: ClienteDTO): Customer => {
       const result = {
