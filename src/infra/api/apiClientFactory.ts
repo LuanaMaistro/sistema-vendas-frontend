@@ -7,7 +7,7 @@ type WhereKeyIsBaseApi<T, U> = {
 
 type apiClients = WhereKeyIsBaseApi<typeof api, BaseAPI>
 
-const clientFactory = (...clients: apiClients[]) => {
+const createApiClients = (...clients: apiClients[]) => {
   return clients.map(createClient)
 }
 
@@ -16,5 +16,5 @@ const createClient = (client: apiClients) => {
 }
 
 
-export default clientFactory
+export default createApiClients
 
