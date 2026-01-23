@@ -5,17 +5,17 @@ type WhereKeyIsBaseApi<T, U> = {
   [K in keyof T]: T[K] extends new (...args: any[]) => U ? K : never
 }[keyof T]
 
-type apiClients = WhereKeyIsBaseApi<typeof api, BaseAPI>
+type ApiClients = WhereKeyIsBaseApi<typeof api, BaseAPI>
 
-type InstanceOfClient<K extends apiClients> = InstanceType<typeof api[K]>
+type InstanceOfClient<K extends ApiClients> = InstanceType<typeof api[K]>
 
-const createApiClients = <T extends apiClients[]>(...clients: T) => {
+const createApiClients = <T extends ApiClients[]>(...clients: T) => {
   return clients.map(createClient) as {
-    [K in keyof T]: InstanceOfClient<T[K] & apiClients>
+    [K in keyof T]: InstanceOfClient<T[K] & ApiClients>
   }
 }
 
-const createClient = <K extends apiClients>(client: K): InstanceOfClient<K> => {
+const createClient = <K extends ApiClients>(client: K): InstanceOfClient<K> => {
   return new api[client](undefined, 'teste') as InstanceOfClient<K>
 }
 
