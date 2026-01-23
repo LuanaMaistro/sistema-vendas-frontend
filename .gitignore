@@ -29,3 +29,4 @@ src/infra/api/.openapi-generator/VERSION
 src/infra/api/.openapi-generator-ignore
 src/infra/api/git_push.sh
 openapitools.json
+src/infra/api/docs
