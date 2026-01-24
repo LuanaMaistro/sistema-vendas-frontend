@@ -8,7 +8,7 @@ interface CustomerCrudStoreState {
 }
 
 
-export const useCustomerCrudStore = create<CustomerCrudStoreState>((set, get) => ({
+export const useCustomerCrudStore = create<CustomerCrudStoreState>((set) => ({
   customers: [],
   loadCustomers: async () => {
     const response = await application.ListCustomers.execute()
