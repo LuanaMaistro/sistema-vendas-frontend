@@ -18,7 +18,7 @@ let mockProducts = Array.from({ length: 15 }, createRandomProduct)
 
 export default class ProductServiceImp implements ProductService {
 
-  Add(entity: Product): Result {
+  async Add(entity: Product): Promise<Result> {
     mockProducts.unshift(entity)
 
     return {
@@ -27,7 +27,7 @@ export default class ProductServiceImp implements ProductService {
     }
   }
 
-  Remove(id: string): Result {
+  async Remove(id: string): Promise<Result> {
     const productIndex = this.getProductIndex(id)
     delete mockProducts[productIndex]
     mockProducts = mockProducts.filter(Boolean)
@@ -37,7 +37,7 @@ export default class ProductServiceImp implements ProductService {
     }
   }
 
-  Update(entity: Product): Result {
+  async Update(entity: Product): Promise<Result> {
     const productIndex = this.getProductIndex(entity.id!)
     const productUpdated = { ...mockProducts[productIndex] }
     productUpdated.name = entity.name
@@ -52,7 +52,7 @@ export default class ProductServiceImp implements ProductService {
     }
   }
 
-  List(): Result<Product[]> {
+  async List(): Promise<Result<Product[]>> {
     return {
       data: [
         ...mockProducts
@@ -62,7 +62,7 @@ export default class ProductServiceImp implements ProductService {
     }
   }
 
-  GetById(id: string): Result<Product> {
+  async GetById(id: string): Promise<Result<Product>> {
     return {
       success: true,
       code: 200,

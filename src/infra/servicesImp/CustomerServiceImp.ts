@@ -27,7 +27,7 @@ export default class CustomerServiceImp implements CustomerService {
     }
   }
 
-  Remove(id: string): Result {
+  async Remove(id: string): Promise<Result> {
     const customerIndex = this.getCustomerIndex(id)
     delete mockCustomers[customerIndex]
     mockCustomers = mockCustomers.filter(Boolean)
@@ -37,7 +37,7 @@ export default class CustomerServiceImp implements CustomerService {
     }
   }
 
-  Update(entity: Customer): Result {
+  async Update(entity: Customer): Promise<Result> {
     const customerIndex = this.getCustomerIndex(entity.id!)
     const customerUpdated = { ...mockCustomers[customerIndex] }
     customerUpdated.Cpf = entity.Cpf
@@ -61,7 +61,7 @@ export default class CustomerServiceImp implements CustomerService {
     }
   }
 
-  GetById(id: string): Result<Customer> {
+  async GetById(id: string): Promise<Result<Customer>> {
     return {
       success: true,
       code: 200,
