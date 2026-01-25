@@ -11,10 +11,6 @@ function createRandomCustomer(): Customer {
     id: faker.string.uuid(),
     name: faker.company.name(),
     Cnpj: CNPJ.create("15.250.180/0001-37"),
-    CustomerContact: {
-      email: faker.internet.email(),
-      phone: faker.phone.number({ style: "national" })
-    }
   }
 }
 let mockCustomers = Array.from({ length: 15 }, createRandomCustomer)
@@ -46,17 +42,6 @@ export default class CustomerServiceImp implements CustomerService {
     customerUpdated.Cpf = entity.Cpf
     customerUpdated.Cnpj = entity.Cnpj
     customerUpdated.name = entity.name
-    if(!customerUpdated.CustomerContact) {
-      customerUpdated.CustomerContact = {
-        email: entity.CustomerContact?.email,
-        phone: entity.CustomerContact?.phone,
-      }
-    }
-    else {
-      customerUpdated.CustomerContact!.email = entity.CustomerContact?.email
-      customerUpdated.CustomerContact!.phone = entity.CustomerContact?.phone
-
-    }
     mockCustomers[customerIndex] = customerUpdated
     return {
       code: 200,
