@@ -1,5 +1,19 @@
-import type { Address } from "@dibimo/core-lib";
+import { Address } from "@dibimo/core-lib";
 import type { EnderecoDTO } from "../../api";
+
+export const convertEnderecoDTOToAddress = (dto: EnderecoDTO | undefined): Address | undefined => {
+  if (!dto) return undefined
+
+  return Address.create(
+    dto.logradouro!,
+    dto.numero!,
+    dto.complemento || undefined,
+    dto.bairro!,
+    dto.cidade!,
+    dto.uf!,
+    dto.cep!
+  )
+}
 
 export const convertAddressToEnderecoDTO = (address: Address | undefined): EnderecoDTO | undefined => {
   if (!address) return undefined
