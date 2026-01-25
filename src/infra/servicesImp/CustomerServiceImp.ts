@@ -1,8 +1,7 @@
 import { fakerPT_BR as faker } from '@faker-js/faker'
-import { CNPJ, CPF, type Customer, type CustomerService, type Result } from "@dibimo/core-lib";
-import { type ClienteDTO } from '../api';
+import { CNPJ, type Customer, type CustomerService, type Result } from "@dibimo/core-lib";
 import createApiClients from '../api/apiClientFactory';
-import { convertCustomerToClienteCreateDTO } from './mappers/customerMappers';
+import { convertClienteDTOToCustomer, convertCustomerToClienteCreateDTO } from './mappers/customerMappers';
 
 faker.seed(123)
 
@@ -52,34 +51,11 @@ export default class CustomerServiceImp implements CustomerService {
   }
 
   async List(): Promise<Result<Customer[]>> {
-
-
     const [customerApi] = createApiClients('ClientesApi')
-
     const resultApi = await customerApi.apiClientesGet()
 
-    const toCustomer = (dto: ClienteDTO): Customer => {
-      const result = {
-        id: dto.id,
-        name: dto.nome!,
-
-      } as Customer
-
-      const preencherDocumentos = (customer: Customer, dto: ClienteDTO) => {
-        if(dto.tipoDocumento == "CNPJ") {
-          customer.Cnpj = CNPJ.create(dto.documento!)
-        }
-        else {
-          customer.Cpf = CPF.create(dto.documento!)
-        }
-      }
-
-      preencherDocumentos(result, dto)
-      return result
-    }
-
     return {
-      data: resultApi.data.map(toCustomer),
+      data: resultApi.data.map(convertClienteDTOToCustomer),
       success: true,
       code: 200,
     }
