@@ -1,6 +1,6 @@
 import { fakerPT_BR as faker } from '@faker-js/faker'
 import { CNPJ, CPF, type Customer, type CustomerService, type Result } from "@dibimo/core-lib";
-import { ClientesApi, type ClienteDTO } from '../api';
+import { type ClienteDTO } from '../api';
 import createApiClients from '../api/apiClientFactory';
 
 faker.seed(123)
