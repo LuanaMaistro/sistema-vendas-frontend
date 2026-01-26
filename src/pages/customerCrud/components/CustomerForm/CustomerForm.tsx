@@ -3,6 +3,8 @@ import { Col, Form, Input, Row, type FormInstance, type FormProps } from "antd";
 import type CustomerFormFields from "../../types/CustomerFormFields";
 import Paragraph from "antd/es/typography/Paragraph";
 import Title from "antd/es/typography/Title";
+import { fetchAddressByZipCode } from "@/tools/viaCep";
+import useNotification from "@/hooks/notification/notification";
 
 interface CustomerFormProps {
   customerType: CustomerType
@@ -11,6 +13,40 @@ interface CustomerFormProps {
 }
 
 export default function CustomerForm({ customerType, form, onFinish }: CustomerFormProps) {
+  const [loadingCep, setLoadingCep] = useState(false);
+  const { notify } = useNotification();
+
+  const handleZipCodeBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
+    const zipCode = e.target.value;
+
+    if (!zipCode || zipCode.replace(/\D/g, '').length !== 8)
+      return;
+
+
+    setLoadingCep(true);
+
+    const result = await fetchAddressByZipCode(zipCode);
+    fold(
+      result,
+      () => {
+        notify({
+          type: 'error',
+          description: 'Erro ao buscar informações do CEP',
+          title: 'Não foi possível buscar as informações do CEP'
+        })
+      },
+      (addressInfo) => {
+        form.setFieldsValue({
+          street: addressInfo.street,
+          neighborhood: addressInfo.neighborhood,
+          city: addressInfo.city,
+          state: addressInfo.state
+        });
+      }
+    );
+
+    setLoadingCep(false);
+  };
 
 
   const cnpjInput = (
@@ -90,13 +126,17 @@ export default function CustomerForm({ customerType, form, onFinish }: CustomerF
 
           <Col span={8}>
             <Form.Item name="zipCode" label="CEP">
-              <Input />
+              <Input
+                onBlur={handleZipCodeBlur}
+                disabled={loadingCep}
+                placeholder="00000-000"
+              />
             </Form.Item>
           </Col>
 
           <Col span={16}>
             <Form.Item name="street" label="Logradouro">
-              <Input />
+              <Input disabled={loadingCep} />
             </Form.Item>
           </Col>
 
@@ -114,19 +154,19 @@ export default function CustomerForm({ customerType, form, onFinish }: CustomerF
 
           <Col span={8}>
             <Form.Item name="state" label="Estado">
-              <Input />
+              <Input disabled={loadingCep} />
             </Form.Item>
           </Col>
 
           <Col span={8}>
             <Form.Item name="city" label="Cidade">
-              <Input />
+              <Input disabled={loadingCep} />
             </Form.Item>
           </Col>
 
           <Col span={8}>
             <Form.Item name="neighborhood" label="Bairro">
-              <Input />
+              <Input disabled={loadingCep} />
             </Form.Item>
           </Col>
 
