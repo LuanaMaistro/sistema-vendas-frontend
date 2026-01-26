@@ -11,9 +11,10 @@ interface CustomerFormProps {
   customerType: CustomerType
   form: FormInstance<CustomerFormFields>
   onFinish: FormProps['onFinish']
+  isEditing?: boolean
 }
 
-export default function CustomerForm({ customerType, form, onFinish }: CustomerFormProps) {
+export default function CustomerForm({ customerType, form, onFinish, isEditing = false }: CustomerFormProps) {
   const [loadingCep, setLoadingCep] = useState(false);
   const { notify } = useNotification();
 
@@ -53,7 +54,7 @@ export default function CustomerForm({ customerType, form, onFinish }: CustomerF
   const cnpjInput = (
     <Col span={12}>
       <Form.Item name="cnpj" label="CNPJ">
-        <Input />
+        <Input disabled={isEditing} />
       </Form.Item>
     </Col>
   )
@@ -61,7 +62,7 @@ export default function CustomerForm({ customerType, form, onFinish }: CustomerF
   const cpfInput = (
     <Col span={12}>
       <Form.Item name="cpf" label="CPF">
-        <Input />
+        <Input disabled={isEditing} />
       </Form.Item>
     </Col>
   )
@@ -101,19 +102,19 @@ export default function CustomerForm({ customerType, form, onFinish }: CustomerF
 
           <Col span={24}>
             <Form.Item name="email" label="E-mail principal">
-              <Input />
+              <Input disabled={isEditing} />
             </Form.Item>
           </Col>
 
           <Col span={12}>
             <Form.Item name="phone" label="Telefone">
-              <Input />
+              <Input disabled={isEditing} />
             </Form.Item>
 
           </Col>
           <Col span={12}>
             <Form.Item name="mobile" label="Celular">
-              <Input />
+              <Input disabled={isEditing} />
             </Form.Item>
           </Col>
         </Row>
