@@ -23,21 +23,30 @@ export default function CustomerTable({ editCustomer, deleteCustomer }: Customer
       dataIndex: 'name'
     },
     {
-      title: 'E-mail',
-      dataIndex: ['CustomerContact', 'email'],
+      title: 'Documento',
+      render: (_, record) => record.Cpf?.Value || record.Cnpj?.Value || '-'
     },
     {
-      title: 'Documento',
-      render: (_, record) => {
-        const document = record.Cpf?.Value || record.Cnpj?.Value
-        return (
-          <p>{document}</p>
-        )
-      }
+      title: 'E-mail',
+      render: (_, record) => record.email?.Value || '-'
+    },
+    {
+      title: 'Telefone',
+      render: (_, record) => record.phone?.Value || '-'
+    },
+    {
+      title: 'Celular',
+      render: (_, record) => record.mobile?.Value || '-'
+    },
+    {
+      title: 'Endereço',
+      render: (_, record) => record.address?.FullAddress || '-'
     },
     {
       title: 'Ações',
       key: 'actions',
+      fixed: 'right',
+      width: 150,
       render: (_, customer) =>  (
         <Space>
           <a onClick={() => editCustomer(customer)}>Editar</a>
