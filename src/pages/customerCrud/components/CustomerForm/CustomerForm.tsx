@@ -5,6 +5,7 @@ import Paragraph from "antd/es/typography/Paragraph";
 import Title from "antd/es/typography/Title";
 import { fetchAddressByZipCode } from "@/tools/viaCep";
 import useNotification from "@/hooks/notification/notification";
+import StateSelect from "@/components/StateSelect";
 
 interface CustomerFormProps {
   customerType: CustomerType
@@ -154,7 +155,7 @@ export default function CustomerForm({ customerType, form, onFinish }: CustomerF
 
           <Col span={8}>
             <Form.Item name="state" label="Estado">
-              <Input disabled={loadingCep} />
+              <StateSelect disabled={loadingCep} />
             </Form.Item>
           </Col>
 
