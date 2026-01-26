@@ -1,5 +1,5 @@
 import { CustomerType } from "@dibimo/core-lib";
-import { Col, Form, Input, Row, type FormInstance, type FormProps } from "antd";
+import { Col, Divider, Form, Input, Row, type FormInstance, type FormProps } from "antd";
 import type CustomerFormFields from "../../types/CustomerFormFields";
 import Paragraph from "antd/es/typography/Paragraph";
 import Title from "antd/es/typography/Title";
@@ -51,7 +51,10 @@ export default function CustomerForm({ customerType, form, onFinish }: CustomerF
             </Form.Item>
           </Col>
           { isLegalPerson ? cnpjInput : cpfInput }
+
         </Row>
+
+        <Divider />
 
         <Row gutter={16}>
 
@@ -78,6 +81,8 @@ export default function CustomerForm({ customerType, form, onFinish }: CustomerF
             </Form.Item>
           </Col>
         </Row>
+
+        <Divider />
 
         <Row gutter={16}>
           <Col span={24}>
