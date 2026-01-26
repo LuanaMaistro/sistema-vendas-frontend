@@ -2,6 +2,7 @@ import { CNPJ, CPF, Email, Mobile, Phone, type Customer } from "@dibimo/core-lib
 import type { ClienteCreateDTO, ClienteDTO } from "../../api"
 import { convertAddressToEnderecoDTO, convertEnderecoDTOToAddress } from "./addressMappers"
 import { convertEmailToContatoDTO, convertMobileToContatoDTO, convertPhoneToContatoDTO } from "./contactMappers"
+import type CustomerFormFields from "@/pages/customerCrud/types/CustomerFormFields"
 
 export const convertClienteDTOToCustomer = (dto: ClienteDTO): Customer => {
   const customer: Customer = {
@@ -123,5 +124,24 @@ function convertMobiles(customer: Customer) {
     convertMobileToContatoDTO(customer.mobile, true),
     ...alternativeMobiles.map((m) => convertMobileToContatoDTO(m, false))
   ]
+}
+
+export const convertCustomerToFormFields = (customer: Customer): CustomerFormFields => {
+  return {
+    id: customer.id,
+    name: customer.name,
+    cpf: customer.Cpf?.Value,
+    cnpj: customer.Cnpj?.Value,
+    email: customer.email?.Value,
+    phone: customer.phone?.Value,
+    mobile: customer.mobile?.Value,
+    street: customer.address?.street,
+    number: customer.address?.number,
+    complement: customer.address?.complement,
+    neighborhood: customer.address?.neighborhood,
+    city: customer.address?.city,
+    state: customer.address?.state,
+    zipCode: customer.address?.zipCode
+  }
 }
 
