@@ -90,6 +90,12 @@ export default function CustomerForm({ customerType, form, onFinish }: CustomerF
             <Paragraph>Endereço principal do cliente</Paragraph>
           </Col>
 
+          <Col span={12}>
+            <Form.Item name="zipCode" label="CEP">
+              <Input />
+            </Form.Item>
+          </Col>
+
           <Col span={16}>
             <Form.Item name="street" label="Logradouro">
               <Input />
@@ -126,11 +132,6 @@ export default function CustomerForm({ customerType, form, onFinish }: CustomerF
             </Form.Item>
           </Col>
 
-          <Col span={12}>
-            <Form.Item name="zipCode" label="CEP">
-              <Input />
-            </Form.Item>
-          </Col>
         </Row>
       </Form>
     </div>
