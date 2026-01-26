@@ -114,23 +114,25 @@ export default function CustomerForm({ customerType, form, onFinish }: CustomerF
             </Form.Item>
           </Col>
 
-          <Col span={12}>
-            <Form.Item name="neighborhood" label="Bairro">
+          <Col span={8}>
+            <Form.Item name="state" label="Estado">
               <Input />
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="city" label="Cidade">
               <Input />
             </Form.Item>
           </Col>
 
-          <Col span={12}>
-            <Form.Item name="state" label="Estado">
+          <Col span={8}>
+            <Form.Item name="neighborhood" label="Bairro">
               <Input />
             </Form.Item>
           </Col>
+
+
 
         </Row>
       </Form>
