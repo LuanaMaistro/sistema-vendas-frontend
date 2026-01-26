@@ -1,4 +1,5 @@
 import { left, right, type Either } from "@dibimo/core-lib";
+import axios from "axios";
 
 export interface AddressInfo {
   zipCode: string
@@ -25,13 +26,7 @@ export const fetchAddressByZipCode = async (zipCode: string): Promise<Either<str
       return left('CEP deve conter 8 dígitos');
     }
 
-    const response = await fetch(`https://viacep.com.br/ws/${cleanZipCode}/json/`);
-
-    if (!response.ok) {
-      return left('Erro ao consultar CEP');
-    }
-
-    const data: ViaCepResponse = await response.json();
+    const { data } = await axios.get<ViaCepResponse>(`https://viacep.com.br/ws/${cleanZipCode}/json/`);
 
     if (data.erro) {
       return left('CEP não encontrado');
