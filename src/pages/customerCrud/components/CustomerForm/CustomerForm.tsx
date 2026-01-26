@@ -40,12 +40,12 @@ export default function CustomerForm({ customerType, form, onFinish }: CustomerF
         onFinish={onFinish}
       >
         <Row gutter={16}>
-          { isLegalPerson ? cnpjInput : cpfInput }
           <Col span={12}>
             <Form.Item name="name" label={isLegalPerson ? 'Razão social' : 'Nome completo'}>
               <Input />
             </Form.Item>
           </Col>
+          { isLegalPerson ? cnpjInput : cpfInput }
         </Row>
 
         <Row gutter={16}>
