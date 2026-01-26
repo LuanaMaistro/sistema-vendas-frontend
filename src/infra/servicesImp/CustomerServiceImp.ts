@@ -1,7 +1,7 @@
 import { fakerPT_BR as faker } from '@faker-js/faker'
 import { CNPJ, type Customer, type CustomerService, type Result } from "@dibimo/core-lib";
 import createApiClients from '../api/apiClientFactory';
-import { convertClienteDTOToCustomer, convertCustomerToClienteCreateDTO } from './mappers/customerMappers';
+import { convertClienteDTOToCustomer, convertCustomerToClienteCreateDTO, convertCustomerToClienteUpdateDTO } from './mappers/customerMappers';
 
 faker.seed(123)
 
@@ -38,12 +38,9 @@ export default class CustomerServiceImp implements CustomerService {
   }
 
   async Update(entity: Customer): Promise<Result> {
-    const customerIndex = this.getCustomerIndex(entity.id!)
-    const customerUpdated = { ...mockCustomers[customerIndex] }
-    customerUpdated.Cpf = entity.Cpf
-    customerUpdated.Cnpj = entity.Cnpj
-    customerUpdated.name = entity.name
-    mockCustomers[customerIndex] = customerUpdated
+    const [customerApi] = createApiClients('ClientesApi')
+    await customerApi.apiClientesIdPut(entity.id!, convertCustomerToClienteUpdateDTO(entity))
+
     return {
       code: 200,
       success: true,
