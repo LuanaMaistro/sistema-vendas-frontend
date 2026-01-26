@@ -43,9 +43,19 @@ export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerPr
     if(success) {
       loadCustomers()
       onClose()
+      clearAddForm()
     }
   }
 
+  const clearAddForm = () => {
+    formAdd.resetFields()
+    setAddType(CustomerType.NATURAL_PERSON)
+  }
+
+  const _onClose = () => {
+    clearAddForm()
+    onClose()
+  }
 
   const extraActions = (
     <Space>
@@ -58,7 +68,7 @@ export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerPr
     <Drawer
       title="Adicionar novo Cliente"
       open={open}
-      onClose={onClose}
+      onClose={_onClose}
       extra={extraActions}
       size={720}
     >
