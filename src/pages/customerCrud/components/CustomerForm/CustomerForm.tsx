@@ -40,6 +40,11 @@ export default function CustomerForm({ customerType, form, onFinish }: CustomerF
         onFinish={onFinish}
       >
         <Row gutter={16}>
+          <Col span={24}>
+            <Title level={5}>Dados báscios</Title>
+            <Paragraph>Dados básicos do cliente</Paragraph>
+          </Col>
+
           <Col span={12}>
             <Form.Item name="name" label={isLegalPerson ? 'Razão social' : 'Nome completo'}>
               <Input />
