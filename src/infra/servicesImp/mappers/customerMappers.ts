@@ -1,5 +1,5 @@
 import { CNPJ, CPF, Email, Mobile, Phone, type Customer } from "@dibimo/core-lib"
-import type { ClienteCreateDTO, ClienteDTO } from "../../api"
+import type { ClienteCreateDTO, ClienteDTO, ClienteUpdateDTO } from "../../api"
 import { convertAddressToEnderecoDTO, convertEnderecoDTOToAddress } from "./addressMappers"
 import { convertEmailToContatoDTO, convertMobileToContatoDTO, convertPhoneToContatoDTO } from "./contactMappers"
 import type CustomerFormFields from "@/pages/customerCrud/types/CustomerFormFields"
@@ -142,6 +142,13 @@ export const convertCustomerToFormFields = (customer: Customer): CustomerFormFie
     city: customer.address?.city,
     state: customer.address?.state,
     zipCode: customer.address?.zipCode
+  }
+}
+
+export const convertCustomerToClienteUpdateDTO = (customer: Customer): ClienteUpdateDTO => {
+  return {
+    nome: customer.name,
+    enderecoPrincipal: convertAddressToEnderecoDTO(customer.address)
   }
 }
 
