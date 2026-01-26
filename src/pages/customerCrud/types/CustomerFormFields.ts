@@ -1,10 +1,17 @@
 export default interface CustomerFormFields {
   name?: string,
-  surname?: string,
   email?: string,
   phone?: string,
-  corporativeName?: string,
   cnpj?: string,
   cpf?: string,
   id?: string,
+
+  street?: string,
+  number?: string,
+  complement?: string,
+  neighborhood?: string,
+  city?: string,
+  state?: string,
+  zipCode?: string,
+
 }

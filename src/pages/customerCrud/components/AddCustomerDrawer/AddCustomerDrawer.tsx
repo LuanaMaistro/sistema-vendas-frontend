@@ -22,11 +22,20 @@ export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerPr
   const [formAdd] = Form.useForm<CustomerFormFields>()
   const addCustomer = async (customerFormData: CustomerFormFields) => {
     const response = await application.AddCustomer.execute({
-      name: mountCustomerName(customerFormData),
+      name: customerFormData.name!,
       email: customerFormData.email,
       phone: customerFormData.phone,
       cnpj: customerFormData.cnpj,
       cpf: customerFormData.cpf,
+      address: {
+        street: customerFormData.street || '',
+        number: customerFormData.number || '',
+        complement: customerFormData.complement || '',
+        neighborhood: customerFormData.neighborhood || '',
+        city: customerFormData.city || '',
+        state: customerFormData.state || '',
+        zipCode: customerFormData.zipCode || '',
+      }
     })
 
     const success = eitherToBoolean(response)
@@ -35,11 +44,6 @@ export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerPr
       loadCustomers()
       onClose()
     }
-  }
-
-  const mountCustomerName = (customerFormData: CustomerFormFields): string => {
-    if(customerFormData.cpf) return `${customerFormData.name} ${customerFormData.surname}`
-    return customerFormData.corporativeName || 'Error'
   }
 
 
@@ -56,6 +60,7 @@ export default function AddCustomerDrawer({ open, onClose }: AddCustomerDrawerPr
       open={open}
       onClose={onClose}
       extra={extraActions}
+      size={720}
     >
       <Radio.Group
         options={CustomerTypeOptions}
