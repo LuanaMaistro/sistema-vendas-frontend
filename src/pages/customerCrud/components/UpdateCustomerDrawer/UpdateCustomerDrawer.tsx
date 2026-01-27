@@ -1,11 +1,11 @@
 import { Button, Drawer, Form, Space } from "antd";
 import CustomerForm from "../CustomerForm/CustomerForm";
-import { CustomerType, fold, type Customer } from "@dibimo/core-lib";
+import { CustomerType, type Customer } from "@dibimo/core-lib";
 import application from "../../../../infra/applicationInstance";
 import type CustomerFormFields from "../../types/CustomerFormFields";
 import { useCustomerCrudStore } from "../../CustomerCrudStore";
-import { eitherToBoolean } from "../../../../tools/either";
-import { useEffect } from "react";
+import { convertCustomerToFormFields } from "@/infra/servicesImp/mappers/customerMappers";
+import useNotification from "@/hooks/notification/notification";
 
 interface UpdateCustomerDrawerProps {
   open: boolean,
@@ -16,60 +16,48 @@ interface UpdateCustomerDrawerProps {
 export default function UpdateCustomerDrawer({ open, onClose, customer }: UpdateCustomerDrawerProps) {
 
   const { loadCustomers } = useCustomerCrudStore()
+  const { notify } = useNotification()
 
   const [editForm] = Form.useForm<CustomerFormFields>()
 
   useEffect(() => {
-    customerToForm()
-
+    if (customer) {
+      editForm.setFieldsValue(convertCustomerToFormFields(customer))
+    }
   }, [customer])
 
-  const customerToForm = () => {
-    if(!customer) return
-
-    editForm.setFieldsValue({
-      name: customer.name,
-      phone: customer.CustomerContact?.phone,
-      email: customer.CustomerContact?.email,
-      cpf: customer.Cpf?.Value,
-      cnpj: customer.Cnpj?.Value,
-      id: customer.id,
-      corporativeName: customer.name,
-      surname: customer.name,
-    })
-  }
-
   const getCustomerType = (): CustomerType => {
-    if(!customer) return CustomerType.NATURAL_PERSON
-
-    if (customer.Cnpj) return CustomerType.LEGAL_PERSON
-    return CustomerType.NATURAL_PERSON
+    if (!customer) return CustomerType.NATURAL_PERSON
+    return customer.Cnpj ? CustomerType.LEGAL_PERSON : CustomerType.NATURAL_PERSON
   }
 
+  const updateCustomer = async (formData: CustomerFormFields) => {
+    if (!customer) return
 
-  const updateCustomer = async (customerFormData: CustomerFormFields) => {
-    const response = await application.UpdateCustomer.execute({
-      id: customer?.id!,
-      cnpj: customerFormData.cnpj,
-      cpf: customerFormData.cpf,
-      email: customerFormData.email,
-      phone: customerFormData.phone,
-      name: mountCustomerName(customerFormData),
 
+    const result = await application.UpdateCustomer.execute({
+      id: customer.id!,
+      name: formData.name,
+      address: {
+        street: formData.street!,
+        number: formData.number!,
+        complement: formData.complement,
+        neighborhood: formData.neighborhood!,
+        city: formData.city!,
+        state: formData.state!,
+        zipCode: formData.zipCode!
+      }
     })
 
-    const message = fold(response, (erro: Error) => erro.message, () => 'deu tudo certo')
-    const success = eitherToBoolean(response)
+    notify(operationResultToNotification(result))
+    const success = eitherToBoolean(result)
 
-    if(success) {
+    if (success) {
       loadCustomers()
+      editForm.resetFields()
       onClose()
     }
-  }
 
-  const mountCustomerName = (customerFormData: CustomerFormFields): string => {
-    if(getCustomerType() == CustomerType.NATURAL_PERSON) return `${customerFormData.name} ${customerFormData.surname}`
-    return customerFormData.corporativeName || 'Error'
   }
 
 
@@ -86,12 +74,14 @@ export default function UpdateCustomerDrawer({ open, onClose, customer }: Update
       open={open}
       onClose={onClose}
       extra={extraActions}
+      size={720}
     >
 
       <CustomerForm
         form={editForm}
         customerType={getCustomerType()}
         onFinish={updateCustomer}
+        isEditing={true}
       />
     </Drawer>
   )
