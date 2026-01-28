@@ -21,8 +21,8 @@ const useDeleteCustomer = () => {
   }
 
   const deleteCustoner = async () => {
-    const result = await application.RemoveCustomer.execute({
-      id: customer!.id!
+    const result = await application.ToggleActiveStatus.execute({
+      customer: customer!
     })
 
     notify(operationResultToNotification(result))
