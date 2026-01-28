@@ -1,19 +1,6 @@
-import { fakerPT_BR as faker } from '@faker-js/faker'
-import { CNPJ, type Customer, type CustomerService, type Result } from "@dibimo/core-lib";
+import type { Customer, CustomerService, Result } from "@dibimo/core-lib";
 import createApiClients from '../api/apiClientFactory';
 import { convertClienteDTOToCustomer, convertCustomerToClienteCreateDTO, convertCustomerToClienteUpdateDTO } from './mappers/customerMappers';
-
-faker.seed(123)
-
-function createRandomCustomer(): Customer {
-
-  return {
-    id: faker.string.uuid(),
-    name: faker.company.name(),
-    Cnpj: CNPJ.create("15.250.180/0001-37"),
-  }
-}
-let mockCustomers = Array.from({ length: 15 }, createRandomCustomer)
 
 export default class CustomerServiceImp implements CustomerService {
 
@@ -67,12 +54,6 @@ export default class CustomerServiceImp implements CustomerService {
       code: 200,
       data: convertClienteDTOToCustomer(resultApi.data)
     }
-  }
-
-  private getCustomerIndex(customerId: string) {
-    const result = mockCustomers.findIndex((c) => c.id! == customerId)
-    if(result < 0) throw 'cliente não encontrado'
-    return result
   }
 }
 
