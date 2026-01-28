@@ -8,7 +8,7 @@ export const convertClienteDTOToCustomer = (dto: ClienteDTO): Customer => {
   const customer: Customer = {
     name: dto.nome!,
     id: dto.id!,
-
+    active: dto.ativo
   }
 
   assignDocument(dto, customer)
