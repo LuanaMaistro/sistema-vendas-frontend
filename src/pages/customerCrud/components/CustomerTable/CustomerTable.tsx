@@ -1,5 +1,5 @@
 import type { Customer } from "@dibimo/core-lib"
-import { Space, Table, type TableColumnsType } from "antd"
+import { Space, Table, Tag, type TableColumnsType } from "antd"
 import styles from './CustomerTable.module.css'
 import { useCustomerCrudStore } from "../../CustomerCrudStore"
 
@@ -24,7 +24,15 @@ export default function CustomerTable({ editCustomer, deleteCustomer }: Customer
     },
     {
       title: 'Ativo',
-      render: (_, record) => record.active ? 'Sim' : 'Não'
+      render: (_, record) => {
+        const statusText = record.active ? 'Sim' : 'Não'
+        const styles = record.active ? 'success' : 'red'
+        return (
+          <Tag color={styles}>
+            {statusText}
+          </Tag>
+        )
+      }
     },
     {
       title: 'Documento',
