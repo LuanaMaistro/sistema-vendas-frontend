@@ -28,9 +28,9 @@ export default class CustomerServiceImp implements CustomerService {
   }
 
   async Remove(id: string): Promise<Result> {
-    const customerIndex = this.getCustomerIndex(id)
-    delete mockCustomers[customerIndex]
-    mockCustomers = mockCustomers.filter(Boolean)
+    const [customerApi] = createApiClients('ClientesApi')
+    await customerApi.apiClientesIdInativarPatch(id)
+
     return {
       code: 200,
       success: true,
