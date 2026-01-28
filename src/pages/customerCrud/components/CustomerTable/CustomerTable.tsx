@@ -23,6 +23,10 @@ export default function CustomerTable({ editCustomer, deleteCustomer }: Customer
       dataIndex: 'name'
     },
     {
+      title: 'Ativo',
+      render: (_, record) => record.active ? 'Sim' : 'Não'
+    },
+    {
       title: 'Documento',
       render: (_, record) => record.Cpf?.Value || record.Cnpj?.Value || '-'
     },
