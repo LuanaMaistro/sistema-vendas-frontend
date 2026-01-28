@@ -1,8 +1,23 @@
-import type { Customer, CustomerService, Result } from "@dibimo/core-lib";
+import type { Customer, CustomerService, ListCustomerFilters, Result } from "@dibimo/core-lib";
 import createApiClients from '../api/apiClientFactory';
 import { convertClienteDTOToCustomer, convertCustomerToClienteCreateDTO, convertCustomerToClienteUpdateDTO } from './mappers/customerMappers';
 
 export default class CustomerServiceImp implements CustomerService {
+
+  async ListCustomers(filters: ListCustomerFilters): Promise<Result<Array<Customer>>> {
+
+    if(!filters.onlyActives)
+      return await this.List()
+
+    const [customerApi] = createApiClients('ClientesApi')
+    const resultApi = await customerApi.apiClientesAtivosGet()
+
+    return {
+      data: resultApi.data.map(convertClienteDTOToCustomer),
+      code: 200,
+      success: true,
+    }
+  }
 
   async Add(entity: Customer): Promise<Result> {
     const [customerApi] = createApiClients('ClientesApi')
