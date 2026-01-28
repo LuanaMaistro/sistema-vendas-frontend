@@ -59,12 +59,16 @@ export default function CustomerTable({ editCustomer, deleteCustomer }: Customer
       key: 'actions',
       fixed: 'right',
       width: 150,
-      render: (_, customer) =>  (
-        <Space>
-          <a onClick={() => editCustomer(customer)}>Editar</a>
-          <a onClick={() => deleteCustomer(customer)}>Deletar</a>
-        </Space>
-      )
+      render: (_, customer) => {
+        const deleteText = customer.active ? 'Inativar' : 'Ativar'
+
+        return (
+          <Space>
+            <a onClick={() => editCustomer(customer)}>Editar</a>
+            <a onClick={() => deleteCustomer(customer)}>{deleteText}</a>
+          </Space>
+        )
+      }
     },
   ]
 
