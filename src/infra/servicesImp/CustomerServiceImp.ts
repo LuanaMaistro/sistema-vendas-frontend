@@ -59,10 +59,12 @@ export default class CustomerServiceImp implements CustomerService {
   }
 
   async GetById(id: string): Promise<Result<Customer>> {
+    const [customerApi] = createApiClients('ClientesApi')
+    const resultApi = await customerApi.apiClientesIdGet(id)
     return {
       success: true,
       code: 200,
-      data: mockCustomers[this.getCustomerIndex(id)]
+      data: convertClienteDTOToCustomer(resultApi.data)
     }
   }
 
