@@ -4,6 +4,20 @@ import { convertClienteDTOToCustomer, convertCustomerToClienteCreateDTO, convert
 
 export default class CustomerServiceImp implements CustomerService {
 
+  async ToogleActiveStatus(customer: Customer): Promise<Result> {
+    const [customerApi] = createApiClients('ClientesApi')
+
+    if (customer.active)
+      await customerApi.apiClientesIdInativarPatch(customer.id!)
+    else
+      await customerApi.apiClientesIdAtivarPatch(customer.id!)
+
+    return {
+      code: 200,
+      success: true,
+    }
+  }
+
   async ListCustomers(filters: ListCustomerFilters): Promise<Result<Array<Customer>>> {
 
     if(!filters.onlyActives)
