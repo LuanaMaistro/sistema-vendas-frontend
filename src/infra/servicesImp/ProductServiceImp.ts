@@ -1,25 +1,41 @@
-import { fakerPT_BR as faker } from '@faker-js/faker'
-import { Price, Quantity, type Product, type ProductService, type Result } from "@dibimo/core-lib";
-
-faker.seed(123)
-
-function createRandomProduct(): Product {
-  return {
-    id: faker.string.uuid(),
-    name: faker.commerce.productName(),
-    description: faker.commerce.productDescription(),
-    code: faker.string.alphanumeric(10).toUpperCase(),
-    price: Price.create(Number(faker.commerce.price())),
-    quantity: Quantity.create(faker.number.int({ min: 0, max: 1000 }))
-  }
-}
-
-let mockProducts = Array.from({ length: 15 }, createRandomProduct)
+import type { ListProductFilters, Product, ProductService, Result } from "@dibimo/core-lib";
+import createApiClients from '../api/apiClientFactory';
+import { convertProdutoDTOToProduct, convertProductToProdutoCreateDTO, convertProductToProdutoUpdateDTO } from './mappers/productMappers';
 
 export default class ProductServiceImp implements ProductService {
 
+  async ToogleActiveStatus(product: Product): Promise<Result> {
+    const [productApi] = createApiClients('ProdutosApi')
+
+    if (product.active)
+      await productApi.apiProdutosIdInativarPatch(product.id!)
+    else
+      await productApi.apiProdutosIdAtivarPatch(product.id!)
+
+    return {
+      code: 200,
+      success: true,
+    }
+  }
+
+  async ListProducts(filters: ListProductFilters): Promise<Result<Array<Product>>> {
+
+    if(!filters.onlyActives)
+      return await this.List()
+
+    const [productApi] = createApiClients('ProdutosApi')
+    const resultApi = await productApi.apiProdutosAtivosGet()
+
+    return {
+      data: resultApi.data.map(convertProdutoDTOToProduct),
+      code: 200,
+      success: true,
+    }
+  }
+
   async Add(entity: Product): Promise<Result> {
-    mockProducts.unshift(entity)
+    const [productApi] = createApiClients('ProdutosApi')
+    await productApi.apiProdutosPost(convertProductToProdutoCreateDTO(entity))
 
     return {
       code: 200,
@@ -28,9 +44,9 @@ export default class ProductServiceImp implements ProductService {
   }
 
   async Remove(id: string): Promise<Result> {
-    const productIndex = this.getProductIndex(id)
-    delete mockProducts[productIndex]
-    mockProducts = mockProducts.filter(Boolean)
+    const [productApi] = createApiClients('ProdutosApi')
+    await productApi.apiProdutosIdInativarPatch(id)
+
     return {
       code: 200,
       success: true,
@@ -38,14 +54,9 @@ export default class ProductServiceImp implements ProductService {
   }
 
   async Update(entity: Product): Promise<Result> {
-    const productIndex = this.getProductIndex(entity.id!)
-    const productUpdated = { ...mockProducts[productIndex] }
-    productUpdated.name = entity.name
-    productUpdated.description = entity.description
-    productUpdated.price = entity.price
-    productUpdated.quantity = entity.quantity
+    const [productApi] = createApiClients('ProdutosApi')
+    await productApi.apiProdutosIdPut(entity.id!, convertProductToProdutoUpdateDTO(entity))
 
-    mockProducts[productIndex] = productUpdated
     return {
       code: 200,
       success: true,
@@ -53,26 +64,24 @@ export default class ProductServiceImp implements ProductService {
   }
 
   async List(): Promise<Result<Product[]>> {
+    const [productApi] = createApiClients('ProdutosApi')
+    const resultApi = await productApi.apiProdutosGet()
+
     return {
-      data: [
-        ...mockProducts
-      ],
+      data: resultApi.data.map(convertProdutoDTOToProduct),
       success: true,
       code: 200,
     }
   }
 
   async GetById(id: string): Promise<Result<Product>> {
+    const [productApi] = createApiClients('ProdutosApi')
+    const resultApi = await productApi.apiProdutosIdGet(id)
+
     return {
       success: true,
       code: 200,
-      data: mockProducts[this.getProductIndex(id)]
+      data: convertProdutoDTOToProduct(resultApi.data)
     }
-  }
-
-  private getProductIndex(productId: string) {
-    const result = mockProducts.findIndex((p) => p.id! == productId)
-    if(result < 0) throw 'produto não encontrado'
-    return result
   }
 }
