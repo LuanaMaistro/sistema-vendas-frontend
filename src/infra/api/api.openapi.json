@@ -1903,13 +1903,23 @@
             "type": "string",
             "nullable": true
           },
-          "enderecoPrincipal": {
-            "$ref": "#/components/schemas/EnderecoDTO"
+          "contatoPrincipal": {
+            "$ref": "#/components/schemas/ContatoDTO"
           },
-          "contatos": {
+          "contatosSecundarios": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContatoDTO"
+            },
+            "nullable": true
+          },
+          "enderecoPrincipal": {
+            "$ref": "#/components/schemas/EnderecoDTO"
+          },
+          "enderecosSecundarios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnderecoDTO"
             },
             "nullable": true
           }
@@ -1942,6 +1952,16 @@
             "type": "string",
             "format": "date-time"
           },
+          "contatoPrincipal": {
+            "$ref": "#/components/schemas/ContatoDTO"
+          },
+          "contatosSecundarios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContatoDTO"
+            },
+            "nullable": true
+          },
           "enderecoPrincipal": {
             "$ref": "#/components/schemas/EnderecoDTO"
           },
@@ -1949,13 +1969,6 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EnderecoDTO"
-            },
-            "nullable": true
-          },
-          "contatos": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContatoDTO"
             },
             "nullable": true
           }
@@ -1969,6 +1982,9 @@
             "type": "string",
             "nullable": true
           },
+          "contatoPrincipal": {
+            "$ref": "#/components/schemas/ContatoDTO"
+          },
           "enderecoPrincipal": {
             "$ref": "#/components/schemas/EnderecoDTO"
           }
@@ -1978,16 +1994,17 @@
       "ContatoDTO": {
         "type": "object",
         "properties": {
-          "tipo": {
+          "telefone": {
             "type": "string",
             "nullable": true
           },
-          "valor": {
+          "celular": {
             "type": "string",
             "nullable": true
           },
-          "principal": {
-            "type": "boolean"
+          "email": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

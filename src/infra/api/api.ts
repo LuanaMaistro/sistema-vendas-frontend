@@ -26,8 +26,10 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 export interface ClienteCreateDTO {
     'nome'?: string | null;
     'documento'?: string | null;
+    'contatoPrincipal'?: ContatoDTO;
+    'contatosSecundarios'?: Array<ContatoDTO> | null;
     'enderecoPrincipal'?: EnderecoDTO;
-    'contatos'?: Array<ContatoDTO> | null;
+    'enderecosSecundarios'?: Array<EnderecoDTO> | null;
 }
 export interface ClienteDTO {
     'id'?: string;
@@ -36,18 +38,20 @@ export interface ClienteDTO {
     'tipoDocumento'?: string | null;
     'ativo'?: boolean;
     'dataCadastro'?: string;
+    'contatoPrincipal'?: ContatoDTO;
+    'contatosSecundarios'?: Array<ContatoDTO> | null;
     'enderecoPrincipal'?: EnderecoDTO;
     'enderecosSecundarios'?: Array<EnderecoDTO> | null;
-    'contatos'?: Array<ContatoDTO> | null;
 }
 export interface ClienteUpdateDTO {
     'nome'?: string | null;
+    'contatoPrincipal'?: ContatoDTO;
     'enderecoPrincipal'?: EnderecoDTO;
 }
 export interface ContatoDTO {
-    'tipo'?: string | null;
-    'valor'?: string | null;
-    'principal'?: boolean;
+    'telefone'?: string | null;
+    'celular'?: string | null;
+    'email'?: string | null;
 }
 export interface EnderecoDTO {
     'cep'?: string | null;

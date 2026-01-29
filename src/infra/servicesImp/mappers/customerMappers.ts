@@ -20,25 +20,17 @@ export const convertClienteDTOToCustomer = (dto: ClienteDTO): Customer => {
 }
 
 function assingContacts(dto: ClienteDTO, customer: Customer) {
-  if(!dto.contatos) return;
-
   assingDefaultContacts(dto, customer)
-  assingAlternativeContacts(dto, customer)
+
+  if(!dto.contatosSecundarios) return;
+    assingAlternativeContacts(dto, customer)
 
 }
 
 function assingDefaultContacts(dto: ClienteDTO, customer: Customer) {
-  if(!dto.contatos) return;
-
-  const defaultContacts = dto.contatos!.filter(c => c.principal)
-
-  const defaultEmail = defaultContacts.find(c => c.tipo == 'Email')
-  const defaultPhone = defaultContacts.find(c => c.tipo == 'Telefone')
-  const defaultMobile = defaultContacts.find(c => c.tipo == 'Celular')
-
-  if(defaultEmail) customer.email = Email.create(defaultEmail.valor!)
-  if(defaultPhone) customer.phone = Phone.create(defaultPhone.valor!)
-  if(defaultMobile) customer.mobile = Mobile.create(defaultMobile.valor!)
+  if(dto.contatoPrincipal?.email) customer.email = Email.create(dto.contatoPrincipal?.email)
+  if(dto.contatoPrincipal?.telefone) customer.phone = Phone.create(dto.contatoPrincipal?.telefone)
+  if(dto.contatoPrincipal?.celular) customer.mobile = Mobile.create(dto.contatoPrincipal?.celular)
 }
 
 function assingAlternativesAddresses(dto: ClienteDTO, customer: Customer) {
@@ -50,18 +42,17 @@ function assingAlternativesAddresses(dto: ClienteDTO, customer: Customer) {
 }
 
 function assingAlternativeContacts(dto: ClienteDTO, customer: Customer) {
-  if(!dto.contatos) return;
-  const alternativeContacts = dto.contatos!.filter(c => !c.principal)
-    .filter(c => c.valor)
+  if(!dto.contatosSecundarios) return;
+  const alternativeContacts = dto.contatosSecundarios!
 
-  customer.alternativeEmails = alternativeContacts.filter(c => c.tipo == 'Email')
-    .map(c => Email.create(c.valor!))
+  customer.alternativeEmails = alternativeContacts.filter(c => c.email)
+    .map(c => Email.create(c.email!))
 
-  customer.alternativePhones = alternativeContacts.filter(c => c.tipo == 'Telefone')
-    .map(c => Phone.create(c.valor!))
+  customer.alternativePhones = alternativeContacts.filter(c => c.telefone)
+    .map(c => Phone.create(c.telefone!))
 
-  customer.alternativeMobiles = alternativeContacts.filter(c => c.tipo == 'Celular')
-    .map(c => Mobile.create(c.valor!))
+  customer.alternativeMobiles = alternativeContacts.filter(c => c.celular)
+    .map(c => Mobile.create(c.celular!))
 }
 
 function assignDocument(dto: ClienteDTO, customer: Customer) {
@@ -83,10 +74,15 @@ export const convertCustomerToClienteCreateDTO = (customer: Customer): ClienteCr
   const dto: ClienteCreateDTO = {
     nome: customer.name!,
     documento: customer.Cnpj?.Value || customer.Cpf?.Value!,
+    contatoPrincipal: {
+      email: customer.email?.Value,
+      celular: customer.mobile?.Value,
+      telefone: customer.phone?.Value,
+    }
   }
 
   dto.enderecoPrincipal = convertAddressToEnderecoDTO(customer.address)
-  dto.contatos = convertContactsToContatoDTO(customer)
+  dto.contatosSecundarios = convertContactsToContatoDTO(customer)
 
   return dto
 }
