@@ -19,7 +19,9 @@ export default defineConfig({
             'right',
             'left'
           ],
-          '@/tools/either': ['eitherToBoolean', 'operationResultToNotification']
+          '@/tools/either': ['eitherToBoolean', 'operationResultToNotification'],
+          '@/tools/date': ['formatDate'],
+          '@/tools/currency': ['formatCurrency']
 
         },
       ]
