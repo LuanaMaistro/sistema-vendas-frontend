@@ -7,9 +7,9 @@ export const convertVendaDTOToSale = (dto: VendaDTO): Sale => {
     customerId: dto.clienteId!,
     date: dto.dataVenda ? new Date(dto.dataVenda) : undefined,
     totalAmount: dto.valorTotal,
-    status: convertStatusToEnum(dto.status),
-    paymentMethod: convertPaymentMethodToEnum(dto.formaPagamento),
-    observations: dto.observacao,
+    status: convertStatusToEnum(dto.status!),
+    paymentMethod: convertPaymentMethodToEnum(dto.formaPagamento!),
+    observations: dto.observacao!,
     items: dto.itens?.map(convertItemVendaDTOToSaleItem) || []
   }
 }
@@ -18,7 +18,7 @@ export const convertItemVendaDTOToSaleItem = (dto: ItemVendaDTO): SaleItem => {
   return {
     id: dto.id,
     productId: dto.produtoId,
-    productName: dto.produtoNome,
+    productName: dto.produtoNome!,
     quantity: dto.quantidade || 0,
     unitPrice: dto.precoUnitario,
     totalPrice: dto.subtotal
