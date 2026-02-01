@@ -1,0 +1,33 @@
+.saleList {
+  margin-top: 16px;
+}
+
+.collapseHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.collapseContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.saleInfo {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.tableActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.saleActions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
