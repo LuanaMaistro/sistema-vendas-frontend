@@ -9,7 +9,6 @@ import styles from './SaleFilters.module.css'
 const { RangePicker } = DatePicker
 
 const statusOptions = [
-  { value: undefined, label: 'Todos' },
   { value: SaleStatus.PENDING, label: 'Pendente' },
   { value: SaleStatus.COMPLETED, label: 'Confirmada' },
   { value: SaleStatus.CANCELLED, label: 'Cancelada' },
@@ -47,6 +46,7 @@ export default function SaleFilters() {
             options={statusOptions}
             style={{ width: 150 }}
             placeholder="Filtrar por status"
+            allowClear
           />
         </div>
 
@@ -65,6 +65,7 @@ export default function SaleFilters() {
           <RangePicker
             onChange={handleDateChange}
             format="DD/MM/YYYY"
+            allowClear
           />
         </div>
 
