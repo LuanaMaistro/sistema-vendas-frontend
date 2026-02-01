@@ -7,41 +7,37 @@ import {
   convertSaleToVendaCreateDTO,
   convertVendaDTOToSale
 } from './mappers/saleMappers';
+import type { AxiosResponse } from "axios";
+import type { VendaDTO } from "../api";
 
 export default class SaleServiceImp implements SaleService {
 
   async ListSales(filters: ListSaleFilters): Promise<Result<Array<Sale>>> {
-    const [vendasApi] = createApiClients('VendasApi')
 
-    if (filters.customerId) {
-      const resultApi = await vendasApi.apiVendasClienteClienteIdGet(filters.customerId)
-      return {
-        data: resultApi.data.map(convertVendaDTOToSale),
-        code: 200,
-        success: true,
-      }
+    const resultApi = await this.getSalesFromApi(filters)
+
+    return {
+      data: resultApi.data.map(convertVendaDTOToSale),
+      code: 200,
+      success: true,
     }
+
+  }
+
+  private async getSalesFromApi(filters: ListSaleFilters): Promise<AxiosResponse<Array<VendaDTO>>> {
+    const [vendasApi] = createApiClients('VendasApi')
+    if (filters.customerId)
+      return await vendasApi.apiVendasClienteClienteIdGet(filters.customerId)
 
     if (filters.status) {
       const statusString = convertSaleStatusToString(filters.status)
-      const resultApi = await vendasApi.apiVendasStatusStatusGet(statusString)
-      return {
-        data: resultApi.data.map(convertVendaDTOToSale),
-        code: 200,
-        success: true,
-      }
+      return await vendasApi.apiVendasStatusStatusGet(statusString)
     }
 
-    if (filters.startDate && filters.endDate) {
-      const resultApi = await vendasApi.apiVendasPeriodoGet(filters.startDate, filters.endDate)
-      return {
-        data: resultApi.data.map(convertVendaDTOToSale),
-        code: 200,
-        success: true,
-      }
-    }
+    if (filters.startDate && filters.endDate)
+      return await vendasApi.apiVendasPeriodoGet(filters.startDate, filters.endDate)
 
-    return await this.List()
+    return await vendasApi.apiVendasGet()
   }
 
   async ConfirmSale(saleId: string, paymentMethod: PaymentMethod): Promise<Result<Sale>> {
