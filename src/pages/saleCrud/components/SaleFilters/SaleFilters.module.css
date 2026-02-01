@@ -1,0 +1,14 @@
+.filtersCard {
+  margin-bottom: 16px;
+}
+
+.filterItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filterLabel {
+  font-weight: 500;
+  white-space: nowrap;
+}
