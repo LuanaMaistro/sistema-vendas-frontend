@@ -1,4 +1,4 @@
-import { Price, type Product } from "@dibimo/core-lib"
+import { Price, Quantity, type Product } from "@dibimo/core-lib"
 import type { ProdutoCreateDTO, ProdutoDTO, ProdutoUpdateDTO } from "../../api"
 
 export const convertProdutoDTOToProduct = (dto: ProdutoDTO): Product => {
@@ -6,10 +6,12 @@ export const convertProdutoDTOToProduct = (dto: ProdutoDTO): Product => {
     id: dto.id!,
     name: dto.nome!,
     code: dto.codigo!,
-    description: dto.descricao,
+    description: dto.descricao!,
     price: Price.create(dto.precoUnitario!),
+    quantity: Quantity.create(dto.quantidade ?? 0),
+    minimumQuantity: Quantity.create(dto.quantidadeMinima ?? 0),
     category: dto.categoria,
-    active: dto.ativo,
+    active: dto.ativo!,
     registrationDate: dto.dataCadastro
   }
 
@@ -22,7 +24,9 @@ export const convertProductToProdutoCreateDTO = (product: Product): ProdutoCreat
     nome: product.name,
     descricao: product.description,
     precoUnitario: product.price?.Value,
-    categoria: product.category
+    categoria: product.category,
+    quantidade: product.quantity?.Value ?? 0,
+    quantidadeMinima: product.minimumQuantity?.Value ?? 0
   }
 }
 
@@ -31,6 +35,7 @@ export const convertProductToProdutoUpdateDTO = (product: Product): ProdutoUpdat
     nome: product.name,
     descricao: product.description,
     precoUnitario: product.price?.Value,
-    categoria: product.category
+    categoria: product.category,
+    quantidadeMinima: product.minimumQuantity?.Value ?? 0
   }
 }
