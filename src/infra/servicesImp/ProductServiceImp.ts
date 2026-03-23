@@ -1,4 +1,4 @@
-import type { ListProductFilters, Product, ProductService, Result } from "@dibimo/core-lib";
+import type { ListProductFilters, Product, ProductService, Quantity, Result } from "@dibimo/core-lib";
 import createApiClients from '../api/apiClientFactory';
 import { convertProdutoDTOToProduct, convertProductToProdutoCreateDTO, convertProductToProdutoUpdateDTO } from './mappers/productMappers';
 
@@ -84,6 +84,26 @@ export default class ProductServiceImp implements ProductService {
     const [productApi] = createApiClients('ProdutosApi')
     const resultApi = await productApi.apiProdutosIdGet(id)
 
+    return {
+      success: true,
+      code: 200,
+      data: convertProdutoDTOToProduct(resultApi.data)
+    }
+  }
+
+  async AddStock(id: string, quantity: Quantity): Promise<Result<Product>> {
+    const [productApi] = createApiClients('ProdutosApi')
+    const resultApi = await productApi.apiProdutosIdEstoqueAdicionarPatch(id, { quantidade: quantity.Value })
+    return {
+      success: true,
+      code: 200,
+      data: convertProdutoDTOToProduct(resultApi.data)
+    }
+  }
+
+  async RemoveStock(id: string, quantity: Quantity): Promise<Result<Product>> {
+    const [productApi] = createApiClients('ProdutosApi')
+    const resultApi = await productApi.apiProdutosIdEstoqueRemoverPatch(id, { quantidade: quantity.Value })
     return {
       success: true,
       code: 200,
