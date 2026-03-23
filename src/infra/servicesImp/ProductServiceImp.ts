@@ -6,7 +6,7 @@ export default class ProductServiceImp implements ProductService {
 
   async Activate(id: string): Promise<Result> {
     const [productApi] = createApiClients('ProdutosApi')
-    await productApi.apiProdutosIdInativarPatch(id)
+    await productApi.apiProdutosIdAtivarPatch(id)
     return {
       code: 200,
       success: true,
@@ -15,7 +15,7 @@ export default class ProductServiceImp implements ProductService {
 
   async Deactivate(id: string): Promise<Result> {
     const [productApi] = createApiClients('ProdutosApi')
-    await productApi.apiProdutosIdAtivarPatch(id)
+    await productApi.apiProdutosIdInativarPatch(id)
     return {
       code: 200,
       success: true,
