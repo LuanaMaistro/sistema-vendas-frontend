@@ -46,8 +46,20 @@ export default function ProductForm({ form, onFinish, isEdit }: ProductFormProps
             </Form.Item>
           </Col>
 
+          {!isEdit && (
+            <Col span={12}>
+              <Form.Item name="quantity" label="Quantidade inicial">
+                <InputNumber
+                  min={0}
+                  step={1}
+                  style={{ width: '100%' }}
+                />
+              </Form.Item>
+            </Col>
+          )}
+
           <Col span={12}>
-            <Form.Item name="quantity" label="Quantidade">
+            <Form.Item name="minimumQuantity" label="Quantidade mínima">
               <InputNumber
                 min={0}
                 step={1}
