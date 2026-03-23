@@ -23,7 +23,8 @@ export default function AddProductDrawer({ open, onClose }: AddProductDrawerProp
       description: productFormData.description!,
       code: productFormData.code!,
       price: productFormData.price!,
-      quantity: productFormData.quantity!,
+      quantity: productFormData.quantity ?? 0,
+      minimumQuantity: productFormData.minimumQuantity ?? 0,
     })
 
     notify(operationResultToNotification(response))

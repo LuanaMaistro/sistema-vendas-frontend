@@ -5,6 +5,7 @@ import type ProductFormFields from "../../types/ProductFormFields";
 import { useProductCrudStore } from "../../ProductCrudStore";
 import { eitherToBoolean } from "../../../../tools/either";
 import { type Product } from "@dibimo/core-lib";
+import useNotification from "../../../../hooks/notification/notification";
 
 interface UpdateProductDrawerProps {
   open: boolean,
@@ -14,6 +15,7 @@ interface UpdateProductDrawerProps {
 
 export default function UpdateProductDrawer({ open, onClose, product }: UpdateProductDrawerProps) {
   const { loadProducts } = useProductCrudStore()
+  const { notify } = useNotification()
 
   const [formUpdate] = Form.useForm<ProductFormFields>()
 
@@ -24,7 +26,7 @@ export default function UpdateProductDrawer({ open, onClose, product }: UpdatePr
         description: product.description,
         code: product.code,
         price: product.price.Value,
-        quantity: product.quantity.Value,
+        minimumQuantity: product.minimumQuantity?.Value ?? 0,
       })
     }
   }, [product, formUpdate])
@@ -35,8 +37,10 @@ export default function UpdateProductDrawer({ open, onClose, product }: UpdatePr
       name: productFormData.name!,
       description: productFormData.description!,
       price: productFormData.price!,
-      quantity: productFormData.quantity!,
+      minimumQuantity: productFormData.minimumQuantity ?? 0,
     })
+
+    notify(operationResultToNotification(response))
 
     const success = eitherToBoolean(response)
 
