@@ -1,5 +1,5 @@
 import type { Product } from "@dibimo/core-lib"
-import { Space, Table, type TableColumnsType } from "antd"
+import { Space, Table, Tag, type TableColumnsType } from "antd"
 import styles from './ProductTable.module.css'
 import { useProductCrudStore } from "../../ProductCrudStore"
 
@@ -33,6 +33,18 @@ export default function ProductTable({
     {
       title: 'Código',
       dataIndex: 'code',
+    },
+    {
+      title: 'Ativo',
+      render: (_, record) => {
+        const statusText = record.active ? 'Sim' : 'Não'
+        const styles = record.active ? 'success' : 'red'
+        return (
+          <Tag color={styles}>
+            {statusText}
+          </Tag>
+        )
+      }
     },
     {
       title: 'Descrição',
