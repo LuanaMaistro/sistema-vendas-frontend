@@ -2,6 +2,8 @@ import type { Product } from "@dibimo/core-lib"
 import { Space, Table, Tag, type TableColumnsType } from "antd"
 import styles from './ProductTable.module.css'
 import { useProductCrudStore } from "../../ProductCrudStore"
+import { CheckCircleOutlined, DeleteOutlined, EditOutlined, MinusCircleOutlined, PlusCircleOutlined, StopOutlined } from "@ant-design/icons"
+import ActionButton from "@/components/table/ActionButton/ActionButton"
 
 interface ProductTableProps {
   editProduct: (p: Product) => void,
@@ -68,11 +70,35 @@ export default function ProductTable({
       key: 'actions',
       render: (_, product) =>  (
         <Space>
-          <a onClick={() => editProduct(product)}>Editar</a>
-          <a onClick={() => deleteProduct(product)}>Deletar</a>
-          <a onClick={() => toggleProductStatus(product)}>{product.active ? 'Inativar' : 'Ativar'}</a>
-          <a onClick={() => openAddStock(product)}>+ Estoque</a>
-          <a onClick={() => openRemoveStock(product)}>- Estoque</a>
+          <ActionButton
+            onClick={() => editProduct(product)}
+            icon={<EditOutlined />}
+            tooltip='Editar'
+          />
+
+          <ActionButton
+            onClick={() => deleteProduct(product)}
+            icon={<DeleteOutlined />}
+            tooltip='Deletar'
+          />
+
+          <ActionButton
+            onClick={() => toggleProductStatus(product)}
+            icon={product.active ? <StopOutlined /> : <CheckCircleOutlined />}
+            tooltip={product.active ? 'Inativar' : 'Ativar'}
+          />
+
+          <ActionButton
+            onClick={() => openAddStock(product)}
+            icon={<PlusCircleOutlined />}
+            tooltip='Adicionar estoque'
+          />
+
+          <ActionButton
+            onClick={() => openRemoveStock(product)}
+            icon={<MinusCircleOutlined />}
+            tooltip='Remover estoque'
+          />
         </Space>
       )
     },
