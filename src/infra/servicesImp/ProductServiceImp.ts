@@ -4,19 +4,25 @@ import { convertProdutoDTOToProduct, convertProductToProdutoCreateDTO, convertPr
 
 export default class ProductServiceImp implements ProductService {
 
-  async ToogleActiveStatus(product: Product): Promise<Result> {
+  async Activate(id: string): Promise<Result> {
     const [productApi] = createApiClients('ProdutosApi')
-
-    if (product.active)
-      await productApi.apiProdutosIdInativarPatch(product.id!)
-    else
-      await productApi.apiProdutosIdAtivarPatch(product.id!)
-
+    await productApi.apiProdutosIdInativarPatch(id)
     return {
       code: 200,
       success: true,
     }
   }
+
+  async Deactivate(id: string): Promise<Result> {
+    const [productApi] = createApiClients('ProdutosApi')
+    await productApi.apiProdutosIdAtivarPatch(id)
+    return {
+      code: 200,
+      success: true,
+    }
+  }
+
+
 
   async ListProducts(filters: ListProductFilters): Promise<Result<Array<Product>>> {
 
