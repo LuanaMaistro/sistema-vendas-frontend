@@ -4,4 +4,5 @@ export default interface ProductFormFields {
   code?: string;
   price?: number;
   quantity?: number;
+  minimumQuantity?: number;
 }

@@ -6,14 +6,18 @@ import ProductTable from './components/ProductTable/ProductTable'
 import useDeleteProduct from './hooks/useDeleteProduct'
 import useAddProduct from './hooks/useAddProduct'
 import useEditProduct from './hooks/useEditProduct'
+import useStockMovement from './hooks/useStockMovement'
 import ProductFilters from './components/ProductFilters/ProductFilters'
 import CrudHeader from '../../components/headers/CrudHeader/CrudHeader'
+import AddStockModal from './components/AddStockModal/AddStockModal'
+import RemoveStockModal from './components/RemoveStockModal/RemoveStockModal'
 
 export default function ProductCrudPage() {
 
   const addProduct = useAddProduct()
   const deleteProduct = useDeleteProduct()
   const editProduct = useEditProduct()
+  const stockMovement = useStockMovement()
 
 
  return (
@@ -31,6 +35,9 @@ export default function ProductCrudPage() {
       <ProductTable
         editProduct={editProduct.open}
         deleteProduct={deleteProduct.confirm}
+        toggleProductStatus={editProduct.openInactivateConfirm}
+        openAddStock={stockMovement.openAddStock}
+        openRemoveStock={stockMovement.openRemoveStock}
       />
 
       <AddProductDrawer
@@ -52,7 +59,25 @@ export default function ProductCrudPage() {
         onCancelClick={deleteProduct.cancel}
       />
 
-      {deleteProduct.contextHolder}
+      <DeleteConfirmationModal
+        show={editProduct.showInactivateConfirm}
+        title='Inativar produto?'
+        message='Deseja mesmo inativar o produto?'
+        onConfirmClick={editProduct.inactivateProduct}
+        onCancelClick={editProduct.closeInactivateConfirm}
+      />
+
+      <AddStockModal
+        open={stockMovement.showAddStock}
+        onClose={stockMovement.closeAddStock}
+        product={stockMovement.selectedProduct}
+      />
+
+      <RemoveStockModal
+        open={stockMovement.showRemoveStock}
+        onClose={stockMovement.closeRemoveStock}
+        product={stockMovement.selectedProduct}
+      />
 
     </div>
   )

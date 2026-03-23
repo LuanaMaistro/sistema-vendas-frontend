@@ -6,15 +6,23 @@ import { useProductCrudStore } from "../../ProductCrudStore"
 interface ProductTableProps {
   editProduct: (p: Product) => void,
   deleteProduct: (p: Product) => void,
+  toggleProductStatus: (p: Product) => void,
+  openAddStock: (p: Product) => void,
+  openRemoveStock: (p: Product) => void,
 }
 
-export default function ProductTable({ editProduct, deleteProduct }: ProductTableProps) {
+export default function ProductTable({
+  editProduct,
+  deleteProduct,
+  toggleProductStatus,
+  openAddStock,
+  openRemoveStock }: ProductTableProps) {
 
   const { products, loadProducts } = useProductCrudStore()
 
   useEffect(() => {
     loadProducts()
-  }, [])
+  }, [loadProducts])
 
 
   const columns: TableColumnsType<Product> = [
@@ -40,12 +48,19 @@ export default function ProductTable({ editProduct, deleteProduct }: ProductTabl
       dataIndex: ['quantity', 'Value']
     },
     {
+      title: 'Qtd. Mínima',
+      dataIndex: ['minimumQuantity', 'Value']
+    },
+    {
       title: 'Ações',
       key: 'actions',
       render: (_, product) =>  (
         <Space>
           <a onClick={() => editProduct(product)}>Editar</a>
           <a onClick={() => deleteProduct(product)}>Deletar</a>
+          <a onClick={() => toggleProductStatus(product)}>{product.active ? 'Inativar' : 'Ativar'}</a>
+          <a onClick={() => openAddStock(product)}>+ Estoque</a>
+          <a onClick={() => openRemoveStock(product)}>- Estoque</a>
         </Space>
       )
     },

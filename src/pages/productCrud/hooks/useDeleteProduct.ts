@@ -6,7 +6,7 @@ import { useProductCrudStore } from "../ProductCrudStore"
 const useDeleteProduct = () => {
 
   const { loadProducts } = useProductCrudStore()
-  const { notify, contextHolder } = useNotification()
+  const { notify } = useNotification()
 
   const [showConfirm, setShowConfirm] = useState(false)
   const [product, setProductToDelete] = useState<Product>()
@@ -33,7 +33,6 @@ const useDeleteProduct = () => {
   }
 
   return {
-    contextHolder,
     deleteProduct,
     cancel,
     confirm,
