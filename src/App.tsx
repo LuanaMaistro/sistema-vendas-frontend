@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import AppLayout from './pages/appLayout/AppLayout'
 import { App as AntDApp, ConfigProvider } from 'antd'
 import { routesConfigs } from './routes/routes'
@@ -7,6 +7,8 @@ import type RouteConfig from './routes/RouteConfig'
 import { useTheme } from './hooks/useTheme'
 import { darkTheme, lightTheme } from './config/theme'
 import styles  from './App.module.css'
+import LoginPage from './pages/login/LoginPage'
+import ProtectedRoute from './routes/ProtectedRoute'
 
 function App() {
 
@@ -23,10 +25,13 @@ function App() {
   const appRouter = (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={ <AppLayout /> }>
-          { routesConfigs.map(configToRoute) }
+        <Route path="/login" element={<LoginPage />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<AppLayout />}>
+            <Route index element={<Navigate to="/customers" replace />} />
+            { routesConfigs.map(configToRoute) }
+          </Route>
         </Route>
-
       </Routes>
     </BrowserRouter>
   )
