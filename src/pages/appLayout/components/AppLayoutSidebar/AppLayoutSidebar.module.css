@@ -50,6 +50,7 @@
 
 .sidebarSection {
   display: flex;
+  text-align: left;
   flex-direction: column;
   gap: 0.125rem;
   margin-bottom: 0.5rem;
@@ -102,6 +103,7 @@
 
 .itemLabel {
   flex: 1;
+  text-align: left;
 }
 
 .sidebarFooter {
@@ -125,6 +127,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: left;
 }
 
 .userEmail {
@@ -133,4 +136,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.logoutIcon {
+  margin-left: auto;
 }

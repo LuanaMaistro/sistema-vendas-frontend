@@ -3,7 +3,7 @@ import type RouteConfig from '../../../../routes/RouteConfig'
 import { routesConfigs } from '../../../../routes/routes'
 import styles from './AppLayoutSidebar.module.css'
 import { Avatar } from 'antd'
-import { ShopOutlined, UserOutlined } from '@ant-design/icons'
+import { LogoutOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons'
 
 export default function AppLayoutSidebar() {
 
@@ -52,6 +52,7 @@ export default function AppLayoutSidebar() {
           <span className={styles.userName}>Administrador</span>
           <span className={styles.userEmail}>admin@sistema.com</span>
         </div>
+        <LogoutOutlined className={styles.logoutIcon} />
       </div>
 
     </div>
