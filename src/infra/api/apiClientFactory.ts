@@ -1,3 +1,4 @@
+import axios from "axios"
 import * as api from "./api"
 import type { BaseAPI } from "./base"
 
@@ -15,8 +16,27 @@ const createApiClients = <T extends ApiClients[]>(...clients: T) => {
   }
 }
 
+const getToken = (): string | undefined => {
+  try {
+    const raw = localStorage.getItem('app-auth')
+    if (!raw) return undefined
+    return JSON.parse(raw)?.state?.token ?? undefined
+  } catch {
+    return undefined
+  }
+}
+
+const createAxiosInstance = () => {
+  const token = getToken()
+  return axios.create({
+    headers: {
+      Authorization: token ? `Bearer ${token}` : undefined,
+    },
+  })
+}
+
 const createClient = <K extends ApiClients>(client: K): InstanceOfClient<K> => {
-  return new api[client]() as InstanceOfClient<K>
+  return new api[client](undefined, undefined, createAxiosInstance()) as InstanceOfClient<K>
 }
 
 
