@@ -1,15 +1,11 @@
-import { Button, Form, Input, Typography } from "antd";
+import { Button, Checkbox, Form, Input, Typography } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import styles from "./LoginPage.module.css";
-import useLogin from "./hooks/useLogin";
-
-type LoginFormFields = {
-  email: string;
-  senha: string;
-}
+import useLogin, { loadSavedCredentials, type LoginFormFields } from "./hooks/useLogin";
 
 export default function LoginPage() {
   const { login, loading } = useLogin()
+  const saved = loadSavedCredentials()
 
   return (
     <div className={styles.loginPage}>
@@ -30,6 +26,11 @@ export default function LoginPage() {
           layout="vertical"
           onFinish={login}
           requiredMark={false}
+          initialValues={{
+            email: saved?.email ?? '',
+            senha: saved?.senha ?? '',
+            lembrar: !!saved,
+          }}
         >
           <Form.Item
             label="Email"
@@ -48,6 +49,10 @@ export default function LoginPage() {
             rules={[{ required: true, message: 'Informe sua senha' }]}
           >
             <Input.Password placeholder="••••••••" size="large" />
+          </Form.Item>
+
+          <Form.Item name="lembrar" valuePropName="checked" style={{ marginBottom: 16 }}>
+            <Checkbox>Lembrar-me</Checkbox>
           </Form.Item>
 
           <Form.Item style={{ marginBottom: 0 }}>
