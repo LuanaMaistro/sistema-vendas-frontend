@@ -22,7 +22,7 @@ export default function useLogin() {
       const response = await authApi.apiAuthLoginPost({ email, senha })
       const token = (response as any).data?.token ?? (response as any).data
       setToken(token)
-      navigate('/customers')
+      navigate('/customers', { replace: true })
     } catch {
       notify({
         type: 'error',

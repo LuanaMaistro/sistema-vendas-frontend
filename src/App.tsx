@@ -25,10 +25,9 @@ function App() {
   const appRouter = (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<AppLayout />}>
-            <Route index element={<Navigate to="/customers" replace />} />
+          <Route element={<AppLayout />}>
             { routesConfigs.map(configToRoute) }
           </Route>
         </Route>
