@@ -1,11 +1,29 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import type RouteConfig from '../../../../routes/RouteConfig'
 import { routesConfigs } from '../../../../routes/routes'
 import styles from './AppLayoutSidebar.module.css'
-import { Avatar } from 'antd'
+import { Avatar, Modal } from 'antd'
 import { LogoutOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons'
+import { useAuth } from '../../../../hooks/useAuth'
 
 export default function AppLayoutSidebar() {
+
+  const navigate = useNavigate()
+  const clearToken = useAuth(s => s.clearToken)
+
+  function handleLogout() {
+    Modal.confirm({
+      title: 'Sair do sistema',
+      content: 'Realmente deseja sair do sistema?',
+      okText: 'Sair',
+      cancelText: 'Cancelar',
+      okButtonProps: { danger: true },
+      onOk() {
+        clearToken()
+        navigate('/')
+      },
+    })
+  }
 
   const sections = routesConfigs.reduce((acc, route) => {
     const section = route.section ?? 'Geral'
@@ -52,7 +70,7 @@ export default function AppLayoutSidebar() {
           <span className={styles.userName}>Administrador</span>
           <span className={styles.userEmail}>admin@sistema.com</span>
         </div>
-        <LogoutOutlined className={styles.logoutIcon} />
+        <LogoutOutlined className={styles.logoutIcon} onClick={handleLogout} />
       </div>
 
     </div>
