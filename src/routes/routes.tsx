@@ -7,20 +7,23 @@ import SaleCrudPage from "../pages/saleCrud/SaleCrudPage";
 export const routesConfigs: Array<RouteConfig> = [
   {
     path: 'customers',
-    title: 'Gestão de clientes',
+    title: 'Clientes',
     element: <CustomerCrudPage />,
-    icon: <UserOutlined />
+    icon: <UserOutlined />,
+    section: 'Cadastros'
   },
   {
     path: 'products',
-    title: 'Gestão de produtos',
+    title: 'Produtos',
     element: <ProductCrudPage />,
-    icon: <TagOutlined />
+    icon: <TagOutlined />,
+    section: 'Cadastros'
   },
   {
     path: 'sales',
-    title: 'Gestão de vendas',
+    title: 'Vendas',
     element: <SaleCrudPage />,
-    icon: <ShoppingCartOutlined />
+    icon: <ShoppingCartOutlined />,
+    section: 'Operações'
   }
 ]

@@ -4,6 +4,7 @@ export default interface RouteConfig {
   path: string,
   element: JSX.Element,
   title: string,
-  icon?: JSX.Element
+  icon?: JSX.Element,
+  section?: string
 }
 

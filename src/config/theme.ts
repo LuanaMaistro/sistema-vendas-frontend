@@ -3,17 +3,21 @@ import { type ThemeConfig, theme } from 'antd';
 export const lightTheme: ThemeConfig = {
   algorithm: theme.defaultAlgorithm,
   token: {
-    colorPrimary: "#13C2C2",
-    colorBgLayout: "#F5F5F5",
+    // Primary: oklch(0.6840 0.1270 176.8287) → teal-green
+    colorPrimary: "#00B298",
+    // Backgrounds: oklch(0.9876 0.0044 185) → off-white with teal tint
+    colorBgLayout: "#F5FAFA",
     colorBgContainer: "#FFFFFF",
     colorBgElevated: "#FFFFFF",
-    colorBorder: "#D9D9D9",
-    colorBorderSecondary: "#F0F0F0",
-    borderRadius: 8,
-    borderRadiusLG: 12,
-    borderRadiusSM: 4,
-    boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02)",
-    boxShadowSecondary: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    // Borders: oklch(0.9214 0.0198 186) / oklch(0.9585 0.0066 185)
+    colorBorder: "#DDEAEB",
+    colorBorderSecondary: "#EDF4F4",
+    borderRadius: 12,
+    borderRadiusLG: 16,
+    borderRadiusSM: 6,
+    // Shadows com tint da cor primária (hsl(171 50% 20%) = teal escuro)
+    boxShadow: "0px 8px 20px -2px hsl(171 50% 20% / 0.08), 0px 1px 2px -3px hsl(171 50% 20% / 0.06)",
+    boxShadowSecondary: "0px 8px 20px -2px hsl(171 50% 20% / 0.12), 0px 4px 6px -3px hsl(171 50% 20% / 0.08)",
     fontSize: 14,
     fontFamily: "system-ui, Avenir, Helvetica, Arial, sans-serif",
     padding: 16,
@@ -27,12 +31,20 @@ export const lightTheme: ThemeConfig = {
 export const darkTheme: ThemeConfig = {
   algorithm: theme.darkAlgorithm,
   token: {
-    colorPrimary: "#36CFC9",
-    borderRadius: 8,
-    borderRadiusLG: 12,
-    borderRadiusSM: 4,
-    boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02)",
-    boxShadowSecondary: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    // Primary: oklch(0.8607 0.1582 177.3031) → teal-green brilhante
+    colorPrimary: "#1ADBC8",
+    // Backgrounds: oklch(0.1592 0.0163 195.6) e oklch(0.2032 0.0218 195.6)
+    colorBgLayout: "#141F22",
+    colorBgContainer: "#1A292C",
+    colorBgElevated: "#1E3032",
+    // Border: oklch(0.3331 0.0335 195.7)
+    colorBorder: "#2C4245",
+    colorBorderSecondary: "#1E3032",
+    borderRadius: 12,
+    borderRadiusLG: 16,
+    borderRadiusSM: 6,
+    boxShadow: "0px 10px 25px 0px hsl(0 0% 0% / 0.40), 0px 1px 2px -1px hsl(0 0% 0% / 0.40)",
+    boxShadowSecondary: "0px 10px 25px 0px hsl(0 0% 0% / 0.50), 0px 4px 6px -1px hsl(0 0% 0% / 0.40)",
     fontSize: 14,
     fontFamily: "system-ui, Avenir, Helvetica, Arial, sans-serif",
     padding: 16,
@@ -40,6 +52,5 @@ export const darkTheme: ThemeConfig = {
     paddingSM: 12,
     margin: 16,
     marginLG: 24,
-
   }
 };
