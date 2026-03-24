@@ -6,9 +6,10 @@ import { useCustomerCrudStore } from "../../CustomerCrudStore"
 interface CustomerTableProps {
   editCustomer: (c: Customer) => void,
   deleteCustomer: (c: Customer) => void,
+  viewRecommendations: (c: Customer) => void,
 }
 
-export default function CustomerTable({ editCustomer, deleteCustomer }: CustomerTableProps) {
+export default function CustomerTable({ editCustomer, deleteCustomer, viewRecommendations }: CustomerTableProps) {
 
   const { customers, loadCustomers } = useCustomerCrudStore()
 
@@ -58,7 +59,7 @@ export default function CustomerTable({ editCustomer, deleteCustomer }: Customer
       title: 'Ações',
       key: 'actions',
       fixed: 'right',
-      width: 150,
+      width: 200,
       render: (_, customer) => {
         const deleteText = customer.active ? 'Inativar' : 'Ativar'
 
@@ -66,6 +67,7 @@ export default function CustomerTable({ editCustomer, deleteCustomer }: Customer
           <Space>
             <a onClick={() => editCustomer(customer)}>Editar</a>
             <a onClick={() => deleteCustomer(customer)}>{deleteText}</a>
+            <a onClick={() => viewRecommendations(customer)}>Recomendações</a>
           </Space>
         )
       }

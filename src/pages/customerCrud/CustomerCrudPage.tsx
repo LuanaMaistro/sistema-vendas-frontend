@@ -1,11 +1,13 @@
 import styles from './CustomerCrudPage.module.css'
 import AddCustomerDrawer from './components/AddCustomerDrawer/AddCustomerDrawer'
 import UpdateCustomerDrawer from './components/UpdateCustomerDrawer/UpdateCustomerDrawer'
+import RecommendationsDrawer from './components/RecommendationsDrawer/RecommendationsDrawer'
 import { DeleteConfirmationModal } from '../../components/modals/DeleteConfirmationModal'
 import CustomerTable from './components/CustomerTable/CustomerTable'
 import useDeleteCustomer from './hooks/useDeleteCustomer'
 import useAddCustomer from './hooks/useAddCustomer'
 import useEditCustomer from './hooks/useEditCustomer'
+import useCustomerRecommendations from './hooks/useCustomerRecommendations'
 import CustomerFilters from './components/CustomerFilters/CustomerFilters'
 import CrudHeader from '../../components/headers/CrudHeader/CrudHeader'
 
@@ -14,6 +16,7 @@ export default function CustomerCrudPage() {
   const addCustomer = useAddCustomer()
   const deleteCustomer = useDeleteCustomer()
   const editCustomer = useEditCustomer()
+  const recommendations = useCustomerRecommendations()
 
 
  return (
@@ -31,6 +34,7 @@ export default function CustomerCrudPage() {
       <CustomerTable
         editCustomer={editCustomer.open}
         deleteCustomer={deleteCustomer.confirm}
+        viewRecommendations={recommendations.open}
       />
 
       <AddCustomerDrawer
@@ -42,6 +46,12 @@ export default function CustomerCrudPage() {
         open={editCustomer.show}
         onClose={editCustomer.close}
         customer={editCustomer.customer!}
+      />
+
+      <RecommendationsDrawer
+        open={recommendations.show}
+        onClose={recommendations.close}
+        customer={recommendations.customer!}
       />
 
       <DeleteConfirmationModal
