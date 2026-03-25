@@ -130,6 +130,8 @@ export interface ProdutoDTO {
     'dataCadastro'?: string;
     'quantidade'?: number;
     'quantidadeMinima'?: number;
+    'nivelEstoque'?: number;
+    'corEstoque'?: string | null;
 }
 export interface ProdutoEstoqueMovimentacaoDTO {
     'quantidade'?: number;
@@ -146,6 +148,16 @@ export interface ProdutoUpdateDTO {
     'precoUnitario'?: number;
     'categoria'?: string | null;
     'quantidadeMinima'?: number;
+}
+export interface RecomendacaoDiagnosticoDTO {
+    'clienteId'?: string;
+    'totalRetornadoRecombee'?: number;
+    'totalEncontradoNoBanco'?: number;
+    'itens'?: Array<RecomendacaoDiagnosticoItemDTO> | null;
+}
+export interface RecomendacaoDiagnosticoItemDTO {
+    'idRecombee'?: string | null;
+    'existeNoBanco'?: boolean;
 }
 export interface RecomendacaoItemDTO {
     'produtoId'?: string;
@@ -2698,6 +2710,48 @@ export const RecomendacoesApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        apiRecomendacoesClienteClienteIdDiagnosticoGet: async (clienteId: string, quantidade?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'clienteId' is not null or undefined
+            assertParamExists('apiRecomendacoesClienteClienteIdDiagnosticoGet', 'clienteId', clienteId)
+            const localVarPath = `/api/Recomendacoes/cliente/{clienteId}/diagnostico`
+                .replace(`{${"clienteId"}}`, encodeURIComponent(String(clienteId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (quantidade !== undefined) {
+                localVarQueryParameter['quantidade'] = quantidade;
+            }
+
+            localVarHeaderParameter['Accept'] = 'text/plain,application/json,text/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} clienteId 
+         * @param {number} [quantidade] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         apiRecomendacoesClienteClienteIdGet: async (clienteId: string, quantidade?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'clienteId' is not null or undefined
             assertParamExists('apiRecomendacoesClienteClienteIdGet', 'clienteId', clienteId)
@@ -2822,10 +2876,23 @@ export const RecomendacoesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiRecomendacoesClienteClienteIdCompletoGet(clienteId: string, quantidade?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClienteRecomendacoesDTO>> {
+        async apiRecomendacoesClienteClienteIdCompletoGet(clienteId: string, quantidade?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RecomendacaoItemDTO>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiRecomendacoesClienteClienteIdCompletoGet(clienteId, quantidade, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RecomendacoesApi.apiRecomendacoesClienteClienteIdCompletoGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} clienteId 
+         * @param {number} [quantidade] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiRecomendacoesClienteClienteIdDiagnosticoGet(clienteId: string, quantidade?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RecomendacaoDiagnosticoDTO>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiRecomendacoesClienteClienteIdDiagnosticoGet(clienteId, quantidade, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RecomendacoesApi.apiRecomendacoesClienteClienteIdDiagnosticoGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2881,8 +2948,18 @@ export const RecomendacoesApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiRecomendacoesClienteClienteIdCompletoGet(clienteId: string, quantidade?: number, options?: RawAxiosRequestConfig): AxiosPromise<ClienteRecomendacoesDTO> {
+        apiRecomendacoesClienteClienteIdCompletoGet(clienteId: string, quantidade?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<RecomendacaoItemDTO>> {
             return localVarFp.apiRecomendacoesClienteClienteIdCompletoGet(clienteId, quantidade, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} clienteId 
+         * @param {number} [quantidade] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiRecomendacoesClienteClienteIdDiagnosticoGet(clienteId: string, quantidade?: number, options?: RawAxiosRequestConfig): AxiosPromise<RecomendacaoDiagnosticoDTO> {
+            return localVarFp.apiRecomendacoesClienteClienteIdDiagnosticoGet(clienteId, quantidade, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2928,6 +3005,17 @@ export class RecomendacoesApi extends BaseAPI {
      */
     public apiRecomendacoesClienteClienteIdCompletoGet(clienteId: string, quantidade?: number, options?: RawAxiosRequestConfig) {
         return RecomendacoesApiFp(this.configuration).apiRecomendacoesClienteClienteIdCompletoGet(clienteId, quantidade, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} clienteId 
+     * @param {number} [quantidade] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public apiRecomendacoesClienteClienteIdDiagnosticoGet(clienteId: string, quantidade?: number, options?: RawAxiosRequestConfig) {
+        return RecomendacoesApiFp(this.configuration).apiRecomendacoesClienteClienteIdDiagnosticoGet(clienteId, quantidade, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
