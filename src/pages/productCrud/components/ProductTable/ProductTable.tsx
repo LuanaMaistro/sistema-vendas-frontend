@@ -41,12 +41,12 @@ export default function ProductTable({
           '#F44336'
         ]
         const textoEstoque = [
-          'Muito acima do mínimo',
-          'Acima do mínimo',
-          'Levemente acima do mínimo',
-          'Próximo ao mínimo',
-          'No limite mínimo',
-          'Abaixo do mínimo'
+          'Muito acima do mínimo', //"Estoque ótimo"  
+          'Acima do mínimo', //"Estoque adequado" 
+          'Levemente acima do mínimo', //"Estoque satisfatório"
+          'Próximo ao mínimo', //"Estoque baixo"  
+          'No limite mínimo', //"Estoque crítico"
+          'Abaixo do mínimo' //"Estoque insuficiente"
         ]
         const color = colors[record.nivelEstoque]
         const texto = textoEstoque[record.nivelEstoque]
