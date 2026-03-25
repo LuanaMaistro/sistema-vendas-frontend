@@ -4,6 +4,7 @@ import styles from './ProductTable.module.css'
 import { useProductCrudStore } from "../../ProductCrudStore"
 import { CheckCircleOutlined, DeleteOutlined, EditOutlined, MinusCircleOutlined, PlusCircleOutlined, StopOutlined } from "@ant-design/icons"
 import ActionButton from "@/components/table/ActionButton/ActionButton"
+import useTableScrollY from "@/hooks/useTableScrollY"
 
 interface ProductTableProps {
   editProduct: (p: Product) => void,
@@ -104,14 +105,18 @@ export default function ProductTable({
     },
   ]
 
+  const { containerRef, scrollY } = useTableScrollY(56);
+
 
   return (
     <div
       className={styles.productsTable}
+      ref={containerRef}
     >
       <Table<Product>
         columns={columns}
         dataSource={products}
+        scroll={{ y: scrollY }}
       />
     </div>
 
