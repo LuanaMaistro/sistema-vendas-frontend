@@ -1510,17 +1510,26 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ClienteRecomendacoesDTO"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RecomendacaoItemDTO"
+                  }
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ClienteRecomendacoesDTO"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RecomendacaoItemDTO"
+                  }
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ClienteRecomendacoesDTO"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RecomendacaoItemDTO"
+                  }
                 }
               }
             }
@@ -1570,6 +1579,55 @@
                   "items": {
                     "$ref": "#/components/schemas/ClienteRecomendacoesDTO"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Recomendacoes/cliente/{clienteId}/diagnostico": {
+      "get": {
+        "tags": [
+          "Recomendacoes"
+        ],
+        "parameters": [
+          {
+            "name": "clienteId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "quantidade",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecomendacaoDiagnosticoDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecomendacaoDiagnosticoDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecomendacaoDiagnosticoDTO"
                 }
               }
             }
@@ -2809,6 +2867,14 @@
           "quantidadeMinima": {
             "type": "integer",
             "format": "int32"
+          },
+          "nivelEstoque": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "corEstoque": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2867,6 +2933,44 @@
           "quantidadeMinima": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecomendacaoDiagnosticoDTO": {
+        "type": "object",
+        "properties": {
+          "clienteId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "totalRetornadoRecombee": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalEncontradoNoBanco": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecomendacaoDiagnosticoItemDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecomendacaoDiagnosticoItemDTO": {
+        "type": "object",
+        "properties": {
+          "idRecombee": {
+            "type": "string",
+            "nullable": true
+          },
+          "existeNoBanco": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -3106,7 +3210,7 @@
   },
   "security": [
     {
-      "Bearer": [ ]
+      "Bearer": []
     }
   ]
 }
