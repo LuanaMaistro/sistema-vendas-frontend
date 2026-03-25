@@ -30,80 +30,105 @@ export default function ProductTable({
 
   const columns: TableColumnsType<Product> = [
     {
-      title: 'Nome',
-      dataIndex: 'name'
-    },
-    {
-      title: 'Código',
-      dataIndex: 'code',
-    },
-    {
-      title: 'Ativo',
+      title: "Nivel Estoque",
       render: (_, record) => {
-        const statusText = record.active ? 'Sim' : 'Não'
-        const styles = record.active ? 'success' : 'red'
+        const colors = [
+          '#4CAF50',
+          '#8BC34A',
+          '#CDDC39',
+          '#FFC107',
+          '#FF9800',
+          '#F44336'
+        ]
+        const textoEstoque = [
+          'Muito acima do mínimo',
+          'Acima do mínimo',
+          'Levemente acima do mínimo',
+          'Próximo ao mínimo',
+          'No limite mínimo',
+          'Abaixo do mínimo'
+        ]
+        const color = colors[record.nivelEstoque]
+        const texto = textoEstoque[record.nivelEstoque]
         return (
-          <Tag color={styles}>
-            {statusText}
-          </Tag>
+          <div>
+          <div className={styles.indicator} style={{background: color}}></div>
+          <div>{texto}</div>
+          </div>
         )
-      }
+      },
     },
     {
-      title: 'Descrição',
-      dataIndex: 'description'
+      title: "Nome",
+      dataIndex: "name",
     },
     {
-      title: 'Preço',
-      dataIndex: ['price', 'Value'],
-      render: (value: number) => `R$ ${value.toFixed(2)}`
+      title: "Código",
+      dataIndex: "code",
     },
     {
-      title: 'Quantidade',
-      dataIndex: ['quantity', 'Value']
+      title: "Ativo",
+      render: (_, record) => {
+        const statusText = record.active ? "Sim" : "Não";
+        const styles = record.active ? "success" : "red";
+        return <Tag color={styles}>{statusText}</Tag>;
+      },
     },
     {
-      title: 'Qtd. Mínima',
-      dataIndex: ['minimumQuantity', 'Value']
+      title: "Descrição",
+      dataIndex: "description",
     },
     {
-      title: 'Ações',
-      key: 'actions',
-      render: (_, product) =>  (
+      title: "Preço",
+      dataIndex: ["price", "Value"],
+      render: (value: number) => `R$ ${value.toFixed(2)}`,
+    },
+    {
+      title: "Quantidade",
+      dataIndex: ["quantity", "Value"],
+    },
+    {
+      title: "Qtd. Mínima",
+      dataIndex: ["minimumQuantity", "Value"],
+    },
+    {
+      title: "Ações",
+      key: "actions",
+      render: (_, product) => (
         <Space>
           <ActionButton
             onClick={() => editProduct(product)}
             icon={<EditOutlined />}
-            tooltip='Editar'
+            tooltip="Editar"
           />
 
           <ActionButton
             onClick={() => deleteProduct(product)}
             icon={<DeleteOutlined />}
-            tooltip='Deletar'
+            tooltip="Deletar"
           />
 
           <ActionButton
             onClick={() => toggleProductStatus(product)}
             icon={product.active ? <StopOutlined /> : <CheckCircleOutlined />}
-            tooltip={product.active ? 'Inativar' : 'Ativar'}
+            tooltip={product.active ? "Inativar" : "Ativar"}
           />
 
           <ActionButton
             onClick={() => openAddStock(product)}
             icon={<PlusCircleOutlined />}
-            tooltip='Adicionar estoque'
+            tooltip="Adicionar estoque"
           />
 
           <ActionButton
             onClick={() => openRemoveStock(product)}
             icon={<MinusCircleOutlined />}
-            tooltip='Remover estoque'
+            tooltip="Remover estoque"
           />
         </Space>
-      )
+      ),
     },
-  ]
+  ];
 
   const { containerRef, scrollY } = useTableScrollY(56);
 

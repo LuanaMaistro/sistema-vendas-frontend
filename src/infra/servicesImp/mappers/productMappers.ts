@@ -12,7 +12,8 @@ export const convertProdutoDTOToProduct = (dto: ProdutoDTO): Product => {
     minimumQuantity: Quantity.create(dto.quantidadeMinima ?? 0),
     category: dto.categoria,
     active: dto.ativo!,
-    registrationDate: dto.dataCadastro
+    registrationDate: dto.dataCadastro,
+    nivelEstoque: dto.nivelEstoque!
   }
 
   return product
