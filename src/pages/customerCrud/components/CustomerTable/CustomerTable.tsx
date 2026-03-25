@@ -2,6 +2,7 @@ import type { Customer } from "@dibimo/core-lib"
 import { Space, Table, Tag, type TableColumnsType } from "antd"
 import styles from './CustomerTable.module.css'
 import { useCustomerCrudStore } from "../../CustomerCrudStore"
+import useTableScrollY from "@/hooks/useTableScrollY"
 
 interface CustomerTableProps {
   editCustomer: (c: Customer) => void,
@@ -74,14 +75,18 @@ export default function CustomerTable({ editCustomer, deleteCustomer, viewRecomm
     },
   ]
 
+  const { containerRef, scrollY } = useTableScrollY(56);
+
 
   return (
     <div
       className={styles.customersTable}
+      ref={containerRef}
     >
       <Table<Customer>
         columns={columns}
         dataSource={customers}
+        scroll={{ y: scrollY }}
       />
     </div>
 
