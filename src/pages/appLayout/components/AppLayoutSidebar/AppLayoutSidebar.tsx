@@ -9,6 +9,7 @@ import { useAuth } from '../../../../hooks/useAuth'
 export default function AppLayoutSidebar() {
 
   const navigate = useNavigate()
+  const { user } = useAuth()
   const clearToken = useAuth(s => s.clearToken)
 
   function handleLogout() {
@@ -67,8 +68,8 @@ export default function AppLayoutSidebar() {
       <div className={styles.sidebarFooter}>
         <Avatar icon={<UserOutlined />} size={32} style={{ flexShrink: 0 }} />
         <div className={styles.userInfo}>
-          <span className={styles.userName}>Administrador</span>
-          <span className={styles.userEmail}>admin@sistema.com</span>
+          <span className={styles.userName}>{user?.name}</span>
+          <span className={styles.userEmail}>{user?.email}</span>
         </div>
         <LogoutOutlined className={styles.logoutIcon} onClick={handleLogout} />
       </div>
