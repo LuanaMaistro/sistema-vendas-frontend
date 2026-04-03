@@ -22,19 +22,32 @@ export default function BarChart({ option, height = '280px' }: BarChartProps) {
       ? { ...option.legend as object, textStyle: { color: subTextColor } }
       : undefined,
     xAxis: option.xAxis
-      ? {
-          ...option.xAxis as object,
-          axisLabel: { color: subTextColor },
-          axisLine: { lineStyle: { color: splitLineColor } },
-          splitLine: { lineStyle: { color: splitLineColor } },
-        }
+      ? Array.isArray(option.xAxis)
+        ? option.xAxis.map(axis => ({
+            ...axis as object,
+            axisLabel: { color: subTextColor },
+            axisLine: { lineStyle: { color: splitLineColor } },
+            splitLine: { lineStyle: { color: splitLineColor } },
+          }))
+        : {
+            ...option.xAxis as object,
+            axisLabel: { color: subTextColor },
+            axisLine: { lineStyle: { color: splitLineColor } },
+            splitLine: { lineStyle: { color: splitLineColor } },
+          }
       : undefined,
     yAxis: option.yAxis
-      ? {
-          ...option.yAxis as object,
-          axisLabel: { color: subTextColor },
-          splitLine: { lineStyle: { color: splitLineColor } },
-        }
+      ? Array.isArray(option.yAxis)
+        ? option.yAxis.map(axis => ({
+            ...axis as object,
+            axisLabel: { ...(axis as { axisLabel?: object }).axisLabel, color: subTextColor },
+            splitLine: { lineStyle: { color: splitLineColor } },
+          }))
+        : {
+            ...option.yAxis as object,
+            axisLabel: { color: subTextColor },
+            splitLine: { lineStyle: { color: splitLineColor } },
+          }
       : undefined,
   }
 
