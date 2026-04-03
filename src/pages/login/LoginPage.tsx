@@ -14,7 +14,7 @@ export default function LoginPage() {
         <div className={styles.logoArea}>
           <ShoppingCartOutlined style={{ fontSize: 40, color: 'var(--ant-color-primary)' }} />
           <Typography.Title level={3} style={{ margin: 0 }}>
-            Sistema de Vendas
+            Nexsell
           </Typography.Title>
           <Typography.Text type="secondary">
             Faça login para continuar

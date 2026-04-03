@@ -53,7 +53,7 @@ export default function AppLayoutSidebar() {
         <div className={styles.logoIcon}>
           <ShopOutlined />
         </div>
-        <span className={styles.logoText}>Sistema de Vendas</span>
+        <span className={styles.logoText}>Nexsell</span>
       </div>
 
       <nav className={styles.sidebarNav}>
