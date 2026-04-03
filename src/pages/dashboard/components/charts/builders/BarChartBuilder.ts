@@ -12,7 +12,7 @@ export class BarChartBuilder {
 
   setXAxis(data: string[], name?: string): this {
     const maxLen = Math.max(...data.map(d => d.length))
-    ;(this as any)._xLabelMaxLen = maxLen
+      ; (this as any)._xLabelMaxLen = maxLen
 
     this.options.xAxis = {
       type: 'category',
@@ -61,7 +61,7 @@ export class BarChartBuilder {
         ellipsis: '...',
       },
     }
-    ;(this as any)._yLabelWidth = calculatedWidth
+      ; (this as any)._yLabelWidth = calculatedWidth
     return this
   }
 
