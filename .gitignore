@@ -23,7 +23,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-.npmrc
+# .npmrc
 auto-imports.d.ts
 src/infra/api/.openapi-generator/FILES
 src/infra/api/.openapi-generator/VERSION
