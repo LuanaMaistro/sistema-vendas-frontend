@@ -8,7 +8,7 @@ import DashboardPage from "../pages/dashboard/DashboardPage";
 export const routesConfigs: Array<RouteConfig> = [
   {
     path: 'dashboard',
-    title: 'Dashboard',
+    title: 'Relatórios',
     element: <DashboardPage />,
     icon: <DashboardOutlined />,
     section: 'Geral'
