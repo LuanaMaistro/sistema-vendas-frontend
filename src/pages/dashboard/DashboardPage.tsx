@@ -28,16 +28,7 @@ const formatCurrency = (value: number | string) =>
 
 function buildEstoqueRiscoOption(itens: RelatorioEstoqueItemDTO[]) {
   const emRisco = itens.filter(i => i.abaixoDoMinimo)
-  return new BarChartBuilder()
-    .setTooltip()
-    .setGrid('10%', '4%', '4%', '4%')
-    .setXAxisValue()
-    .setYAxisCategory(emRisco.map(i => i.produtoNome ?? ''))
-    .setLegend()
-    .addHorizontalSeries('Estoque atual', emRisco.map(i => i.quantidade ?? 0), 28, '#FF4D4F')
-    .addHorizontalSeries('Mínimo', emRisco.map(i => i.quantidadeMinima ?? 0), 28, '#FA8C16')
-    .build()
-}
+  return }
 
 export default function DashboardPage() {
   const {
@@ -94,7 +85,21 @@ export default function DashboardPage() {
     .addLineSeries('Receita (R$)', porProduto.map(p => p.valorTotal ?? 0), 1)
     .build()
 
-  const estoqueRiscoOption = buildEstoqueRiscoOption(estoque?.itens ?? [])
+  const retornaProdutosEmRisco = () => {
+    const emRisco = estoque?.itens?.filter(i => i.abaixoDoMinimo) ?? []
+    return emRisco.sort((a, b) => (b.quantidadeMinima ?? 0) - (a.quantidadeMinima ?? 0))
+  }
+
+  const estoqueRiscoOption = new BarChartBuilder()
+    .setTooltip()
+    .setGrid('10%', '4%', '4%', '4%')
+    .setXAxisValue()
+    .setYAxisCategory(retornaProdutosEmRisco().map(i => i.produtoNome ?? ''))
+    .setLegend()
+    .addHorizontalSeries('Estoque atual', retornaProdutosEmRisco().map(i => i.quantidade ?? 0), 28, '#FF4D4F')
+    .addHorizontalSeries('Mínimo', retornaProdutosEmRisco().map(i => i.quantidadeMinima ?? 0), 28, '#FA8C16')
+    .build()
+
 
   return (
     <div className={styles.dashboardPage}>
