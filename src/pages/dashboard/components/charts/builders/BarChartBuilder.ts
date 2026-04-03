@@ -20,6 +20,11 @@ export class BarChartBuilder {
     return this
   }
 
+  setXAxisValue(): this {
+    this.options.xAxis = { type: 'value' }
+    return this
+  }
+
   setYAxis(name?: string, formatter?: (val: number) => string): this {
     this.options.yAxis = {
       type: 'value',
@@ -29,22 +34,81 @@ export class BarChartBuilder {
     return this
   }
 
-  addSeries(name: string, data: number[], barMaxWidth = 48): this {
+  setYAxisCategory(data: string[]): this {
+    this.options.yAxis = {
+      type: 'category',
+      data,
+      axisLabel: { width: 120, overflow: 'truncate' },
+    }
+    return this
+  }
+
+  addDualYAxis(
+    leftName: string,
+    rightName: string,
+    rightFormatter?: (val: number) => string,
+  ): this {
+    this.options.yAxis = [
+      { type: 'value', name: leftName, position: 'left' },
+      {
+        type: 'value',
+        name: rightName,
+        position: 'right',
+        axisLabel: rightFormatter ? { formatter: rightFormatter } : undefined,
+      },
+    ]
+    return this
+  }
+
+  addSeries(name: string, data: number[], barMaxWidth = 48, yAxisIndex = 0, color?: string): this {
+    const series = this.options.series as SeriesOption[]
+    series.push({
+      name,
+      type: 'bar',
+      yAxisIndex,
+      data,
+      barMaxWidth,
+      itemStyle: {
+        borderRadius: [6, 6, 0, 0],
+        ...(color ? { color } : {}),
+      },
+    })
+    return this
+  }
+
+  addHorizontalSeries(name: string, data: number[], barMaxWidth = 28, color?: string): this {
     const series = this.options.series as SeriesOption[]
     series.push({
       name,
       type: 'bar',
       data,
       barMaxWidth,
-      itemStyle: { borderRadius: [6, 6, 0, 0] },
+      itemStyle: {
+        borderRadius: [0, 6, 6, 0],
+        ...(color ? { color } : {}),
+      },
     })
     return this
   }
 
-  setTooltip(formatter?: string): this {
+  addLineSeries(name: string, data: number[], yAxisIndex = 1): this {
+    const series = this.options.series as SeriesOption[]
+    series.push({
+      name,
+      type: 'line',
+      yAxisIndex,
+      data,
+      smooth: true,
+      symbol: 'circle',
+      symbolSize: 7,
+    })
+    return this
+  }
+
+  setTooltip(formatter?: string, axisPointer: 'shadow' | 'cross' = 'shadow'): this {
     this.options.tooltip = {
       trigger: 'axis',
-      axisPointer: { type: 'shadow' },
+      axisPointer: { type: axisPointer },
       formatter: formatter as string | undefined,
     }
     return this

@@ -1,7 +1,6 @@
 import { Card, Col, DatePicker, Row, Select, Spin, Typography } from 'antd'
 import { DollarOutlined, ShoppingCartOutlined, TagOutlined } from '@ant-design/icons'
 import type { Dayjs } from 'dayjs'
-import type { EChartsOption } from 'echarts'
 import styles from './DashboardPage.module.css'
 import IndicatorCard from './components/IndicatorCard/IndicatorCard'
 import BarChart from './components/charts/BarChart/BarChart'
@@ -11,6 +10,7 @@ import { PieChartBuilder } from './components/charts/builders/PieChartBuilder'
 import { useRelatorios } from './hooks/useRelatorios'
 import type { TopOption } from './hooks/useRelatorios'
 import type { ProdutoMaisVendidoDTO, RelatorioEstoqueItemDTO } from '../../infra/api/api'
+
 
 const { Title, Paragraph } = Typography
 const { RangePicker } = DatePicker
@@ -25,80 +25,29 @@ const TOP_OPTIONS = [
 const formatCurrency = (value: number | string) =>
   `R$ ${Number(value).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
 
-function buildReceitaQuantidadeOption(porProduto: ProdutoMaisVendidoDTO[]): EChartsOption {
-  const nomes = porProduto.map(p => p.produtoNome ?? '')
-  const quantidades = porProduto.map(p => p.quantidadeVendida ?? 0)
-  const receitas = porProduto.map(p => p.valorTotal ?? 0)
-
-  return {
-    tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
-    legend: { data: ['Qtd. Vendida', 'Receita (R$)'] },
-    grid: { top: '14%', right: '8%', bottom: '8%', left: '4%', containLabel: true },
-    xAxis: { type: 'category', data: nomes, axisLine: { lineStyle: { color: 'inherit' } } },
-    yAxis: [
-      { type: 'value', name: 'Qtd. Vendida', position: 'left' },
-      {
-        type: 'value',
-        name: 'Receita',
-        position: 'right',
-        axisLabel: { formatter: (v: number) => `R$ ${(v / 1000).toFixed(0)}k` },
-      },
-    ],
-    series: [
-      {
-        name: 'Qtd. Vendida',
-        type: 'bar',
-        yAxisIndex: 0,
-        data: quantidades,
-        barMaxWidth: 48,
-        itemStyle: { borderRadius: [6, 6, 0, 0] },
-      },
-      {
-        name: 'Receita (R$)',
-        type: 'line',
-        yAxisIndex: 1,
-        data: receitas,
-        smooth: true,
-        symbol: 'circle',
-        symbolSize: 7,
-      },
-    ],
-  }
+function buildReceitaQuantidadeOption(porProduto: ProdutoMaisVendidoDTO[]) {
+  return new BarChartBuilder()
+    .setTooltip(undefined, 'cross')
+    .setGrid('14%', '8%', '8%', '4%')
+    .setXAxis(porProduto.map(p => p.produtoNome ?? ''))
+    .addDualYAxis('Qtd. Vendida', 'Receita', (v: number) => `R$ ${(v / 1000).toFixed(0)}k`)
+    .setLegend()
+    .addSeries('Qtd. Vendida', porProduto.map(p => p.quantidadeVendida ?? 0), 48, 0)
+    .addLineSeries('Receita (R$)', porProduto.map(p => p.valorTotal ?? 0), 1)
+    .build()
 }
 
-function buildEstoqueRiscoOption(itens: RelatorioEstoqueItemDTO[]): EChartsOption {
+function buildEstoqueRiscoOption(itens: RelatorioEstoqueItemDTO[]) {
   const emRisco = itens.filter(i => i.abaixoDoMinimo)
-  const nomes = emRisco.map(i => i.produtoNome ?? '')
-  const quantidades = emRisco.map(i => i.quantidade ?? 0)
-  const minimos = emRisco.map(i => i.quantidadeMinima ?? 0)
-
-  return {
-    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-    legend: { data: ['Estoque atual', 'Mínimo'] },
-    grid: { top: '10%', right: '4%', bottom: '4%', left: '4%', containLabel: true },
-    xAxis: { type: 'value' },
-    yAxis: {
-      type: 'category',
-      data: nomes,
-      axisLabel: { width: 120, overflow: 'truncate' },
-    },
-    series: [
-      {
-        name: 'Estoque atual',
-        type: 'bar',
-        data: quantidades,
-        barMaxWidth: 28,
-        itemStyle: { color: '#FF4D4F', borderRadius: [0, 6, 6, 0] },
-      },
-      {
-        name: 'Mínimo',
-        type: 'bar',
-        data: minimos,
-        barMaxWidth: 28,
-        itemStyle: { color: '#FA8C16', borderRadius: [0, 6, 6, 0] },
-      },
-    ],
-  }
+  return new BarChartBuilder()
+    .setTooltip()
+    .setGrid('10%', '4%', '4%', '4%')
+    .setXAxisValue()
+    .setYAxisCategory(emRisco.map(i => i.produtoNome ?? ''))
+    .setLegend()
+    .addHorizontalSeries('Estoque atual', emRisco.map(i => i.quantidade ?? 0), 28, '#FF4D4F')
+    .addHorizontalSeries('Mínimo', emRisco.map(i => i.quantidadeMinima ?? 0), 28, '#FA8C16')
+    .build()
 }
 
 export default function DashboardPage() {
