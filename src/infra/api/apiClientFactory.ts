@@ -29,6 +29,7 @@ const getToken = (): string | undefined => {
 const createAxiosInstance = () => {
   const token = getToken()
   return axios.create({
+    baseURL: import.meta.env.VITE_API_URL,
     headers: {
       Authorization: token ? `Bearer ${token}` : undefined,
     },
