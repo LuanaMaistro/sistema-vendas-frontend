@@ -25,17 +25,6 @@ const TOP_OPTIONS = [
 const formatCurrency = (value: number | string) =>
   `R$ ${Number(value).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
 
-function buildReceitaQuantidadeOption(porProduto: ProdutoMaisVendidoDTO[]) {
-  return new BarChartBuilder()
-    .setTooltip(undefined, 'cross')
-    .setGrid('14%', '8%', '8%', '4%')
-    .setXAxis(porProduto.map(p => p.produtoNome ?? ''))
-    .addDualYAxis('Qtd. Vendida', 'Receita', (v: number) => `R$ ${(v / 1000).toFixed(0)}k`)
-    .setLegend()
-    .addSeries('Qtd. Vendida', porProduto.map(p => p.quantidadeVendida ?? 0), 48, 0)
-    .addLineSeries('Receita (R$)', porProduto.map(p => p.valorTotal ?? 0), 1)
-    .build()
-}
 
 function buildEstoqueRiscoOption(itens: RelatorioEstoqueItemDTO[]) {
   const emRisco = itens.filter(i => i.abaixoDoMinimo)
@@ -95,7 +84,16 @@ export default function DashboardPage() {
     )
     .build()
 
-  const receitaQuantidadeOption = buildReceitaQuantidadeOption(porProduto)
+  const receitaQuantidadeOption = new BarChartBuilder()
+    .setTooltip(undefined, 'cross')
+    .setGrid('14%', '8%', '8%', '4%')
+    .setXAxis(porProduto.map(p => p.produtoNome ?? ''))
+    .addDualYAxis('Qtd. Vendida', 'Receita', (v: number) => `R$ ${(v / 1000).toFixed(0)}k`)
+    .setLegend()
+    .addSeries('Qtd. Vendida', porProduto.map(p => p.quantidadeVendida ?? 0), 48, 0)
+    .addLineSeries('Receita (R$)', porProduto.map(p => p.valorTotal ?? 0), 1)
+    .build()
+
   const estoqueRiscoOption = buildEstoqueRiscoOption(estoque?.itens ?? [])
 
   return (
