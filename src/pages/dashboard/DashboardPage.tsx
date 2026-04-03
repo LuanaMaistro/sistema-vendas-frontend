@@ -9,7 +9,6 @@ import { BarChartBuilder } from './components/charts/builders/BarChartBuilder'
 import { PieChartBuilder } from './components/charts/builders/PieChartBuilder'
 import { useRelatorios } from './hooks/useRelatorios'
 import type { TopOption } from './hooks/useRelatorios'
-import type { ProdutoMaisVendidoDTO, RelatorioEstoqueItemDTO } from '../../infra/api/api'
 
 
 const { Title, Paragraph } = Typography
@@ -24,11 +23,6 @@ const TOP_OPTIONS = [
 
 const formatCurrency = (value: number | string) =>
   `R$ ${Number(value).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
-
-
-function buildEstoqueRiscoOption(itens: RelatorioEstoqueItemDTO[]) {
-  const emRisco = itens.filter(i => i.abaixoDoMinimo)
-  return }
 
 export default function DashboardPage() {
   const {
