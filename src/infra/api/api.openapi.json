@@ -1510,26 +1510,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/RecomendacaoItemDTO"
-                  }
+                  "$ref": "#/components/schemas/ClienteRecomendacoesDTO"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/RecomendacaoItemDTO"
-                  }
+                  "$ref": "#/components/schemas/ClienteRecomendacoesDTO"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/RecomendacaoItemDTO"
-                  }
+                  "$ref": "#/components/schemas/ClienteRecomendacoesDTO"
                 }
               }
             }
@@ -1586,55 +1577,6 @@
         }
       }
     },
-    "/api/Recomendacoes/cliente/{clienteId}/diagnostico": {
-      "get": {
-        "tags": [
-          "Recomendacoes"
-        ],
-        "parameters": [
-          {
-            "name": "clienteId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "quantidade",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 5
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/RecomendacaoDiagnosticoDTO"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RecomendacaoDiagnosticoDTO"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RecomendacaoDiagnosticoDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Recomendacoes/eventos/visualizacao": {
       "post": {
         "tags": [
@@ -1666,7 +1608,7 @@
         }
       }
     },
-    "/api/Relatorios/vendas/resumo": {
+    "/api/Relatorios/vendas/total-pedidos": {
       "get": {
         "tags": [
           "Relatorios"
@@ -1695,17 +1637,111 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/RelatorioVendasResumoDTO"
+                  "$ref": "#/components/schemas/TotalPedidosDTO"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RelatorioVendasResumoDTO"
+                  "$ref": "#/components/schemas/TotalPedidosDTO"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RelatorioVendasResumoDTO"
+                  "$ref": "#/components/schemas/TotalPedidosDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Relatorios/vendas/valor-total": {
+      "get": {
+        "tags": [
+          "Relatorios"
+        ],
+        "parameters": [
+          {
+            "name": "dataInicio",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "dataFim",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValorTotalVendasDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValorTotalVendasDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValorTotalVendasDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Relatorios/vendas/ticket-medio": {
+      "get": {
+        "tags": [
+          "Relatorios"
+        ],
+        "parameters": [
+          {
+            "name": "dataInicio",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "dataFim",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketMedioDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketMedioDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketMedioDTO"
                 }
               }
             }
@@ -1835,6 +1871,71 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/ClienteCompradorDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Relatorios/vendas/por-categoria": {
+      "get": {
+        "tags": [
+          "Relatorios"
+        ],
+        "parameters": [
+          {
+            "name": "dataInicio",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "dataFim",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoriaMaisVendidaDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoriaMaisVendidaDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoriaMaisVendidaDTO"
                   }
                 }
               }
@@ -2466,6 +2567,24 @@
   },
   "components": {
     "schemas": {
+      "CategoriaMaisVendidaDTO": {
+        "type": "object",
+        "properties": {
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantidadeVendida": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "valorTotal": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "ClienteCompradorDTO": {
         "type": "object",
         "properties": {
@@ -2937,44 +3056,6 @@
         },
         "additionalProperties": false
       },
-      "RecomendacaoDiagnosticoDTO": {
-        "type": "object",
-        "properties": {
-          "clienteId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "totalRetornadoRecombee": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalEncontradoNoBanco": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "itens": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RecomendacaoDiagnosticoItemDTO"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "RecomendacaoDiagnosticoItemDTO": {
-        "type": "object",
-        "properties": {
-          "idRecombee": {
-            "type": "string",
-            "nullable": true
-          },
-          "existeNoBanco": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
       "RecomendacaoItemDTO": {
         "type": "object",
         "properties": {
@@ -3060,7 +3141,25 @@
         },
         "additionalProperties": false
       },
-      "RelatorioVendasResumoDTO": {
+      "TicketMedioDTO": {
+        "type": "object",
+        "properties": {
+          "dataInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataFim": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ticketMedio": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TotalPedidosDTO": {
         "type": "object",
         "properties": {
           "dataInicio": {
@@ -3074,14 +3173,6 @@
           "totalPedidos": {
             "type": "integer",
             "format": "int32"
-          },
-          "valorTotal": {
-            "type": "number",
-            "format": "double"
-          },
-          "ticketMedio": {
-            "type": "number",
-            "format": "double"
           }
         },
         "additionalProperties": false
@@ -3104,6 +3195,24 @@
           "role": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ValorTotalVendasDTO": {
+        "type": "object",
+        "properties": {
+          "dataInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataFim": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "valorTotal": {
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
@@ -3210,7 +3319,7 @@
   },
   "security": [
     {
-      "Bearer": []
+      "Bearer": [ ]
     }
   ]
 }
