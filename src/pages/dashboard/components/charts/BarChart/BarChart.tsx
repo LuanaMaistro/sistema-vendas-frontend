@@ -25,13 +25,19 @@ export default function BarChart({ option, height = '280px' }: BarChartProps) {
       ? Array.isArray(option.xAxis)
         ? option.xAxis.map(axis => ({
             ...axis as object,
-            axisLabel: { color: subTextColor },
+          axisLabel: {
+            ...(axis as { axisLabel?: object }).axisLabel,  // ← preserva o do builder
+            color: subTextColor
+          },
             axisLine: { lineStyle: { color: splitLineColor } },
             splitLine: { lineStyle: { color: splitLineColor } },
           }))
         : {
             ...option.xAxis as object,
-            axisLabel: { color: subTextColor },
+          axisLabel: {
+            ...(option.xAxis as { axisLabel?: object }).axisLabel,  // ← preserva o do builder
+            color: subTextColor
+          },
             axisLine: { lineStyle: { color: splitLineColor } },
             splitLine: { lineStyle: { color: splitLineColor } },
           }

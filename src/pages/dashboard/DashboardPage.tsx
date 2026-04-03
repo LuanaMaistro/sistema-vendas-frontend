@@ -46,17 +46,17 @@ export default function DashboardPage() {
 
   const porProdutoOption = new BarChartBuilder()
     .setTooltip()
-    .setGrid('8%', '4%', '8%', '4%')
     .setXAxis(porProduto.map(p => p.produtoNome ?? ''))
     .setYAxis('Unidades vendidas')
+    .setGrid('8%', '4%')
     .addSeries('Quantidade vendida', porProduto.map(p => p.quantidadeVendida ?? 0))
     .build()
 
   const porClienteOption = new BarChartBuilder()
     .setTooltip()
-    .setGrid('8%', '4%', '8%', '4%')
     .setXAxis(porCliente.map(c => c.clienteNome ?? ''))
     .setYAxis('Total de pedidos')
+    .setGrid('8%', '4%')
     .addSeries('Pedidos', porCliente.map(c => c.totalPedidos ?? 0))
     .build()
 
@@ -71,12 +71,12 @@ export default function DashboardPage() {
 
   const receitaQuantidadeOption = new BarChartBuilder()
     .setTooltip(undefined, 'cross')
-    .setGrid('14%', '8%', '8%', '4%')
     .setXAxis(porProduto.map(p => p.produtoNome ?? ''))
     .addDualYAxis('Qtd. Vendida', 'Receita', (v: number) => `R$ ${(v / 1000).toFixed(0)}k`)
     .setLegend()
     .addSeries('Qtd. Vendida', porProduto.map(p => p.quantidadeVendida ?? 0), 48, 0)
     .addLineSeries('Receita (R$)', porProduto.map(p => p.valorTotal ?? 0), 1)
+    .setGrid('14%', '8%', '8%', '4%')
     .build()
 
   const retornaProdutosEmRisco = () => {
@@ -86,12 +86,12 @@ export default function DashboardPage() {
 
   const estoqueRiscoOption = new BarChartBuilder()
     .setTooltip()
-    .setGrid('10%', '4%', '4%', '4%')
     .setXAxisValue()
     .setYAxisCategory(retornaProdutosEmRisco().map(i => i.produtoNome ?? ''))
     .setLegend()
     .addHorizontalSeries('Estoque atual', retornaProdutosEmRisco().map(i => i.quantidade ?? 0), 28, '#FF4D4F')
     .addHorizontalSeries('Mínimo', retornaProdutosEmRisco().map(i => i.quantidadeMinima ?? 0), 28, '#FA8C16')
+    .setGrid('10%', '4%', '4%', '4%')
     .build()
 
 

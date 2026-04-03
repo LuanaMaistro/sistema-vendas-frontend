@@ -11,11 +11,24 @@ export class BarChartBuilder {
   }
 
   setXAxis(data: string[], name?: string): this {
+    const maxLen = Math.max(...data.map(d => d.length))
+    ;(this as any)._xLabelMaxLen = maxLen
+
     this.options.xAxis = {
       type: 'category',
       data,
       name,
       axisLine: { lineStyle: { color: 'inherit' } },
+
+      axisLabel: {
+        interval: 0,
+        hideOverlap: false,
+        rotate: maxLen > 8 ? 30 : 0,
+        formatter: (value: string) => {
+          const max = 15
+          return value.length > max ? value.slice(0, max) + '...' : value
+        },
+      },
     }
     return this
   }
@@ -34,12 +47,21 @@ export class BarChartBuilder {
     return this
   }
 
-  setYAxisCategory(data: string[]): this {
+  setYAxisCategory(data: string[], maxLabelWidth?: number): this {
+    const calculatedWidth = maxLabelWidth
+      ?? Math.min(Math.max(...data.map(d => d.length)) * 7, 200)
+
     this.options.yAxis = {
       type: 'category',
       data,
-      axisLabel: { width: 120, overflow: 'truncate' },
+      axisLabel: {
+        interval: 0,
+        width: calculatedWidth,
+        overflow: 'truncate',
+        ellipsis: '...',
+      },
     }
+    ;(this as any)._yLabelWidth = calculatedWidth
     return this
   }
 
@@ -123,13 +145,20 @@ export class BarChartBuilder {
   }
 
   setGrid(top?: string, right?: string, bottom?: string, left?: string): this {
+    const yLabelWidth = (this as any)._yLabelWidth
+    const xLabelMaxLen = (this as any)._xLabelMaxLen
+
+    const autoLeft = yLabelWidth ? `${yLabelWidth + 16}px` : '4%'
+    const autoBottom = xLabelMaxLen > 10 ? `${Math.min(xLabelMaxLen * 3, 80)}px` : '10%'
+
     this.options.grid = {
       top: top ?? '10%',
       right: right ?? '4%',
-      bottom: bottom ?? '10%',
-      left: left ?? '4%',
-      containLabel: true,
+      bottom: bottom ?? autoBottom,
+      left: left ?? autoLeft,
+      containLabel: false,
     }
+
     return this
   }
 
