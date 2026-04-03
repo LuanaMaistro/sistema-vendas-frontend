@@ -1,4 +1,4 @@
-import { left, right, type Either } from "@dibimo/core-lib";
+import { left, right, type Either } from "@luanamaistro/core-lib";
 import axios from "axios";
 
 export interface AddressInfo {

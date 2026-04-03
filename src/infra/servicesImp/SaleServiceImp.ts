@@ -1,4 +1,4 @@
-import type { ListSaleFilters, PaymentMethod, Result, Sale, SaleItem, SaleService } from "@dibimo/core-lib";
+import type { ListSaleFilters, PaymentMethod, Result, Sale, SaleItem, SaleService } from "@luanamaistro/core-lib";
 import createApiClients from '../api/apiClientFactory';
 import {
   convertPaymentMethodToString,

@@ -1,4 +1,4 @@
-import type { Customer, Recommendation } from '@dibimo/core-lib'
+import type { Customer, Recommendation } from '@luanamaistro/core-lib'
 import { Drawer, List, Spin, Typography } from 'antd'
 import application from '@/infra/applicationInstance'
 import useNotification from '@/hooks/notification/notification'

@@ -1,4 +1,4 @@
-import type { Recommendation } from '@dibimo/core-lib'
+import type { Recommendation } from '@luanamaistro/core-lib'
 import type { RecomendacaoItemDTO } from '../../api'
 
 export function convertRecomendacaoItemDTOToRecommendation(dto: RecomendacaoItemDTO): Recommendation {

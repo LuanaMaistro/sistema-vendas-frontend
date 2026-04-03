@@ -1,4 +1,4 @@
-import { CNPJ, CPF, Email, Mobile, Phone, type Customer } from "@dibimo/core-lib"
+import { CNPJ, CPF, Email, Mobile, Phone, type Customer } from "@luanamaistro/core-lib"
 import type { ClienteCreateDTO, ClienteDTO, ClienteUpdateDTO } from "../../api"
 import { convertAddressToEnderecoDTO, convertEnderecoDTOToAddress } from "./addressMappers"
 import { convertEmailToContatoDTO, convertMobileToContatoDTO, convertPhoneToContatoDTO } from "./contactMappers"

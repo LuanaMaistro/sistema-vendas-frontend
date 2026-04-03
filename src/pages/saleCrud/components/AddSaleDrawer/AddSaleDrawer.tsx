@@ -5,7 +5,7 @@ import ProductSelect from "../../../../components/ProductSelect"
 import application from "../../../../infra/applicationInstance"
 import { useSaleCrudStore } from "../../SaleCrudStore"
 import useNotification from "../../../../hooks/notification/notification"
-import type { Customer } from "@dibimo/core-lib"
+import type { Customer } from "@luanamaistro/core-lib"
 import styles from './AddSaleDrawer.module.css'
 
 interface AddSaleDrawerProps {

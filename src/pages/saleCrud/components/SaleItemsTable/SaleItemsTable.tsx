@@ -1,4 +1,4 @@
-import type { Sale, SaleItem } from "@dibimo/core-lib"
+import type { Sale, SaleItem } from "@luanamaistro/core-lib"
 import { Table, type TableColumnsType, Space, InputNumber, Button, Popconfirm } from "antd"
 import { DeleteOutlined } from "@ant-design/icons"
 import application from "../../../../infra/applicationInstance"

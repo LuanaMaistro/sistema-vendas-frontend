@@ -1,4 +1,4 @@
-import { SaleStatus, type Sale } from "@dibimo/core-lib"
+import { SaleStatus, type Sale } from "@luanamaistro/core-lib"
 import { Collapse, Tag, Space, Button, Typography, Tooltip } from "antd"
 import { CheckCircleOutlined, CloseCircleOutlined, PlusOutlined } from "@ant-design/icons"
 import { useSaleCrudStore } from "../../SaleCrudStore"

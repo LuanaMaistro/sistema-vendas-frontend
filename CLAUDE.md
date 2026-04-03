@@ -4,17 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Sistema de Vendas is a React-based sales management system built with TypeScript, Vite, Ant Design, and a custom `@dibimo/core-lib` library. The application manages customers and products with full CRUD operations.
+Sistema de Vendas is a React-based sales management system built with TypeScript, Vite, Ant Design, and a custom `@luanamaistro/core-lib` library. The application manages customers and products with full CRUD operations.
 
-## CRITICAL: @dibimo/core-lib Library
+## CRITICAL: @luanamaistro/core-lib Library
 
-**DO NOT MODIFY `@dibimo/core-lib` UNDER ANY CIRCUMSTANCES.**
+**DO NOT MODIFY `@luanamaistro/core-lib` UNDER ANY CIRCUMSTANCES.**
 
-- `@dibimo/core-lib` is a separate library maintained by another team
+- `@luanamaistro/core-lib` is a separate library maintained by another team
 - You must NEVER suggest changes, modifications, or additions to this library
 - You must NEVER create or modify interfaces, types, or functions within this library
 - If new interfaces or types are needed in the core library, this is the responsibility of the other team
-- Only consume what already exists in `@dibimo/core-lib`
+- Only consume what already exists in `@luanamaistro/core-lib`
 - If functionality is missing from the core library, document what is needed but DO NOT implement it yourself
 
 ## Development Commands
@@ -26,9 +26,9 @@ Sistema de Vendas is a React-based sales management system built with TypeScript
 
 ## Architecture
 
-### Core Library Integration (`@dibimo/core-lib`)
+### Core Library Integration (`@luanamaistro/core-lib`)
 
-The application is built around the `@dibimo/core-lib` package, which provides:
+The application is built around the `@luanamaistro/core-lib` package, which provides:
 
 - **Either/Result types**: Functional error handling using `Either<L, R>` and `Result<T>` types
 - **Application instance**: Created via `createApplicationInstance(serviceFactory)` in `src/infra/applicationInstance.ts`
@@ -36,7 +36,7 @@ The application is built around the `@dibimo/core-lib` package, which provides:
 - **Domain types**: `Customer`, `Product`, `CNPJ`, `CPF`, etc.
 
 **Auto-imported utilities** (configured in `vite.config.ts`):
-- `fold`, `right`, `left` from `@dibimo/core-lib`
+- `fold`, `right`, `left` from `@luanamaistro/core-lib`
 - `eitherToBoolean`, `operationResultToNotification` from `@/tools/either`
 - React hooks (`useState`, `useEffect`, etc.)
 
@@ -93,7 +93,7 @@ pages/[entityName]Crud/
 
 ### Service Layer
 
-Services implement interfaces from `@dibimo/core-lib`:
+Services implement interfaces from `@luanamaistro/core-lib`:
 
 ```typescript
 interface CustomerService {
@@ -153,9 +153,9 @@ All service operations return `Result<T>` types that must be handled using `fold
 
 ## Adding New CRUD Pages
 
-**Prerequisites**: The service interface must already exist in `@dibimo/core-lib`. If it doesn't exist, request the other team to create it first.
+**Prerequisites**: The service interface must already exist in `@luanamaistro/core-lib`. If it doesn't exist, request the other team to create it first.
 
-1. Verify service interface exists in `@dibimo/core-lib`
+1. Verify service interface exists in `@luanamaistro/core-lib`
 2. Implement service in `src/infra/servicesImp/[Entity]ServiceImp.ts`
 3. Add service to factory in `src/infra/servicesImp/serviceFactiory.ts`
 4. Create page directory following the pattern: `src/pages/[entity]Crud/`

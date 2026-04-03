@@ -1,4 +1,4 @@
-import { PaymentMethod, type Sale, type SaleItem, SaleStatus } from "@dibimo/core-lib"
+import { PaymentMethod, type Sale, type SaleItem, SaleStatus } from "@luanamaistro/core-lib"
 import type { ItemVendaCreateDTO, ItemVendaDTO, VendaCreateDTO, VendaDTO } from "../../api"
 
 export const convertVendaDTOToSale = (dto: VendaDTO): Sale => {

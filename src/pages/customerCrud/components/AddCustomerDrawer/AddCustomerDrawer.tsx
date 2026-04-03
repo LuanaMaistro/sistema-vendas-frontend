@@ -1,7 +1,7 @@
 import { Button, Drawer, Form, Radio, Space, type RadioChangeEvent } from "antd";
 import CustomerForm from "../CustomerForm/CustomerForm";
 import { CustomerTypeOptions } from "../../../../types/enums/customer";
-import { CustomerType } from "@dibimo/core-lib";
+import { CustomerType } from "@luanamaistro/core-lib";
 import { useState } from "react";
 import application from "../../../../infra/applicationInstance";
 import type CustomerFormFields from "../../types/CustomerFormFields";

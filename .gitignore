@@ -24,7 +24,7 @@ dist-ssr
 *.sln
 *.sw?
 # .npmrc
-auto-imports.d.ts
+# auto-imports.d.ts
 src/infra/api/.openapi-generator/FILES
 src/infra/api/.openapi-generator/VERSION
 src/infra/api/.openapi-generator-ignore

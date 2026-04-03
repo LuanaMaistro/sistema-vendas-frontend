@@ -1,4 +1,4 @@
-import type { Customer } from '@dibimo/core-lib'
+import type { Customer } from '@luanamaistro/core-lib'
 
 const useCustomerRecommendations = () => {
   const [show, setShow] = useState(false)

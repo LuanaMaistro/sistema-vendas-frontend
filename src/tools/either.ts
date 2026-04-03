@@ -1,4 +1,4 @@
-import { fold, OperationError, type Either, type OperationResult } from "@dibimo/core-lib";
+import { fold, OperationError, type Either, type OperationResult } from "@luanamaistro/core-lib";
 import type { Notification } from "../hooks/notification/notification";
 
 export const eitherToBoolean = <L, R>(aEither: Either<L, R>) =>

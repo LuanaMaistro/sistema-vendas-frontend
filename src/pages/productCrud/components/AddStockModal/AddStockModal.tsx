@@ -1,5 +1,5 @@
 import { Form, InputNumber, Modal } from "antd";
-import type { Product } from "@dibimo/core-lib";
+import type { Product } from "@luanamaistro/core-lib";
 import application from "../../../../infra/applicationInstance";
 import type StockMovementFormFields from "../../types/StockMovementFormFields";
 import { useProductCrudStore } from "../../ProductCrudStore";

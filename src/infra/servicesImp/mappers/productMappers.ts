@@ -1,4 +1,4 @@
-import { Price, Quantity, type Product } from "@dibimo/core-lib"
+import { Price, Quantity, type Product } from "@luanamaistro/core-lib"
 import type { ProdutoCreateDTO, ProdutoDTO, ProdutoUpdateDTO } from "../../api"
 
 export const convertProdutoDTOToProduct = (dto: ProdutoDTO): Product => {

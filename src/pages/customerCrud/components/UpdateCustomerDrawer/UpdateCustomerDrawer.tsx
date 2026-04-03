@@ -1,6 +1,6 @@
 import { Button, Drawer, Form, Space } from "antd";
 import CustomerForm from "../CustomerForm/CustomerForm";
-import { CustomerType, type Customer } from "@dibimo/core-lib";
+import { CustomerType, type Customer } from "@luanamaistro/core-lib";
 import application from "../../../../infra/applicationInstance";
 import type CustomerFormFields from "../../types/CustomerFormFields";
 import { useCustomerCrudStore } from "../../CustomerCrudStore";

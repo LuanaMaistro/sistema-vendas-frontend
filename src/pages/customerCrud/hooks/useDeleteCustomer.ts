@@ -1,4 +1,4 @@
-import type { Customer } from "@dibimo/core-lib"
+import type { Customer } from "@luanamaistro/core-lib"
 import application from "../../../infra/applicationInstance"
 import useNotification from "../../../hooks/notification/notification"
 import { useCustomerCrudStore } from "../CustomerCrudStore"
