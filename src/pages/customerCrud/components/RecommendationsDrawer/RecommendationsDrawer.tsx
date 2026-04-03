@@ -22,7 +22,7 @@ export default function RecommendationsDrawer({ open, onClose, customer }: Recom
       .then(result => {
         fold(
           result,
-          () => notify({ type: 'error', message: 'Erro ao carregar recomendações' }),
+          () => notify(operationResultToNotification(result)),
           data => setRecommendations(data ?? [])
         )
       })
@@ -34,7 +34,7 @@ export default function RecommendationsDrawer({ open, onClose, customer }: Recom
       title={`Recomendações — ${customer?.name ?? ''}`}
       open={open}
       onClose={onClose}
-      width={500}
+      size={500}
     >
       <Spin spinning={loading}>
         <List

@@ -50,13 +50,20 @@ export default function AddSaleDrawer({ open, onClose }: AddSaleDrawerProps) {
 
   const handleSubmit = async (values: SaleFormFields) => {
     if (!selectedCustomer) {
-      notify({ type: 'error', message: 'Selecione um cliente' })
+      notify({
+        type: 'error',
+        description: 'Selecione um cliente para a venda',
+        title: 'Cliente não selecionado'
+      })
       return
     }
 
     const validItems = items.filter(item => item.productId && item.quantity > 0)
     if (validItems.length === 0) {
-      notify({ type: 'error', message: 'Adicione ao menos um item' })
+      notify({ type: 'error',
+        description: 'Adicione ao menos um item',
+        title: 'Itens inválidos'
+      })
       return
     }
 

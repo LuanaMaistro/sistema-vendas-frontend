@@ -18,8 +18,7 @@ export const useProductCrudStore = create<ProductCrudStoreState>((set, get) => (
     get().loadProducts()
   },
   loadProducts: async () => {
-    const { onlyActives } = get()
-    const response = await application.ListProducts.execute({ onlyActives })
+    const response = await application.ListProducts.execute()
     const products = fold(response, () => [], (products: Product[]) => products)
 
     set({ products: products })

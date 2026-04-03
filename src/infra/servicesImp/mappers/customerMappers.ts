@@ -99,8 +99,8 @@ function convertEmails(customer: Customer) {
   const alternativeEmails = customer.alternativeEmails || []
 
   return [
-    convertEmailToContatoDTO(customer.email, true),
-    ...alternativeEmails.map((e) => convertEmailToContatoDTO(e, false))
+    convertEmailToContatoDTO(customer.email),
+    ...alternativeEmails.map((e) => convertEmailToContatoDTO(e))
   ]
 }
 
@@ -108,8 +108,8 @@ function convertPhones(customer: Customer) {
   const alternativePhones = customer.alternativePhones || []
 
   return [
-    convertPhoneToContatoDTO(customer.phone, true),
-    ...alternativePhones.map((p) => convertPhoneToContatoDTO(p, false))
+    convertPhoneToContatoDTO(customer.phone),
+    ...alternativePhones.map((p) => convertPhoneToContatoDTO(p))
   ]
 }
 
@@ -117,8 +117,8 @@ function convertMobiles(customer: Customer) {
   const alternativeMobiles = customer.alternativeMobiles || []
 
   return [
-    convertMobileToContatoDTO(customer.mobile, true),
-    ...alternativeMobiles.map((m) => convertMobileToContatoDTO(m, false))
+    convertMobileToContatoDTO(customer.mobile),
+    ...alternativeMobiles.map((m) => convertMobileToContatoDTO(m))
   ]
 }
 

@@ -8,7 +8,7 @@ interface CustomerSelectProps extends Omit<SelectProps, 'options'> {
 }
 
 export default function CustomerSelect({ onCustomerChange, ...props }: CustomerSelectProps) {
-  const { customers, loadCustomers, setOnlyActives } = useCustomerCrudStore();
+  const { customers,  setOnlyActives } = useCustomerCrudStore();
 
   useEffect(() => {
     setOnlyActives(true);
