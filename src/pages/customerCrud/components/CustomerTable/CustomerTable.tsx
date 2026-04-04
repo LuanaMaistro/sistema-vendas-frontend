@@ -3,6 +3,8 @@ import { Space, Table, Tag, type TableColumnsType } from "antd"
 import styles from './CustomerTable.module.css'
 import { useCustomerCrudStore } from "../../CustomerCrudStore"
 import useTableScrollY from "@/hooks/useTableScrollY"
+import { CheckCircleOutlined, EditOutlined, StarOutlined, StopOutlined } from "@ant-design/icons"
+import ActionButton from "@/components/table/ActionButton/ActionButton"
 
 interface CustomerTableProps {
   editCustomer: (c: Customer) => void,
@@ -60,18 +62,26 @@ export default function CustomerTable({ editCustomer, deleteCustomer, viewRecomm
       title: 'Ações',
       key: 'actions',
       fixed: 'right',
-      width: 200,
-      render: (_, customer) => {
-        const deleteText = customer.active ? 'Inativar' : 'Ativar'
-
-        return (
-          <Space>
-            <a onClick={() => editCustomer(customer)}>Editar</a>
-            <a onClick={() => deleteCustomer(customer)}>{deleteText}</a>
-            <a onClick={() => viewRecommendations(customer)}>Recomendações</a>
-          </Space>
-        )
-      }
+      width: 120,
+      render: (_, customer) => (
+        <Space>
+          <ActionButton
+            onClick={() => editCustomer(customer)}
+            icon={<EditOutlined />}
+            tooltip="Editar"
+          />
+          <ActionButton
+            onClick={() => deleteCustomer(customer)}
+            icon={customer.active ? <StopOutlined /> : <CheckCircleOutlined />}
+            tooltip={customer.active ? "Inativar" : "Ativar"}
+          />
+          <ActionButton
+            onClick={() => viewRecommendations(customer)}
+            icon={<StarOutlined />}
+            tooltip="Recomendações"
+          />
+        </Space>
+      )
     },
   ]
 
