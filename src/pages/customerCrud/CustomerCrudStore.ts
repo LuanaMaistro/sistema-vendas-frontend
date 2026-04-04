@@ -6,6 +6,7 @@ interface CustomerCrudStoreState {
   customers: Customer[],
   onlyActives: boolean,
   setOnlyActives: (onlyActives: boolean) => void,
+  clearFilters: () => void,
   loadCustomers: () => Promise<void>,
 }
 
@@ -15,6 +16,10 @@ export const useCustomerCrudStore = create<CustomerCrudStoreState>((set, get) =>
   onlyActives: false,
   setOnlyActives: (onlyActives: boolean) => {
     set({ onlyActives })
+    get().loadCustomers()
+  },
+  clearFilters: () => {
+    set({ onlyActives: false })
     get().loadCustomers()
   },
   loadCustomers: async () => {
