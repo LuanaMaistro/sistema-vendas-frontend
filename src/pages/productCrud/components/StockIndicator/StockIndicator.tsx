@@ -7,7 +7,7 @@ interface StockIndicatorProps {
 }
 
 export default function StockIndicator({ level, text }: StockIndicatorProps) {
-  const percentage = ((5 - level) / 5) * 100
+  const percentage = 10 + ((5 - level) / 5) * 90
 
   const colors = {
     0: '#52c41a',
@@ -19,10 +19,11 @@ export default function StockIndicator({ level, text }: StockIndicatorProps) {
   }
 
   const color = colors[level as keyof typeof colors] || '#52c41a'
+  const isCritical = level === 5
 
   return (
     <Tooltip title={text}>
-      <div className={styles.indicatorContainer}>
+      <div className={`${styles.indicatorContainer} ${isCritical ? styles.neonAlert : ''}`}>
         <Progress
           type="line"
           percent={Math.max(0, percentage)}

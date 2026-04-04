@@ -12,3 +12,27 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.neonAlert .indicatorText {
+  color: #cf1322;
+  font-weight: 600;
+}
+
+.neonAlert :global(.ant-progress-track) {
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 4px rgba(207, 19, 34, 0.5),
+      0 0 8px rgba(207, 19, 34, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 10px rgba(207, 19, 34, 1),
+      0 0 20px rgba(207, 19, 34, 0.8),
+      0 0 32px rgba(207, 19, 34, 0.5);
+  }
+}
+
