@@ -1,23 +1,18 @@
-import { Card, Checkbox, Input, Select, Space, Button } from 'antd'
+import { Card, Checkbox, Input, Space, Button } from 'antd'
 import { ClearOutlined } from '@ant-design/icons'
 import { useCallback, useEffect, useState } from 'react'
 import { useProductCrudStore } from '../../ProductCrudStore'
 import styles from './ProductFilters.module.css'
 
-const CATEGORIA_OPTIONS = [
-  { label: 'Eletrônicos', value: 'Eletrônicos' },
-  { label: 'Roupas', value: 'Roupas' },
-  { label: 'Alimentos', value: 'Alimentos' },
-  { label: 'Livros', value: 'Livros' },
-  { label: 'Móveis', value: 'Móveis' },
-  { label: 'Esportes', value: 'Esportes' },
-]
-
 export default function ProductFilters() {
   const { filters, setNomeFilter, setCategoriaFilter, setOnlyActives, clearFilters } = useProductCrudStore()
   const [nomeInput, setNomeInput] = useState(filters.nome || '')
+  const [categoriaInput, setCategoriaInput] = useState(filters.categoria || '')
 
-  // Fix debounce: use useEffect with cleanup
+  useEffect(() => {
+    setCategoriaInput(filters.categoria || '')
+  }, [filters.categoria])
+
   useEffect(() => {
     const timer = setTimeout(() => {
       if (nomeInput === '') {
@@ -30,13 +25,25 @@ export default function ProductFilters() {
     return () => clearTimeout(timer)
   }, [nomeInput, setNomeFilter])
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (categoriaInput === '') {
+        setCategoriaFilter(undefined)
+      } else {
+        setCategoriaFilter(categoriaInput)
+      }
+    }, 500)
+
+    return () => clearTimeout(timer)
+  }, [categoriaInput, setCategoriaFilter])
+
   const handleNomeChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setNomeInput(e.target.value)
   }, [])
 
-  const handleCategoriaChange = useCallback((value?: string) => {
-    setCategoriaFilter(value)
-  }, [setCategoriaFilter])
+  const handleCategoriaChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setCategoriaInput(e.target.value)
+  }, [])
 
   const handleOnlyActivesChange = useCallback((e: any) => {
     setOnlyActives(e.target.checked)
@@ -44,6 +51,7 @@ export default function ProductFilters() {
 
   const handleClearFilters = useCallback(() => {
     setNomeInput('')
+    setCategoriaInput('')
     clearFilters()
   }, [clearFilters])
 
@@ -63,10 +71,9 @@ export default function ProductFilters() {
 
         <div className={styles.filterItem}>
           <span className={styles.filterLabel}>Categoria:</span>
-          <Select
-            placeholder="Selecione uma categoria..."
-            options={CATEGORIA_OPTIONS}
-            value={filters.categoria}
+          <Input
+            placeholder="Filtrar por categoria..."
+            value={categoriaInput}
             onChange={handleCategoriaChange}
             allowClear
             style={{ width: 200 }}
