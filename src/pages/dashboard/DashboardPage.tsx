@@ -1,7 +1,8 @@
-import { Card, Col, DatePicker, Row, Spin, Typography } from 'antd'
+import { Card, Col, DatePicker, Row, Spin } from 'antd'
 import { DollarOutlined, ShoppingCartOutlined, TagOutlined } from '@ant-design/icons'
 import type { Dayjs } from 'dayjs'
 import styles from './DashboardPage.module.css'
+import PageHeader from '../../components/headers/PageHeader/PageHeader'
 import IndicatorCard from './components/IndicatorCard/IndicatorCard'
 import BarChart from './components/charts/BarChart/BarChart'
 import PieChart from './components/charts/PieChart/PieChart'
@@ -11,7 +12,6 @@ import { PieChartBuilder } from './components/charts/builders/PieChartBuilder'
 import { useRelatorios } from './hooks/useRelatorios'
 
 
-const { Title, Paragraph } = Typography
 const { RangePicker } = DatePicker
 
 const formatCurrency = (value: number | string) =>
@@ -91,18 +91,18 @@ export default function DashboardPage() {
 
   return (
     <div className={styles.dashboardPage}>
-      <header className={styles.header}>
-        <div className={styles.headerContent}>
-          <Title level={2} style={{ margin: 0, textAlign: 'left' }}>Relatórios</Title>
-          <Paragraph style={{ margin: 0, textAlign: 'left' }}>Visão geral do desempenho de vendas</Paragraph>
-        </div>
-        <RangePicker
-          value={dateRange as [Dayjs, Dayjs] | null}
-          onChange={range => handleDateRangeChange(range as [Dayjs | null, Dayjs | null] | null)}
-          format="DD/MM/YYYY"
-          allowClear
-        />
-      </header>
+      <PageHeader
+        title="Relatórios"
+        subtitle="Visão geral do desempenho de vendas"
+        extra={
+          <RangePicker
+            value={dateRange as [Dayjs, Dayjs] | null}
+            onChange={range => handleDateRangeChange(range as [Dayjs | null, Dayjs | null] | null)}
+            format="DD/MM/YYYY"
+            allowClear
+          />
+        }
+      />
 
       <Spin spinning={loading}>
         <div className={styles.content}>

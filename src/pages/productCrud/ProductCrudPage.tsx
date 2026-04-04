@@ -1,4 +1,6 @@
+import { Button } from 'antd'
 import styles from './ProductCrudPage.module.css'
+import PageHeader from '../../components/headers/PageHeader/PageHeader'
 import AddProductDrawer from './components/AddProductDrawer/AddProductDrawer'
 import UpdateProductDrawer from './components/UpdateProductDrawer/UpdateProductDrawer'
 import { DeleteConfirmationModal } from '../../components/modals/DeleteConfirmationModal'
@@ -8,7 +10,6 @@ import useAddProduct from './hooks/useAddProduct'
 import useEditProduct from './hooks/useEditProduct'
 import useStockMovement from './hooks/useStockMovement'
 import ProductFilters from './components/ProductFilters/ProductFilters'
-import CrudHeader from '../../components/headers/CrudHeader/CrudHeader'
 import AddStockModal from './components/AddStockModal/AddStockModal'
 import RemoveStockModal from './components/RemoveStockModal/RemoveStockModal'
 
@@ -23,11 +24,10 @@ export default function ProductCrudPage() {
  return (
     <div className={styles.productCrudPage}>
 
-      <CrudHeader
-        addButtonAction={addProduct.open}
-        addButtonText='Adicionar produto'
-        description='Gerencie os produtos do sistema'
+      <PageHeader
         title='Produto'
+        subtitle='Gerencie os produtos do sistema'
+        extra={<Button type="primary" onClick={addProduct.open}>Adicionar produto</Button>}
       />
 
       <ProductFilters />

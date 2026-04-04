@@ -4,20 +4,6 @@
   gap: 32px;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.headerContent {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 1;
-}
-
 .content {
   display: flex;
   flex-direction: column;

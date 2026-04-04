@@ -1,4 +1,6 @@
+import { Button } from 'antd'
 import styles from './CustomerCrudPage.module.css'
+import PageHeader from '../../components/headers/PageHeader/PageHeader'
 import AddCustomerDrawer from './components/AddCustomerDrawer/AddCustomerDrawer'
 import UpdateCustomerDrawer from './components/UpdateCustomerDrawer/UpdateCustomerDrawer'
 import RecommendationsDrawer from './components/RecommendationsDrawer/RecommendationsDrawer'
@@ -9,7 +11,6 @@ import useAddCustomer from './hooks/useAddCustomer'
 import useEditCustomer from './hooks/useEditCustomer'
 import useCustomerRecommendations from './hooks/useCustomerRecommendations'
 import CustomerFilters from './components/CustomerFilters/CustomerFilters'
-import CrudHeader from '../../components/headers/CrudHeader/CrudHeader'
 
 export default function CustomerCrudPage() {
 
@@ -22,11 +23,10 @@ export default function CustomerCrudPage() {
  return (
     <div className={styles.customerCrudPage}>
 
-      <CrudHeader
-        addButtonAction={addCustomer.open}
-        addButtonText='Adicionar cliente'
-        description='Gerencie os clientes do sistema'
+      <PageHeader
         title='Cliente'
+        subtitle='Gerencie os clientes do sistema'
+        extra={<Button type="primary" onClick={addCustomer.open}>Adicionar cliente</Button>}
       />
 
       <CustomerFilters />

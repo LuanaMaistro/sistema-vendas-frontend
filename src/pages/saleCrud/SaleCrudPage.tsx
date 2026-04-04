@@ -1,5 +1,6 @@
+import { Button } from 'antd'
 import styles from './SaleCrudPage.module.css'
-import CrudHeader from '../../components/headers/CrudHeader/CrudHeader'
+import PageHeader from '../../components/headers/PageHeader/PageHeader'
 import SaleFilters from './components/SaleFilters'
 import SaleList from './components/SaleList'
 import AddSaleDrawer from './components/AddSaleDrawer'
@@ -16,11 +17,10 @@ export default function SaleCrudPage() {
 
   return (
     <div className={styles.saleCrudPage}>
-      <CrudHeader
-        addButtonAction={addSale.open}
-        addButtonText='Nova Venda'
-        description='Gerencie as vendas do sistema'
+      <PageHeader
         title='Vendas'
+        subtitle='Gerencie as vendas do sistema'
+        extra={<Button type="primary" onClick={addSale.open}>Nova Venda</Button>}
       />
 
       <SaleFilters />
