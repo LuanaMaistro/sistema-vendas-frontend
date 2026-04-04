@@ -1,4 +1,4 @@
-export const formatCurrency = (value?: number) => {
+export const formatCurrency = (value?: number | string) => {
   if (value === undefined) return '-'
-  return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+  return Number(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
