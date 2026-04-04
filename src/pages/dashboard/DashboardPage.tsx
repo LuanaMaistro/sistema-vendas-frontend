@@ -14,9 +14,6 @@ import { useRelatorios } from './hooks/useRelatorios'
 
 const { RangePicker } = DatePicker
 
-const formatCurrency = (value: number | string) =>
-  `R$ ${Number(value).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
-
 export default function DashboardPage() {
   const {
     totalPedidos,
