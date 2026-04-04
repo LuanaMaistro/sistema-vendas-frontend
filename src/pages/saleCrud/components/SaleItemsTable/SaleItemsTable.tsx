@@ -72,13 +72,13 @@ export default function SaleItemsTable({ sale, readonly = false }: SaleItemsTabl
       title: 'Preço Unitário',
       dataIndex: 'unitPrice',
       key: 'unitPrice',
-      render: (value) => value?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) || '-'
+      render: (value) => formatCurrency(value)
     },
     {
       title: 'Subtotal',
       dataIndex: 'totalPrice',
       key: 'totalPrice',
-      render: (value) => value?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) || '-'
+      render: (value) => formatCurrency(value)
     },
     ...(!readonly ? [{
       title: 'Ações',
