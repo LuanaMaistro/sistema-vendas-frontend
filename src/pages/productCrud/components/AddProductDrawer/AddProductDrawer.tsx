@@ -22,6 +22,7 @@ export default function AddProductDrawer({ open, onClose }: AddProductDrawerProp
       name: productFormData.name!,
       description: productFormData.description!,
       code: productFormData.code!,
+      category: productFormData.category,
       price: productFormData.price!,
       quantity: productFormData.quantity ?? 0,
       minimumQuantity: productFormData.minimumQuantity ?? 0,

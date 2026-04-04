@@ -25,6 +25,7 @@ export default function UpdateProductDrawer({ open, onClose, product }: UpdatePr
         name: product.name,
         description: product.description,
         code: product.code,
+        category: product.category,
         price: product.price.Value,
         minimumQuantity: product.minimumQuantity?.Value ?? 0,
       })
@@ -36,6 +37,7 @@ export default function UpdateProductDrawer({ open, onClose, product }: UpdatePr
       id: product.id!,
       name: productFormData.name!,
       description: productFormData.description!,
+      category: productFormData.category,
       price: productFormData.price!,
       minimumQuantity: productFormData.minimumQuantity ?? 0,
     })

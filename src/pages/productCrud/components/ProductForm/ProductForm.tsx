@@ -29,6 +29,12 @@ export default function ProductForm({ form, onFinish, isEdit }: ProductFormProps
             </Form.Item>
           </Col>
 
+          <Col span={12}>
+            <Form.Item name="category" label="Categoria">
+              <Input />
+            </Form.Item>
+          </Col>
+
           <Col span={24}>
             <Form.Item name="description" label="Descrição">
               <Input.TextArea rows={4} />
