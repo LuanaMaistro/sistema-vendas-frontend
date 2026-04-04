@@ -1,10 +1,11 @@
-import { Card, Col, DatePicker, Row, Select, Spin, Typography } from 'antd'
+import { Card, Col, DatePicker, Row, Spin, Typography } from 'antd'
 import { DollarOutlined, ShoppingCartOutlined, TagOutlined } from '@ant-design/icons'
 import type { Dayjs } from 'dayjs'
 import styles from './DashboardPage.module.css'
 import IndicatorCard from './components/IndicatorCard/IndicatorCard'
 import BarChart from './components/charts/BarChart/BarChart'
 import PieChart from './components/charts/PieChart/PieChart'
+import TopSelector from './components/TopSelector/TopSelector'
 import { BarChartBuilder } from './components/charts/builders/BarChartBuilder'
 import { PieChartBuilder } from './components/charts/builders/PieChartBuilder'
 import { useRelatorios } from './hooks/useRelatorios'
@@ -13,13 +14,6 @@ import type { TopOption } from './hooks/useRelatorios'
 
 const { Title, Paragraph } = Typography
 const { RangePicker } = DatePicker
-
-const TOP_OPTIONS = [
-  { label: 'Top 5', value: 5 },
-  { label: 'Top 10', value: 10 },
-  { label: 'Top 15', value: 15 },
-  { label: 'Top 30', value: 30 },
-]
 
 const formatCurrency = (value: number | string) =>
   `R$ ${Number(value).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
@@ -30,18 +24,19 @@ export default function DashboardPage() {
     valorTotal,
     ticketMedio,
     porProduto,
+    porReceitaQuantidade,
     porCliente,
     porCategoria,
     estoque,
     loading,
     dateRange,
     topProduto,
+    topReceitaQuantidade,
     topCliente,
-    topCategoria,
     handleDateRangeChange,
     handleTopProdutoChange,
+    handleTopReceitaQuantidadeChange,
     handleTopClienteChange,
-    handleTopCategoriaChange,
   } = useRelatorios()
 
   const porProdutoOption = new BarChartBuilder()
@@ -71,11 +66,11 @@ export default function DashboardPage() {
 
   const receitaQuantidadeOption = new BarChartBuilder()
     .setTooltip(undefined, 'cross')
-    .setXAxis(porProduto.map(p => p.produtoNome ?? ''))
+    .setXAxis(porReceitaQuantidade.map(p => p.produtoNome ?? ''))
     .addDualYAxis('Qtd. Vendida', 'Receita', (v: number) => `R$ ${(v / 1000).toFixed(0)}k`)
     .setLegend()
-    .addSeries('Qtd. Vendida', porProduto.map(p => p.quantidadeVendida ?? 0), 48, 0)
-    .addLineSeries('Receita (R$)', porProduto.map(p => p.valorTotal ?? 0), 1)
+    .addSeries('Qtd. Vendida', porReceitaQuantidade.map(p => p.quantidadeVendida ?? 0), 48, 0)
+    .addLineSeries('Receita (R$)', porReceitaQuantidade.map(p => p.valorTotal ?? 0), 1)
     .setGrid('14%', '8%', '8%', '4%')
     .build()
 
@@ -148,12 +143,9 @@ export default function DashboardPage() {
               title="Top Produtos Mais Vendidos"
               variant="outlined"
               extra={
-                <Select
+                <TopSelector
                   value={topProduto}
-                  options={TOP_OPTIONS}
-                  onChange={(val: TopOption) => handleTopProdutoChange(val)}
-                  size="small"
-                  style={{ width: 90 }}
+                  onChange={handleTopProdutoChange}
                 />
               }
             >
@@ -165,12 +157,9 @@ export default function DashboardPage() {
               title="Top Clientes Compradores"
               variant="outlined"
               extra={
-                <Select
+                <TopSelector
                   value={topCliente}
-                  options={TOP_OPTIONS}
-                  onChange={(val: TopOption) => handleTopClienteChange(val)}
-                  size="small"
-                  style={{ width: 90 }}
+                  onChange={handleTopClienteChange}
                 />
               }
             >
@@ -184,15 +173,6 @@ export default function DashboardPage() {
             <Card
               title="Vendas por Categoria"
               variant="outlined"
-              extra={
-                <Select
-                  value={topCategoria}
-                  options={TOP_OPTIONS}
-                  onChange={(val: TopOption) => handleTopCategoriaChange(val)}
-                  size="small"
-                  style={{ width: 90 }}
-                />
-              }
             >
               <PieChart option={porCategoriaOption} height="300px" />
             </Card>
@@ -202,12 +182,9 @@ export default function DashboardPage() {
               title="Receita vs Quantidade por Produto"
               variant="outlined"
               extra={
-                <Select
-                  value={topProduto}
-                  options={TOP_OPTIONS}
-                  onChange={(val: TopOption) => handleTopProdutoChange(val)}
-                  size="small"
-                  style={{ width: 90 }}
+                <TopSelector
+                  value={topReceitaQuantidade}
+                  onChange={handleTopReceitaQuantidadeChange}
                 />
               }
             >

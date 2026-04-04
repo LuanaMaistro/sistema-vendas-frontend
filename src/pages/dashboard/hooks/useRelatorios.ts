@@ -21,6 +21,7 @@ interface RelatoriosState {
   valorTotal: ValorTotalVendasDTO | null
   ticketMedio: TicketMedioDTO | null
   porProduto: ProdutoMaisVendidoDTO[]
+  porReceitaQuantidade: ProdutoMaisVendidoDTO[]
   porCliente: ClienteCompradorDTO[]
   porCategoria: CategoriaMaisVendidaDTO[]
   estoque: RelatorioEstoqueDTO | null
@@ -33,14 +34,15 @@ export function useRelatorios() {
     dayjs().endOf('month'),
   ])
   const [topProduto, setTopProduto] = useState<TopOption>(10)
+  const [topReceitaQuantidade, setTopReceitaQuantidade] = useState<TopOption>(10)
   const [topCliente, setTopCliente] = useState<TopOption>(10)
-  const [topCategoria, setTopCategoria] = useState<TopOption>(10)
 
   const [state, setState] = useState<RelatoriosState>({
     totalPedidos: null,
     valorTotal: null,
     ticketMedio: null,
     porProduto: [],
+    porReceitaQuantidade: [],
     porCliente: [],
     porCategoria: [],
     estoque: null,
@@ -53,7 +55,7 @@ export function useRelatorios() {
     range: [Dayjs | null, Dayjs | null],
     topP: TopOption,
     topC: TopOption,
-    topCat: TopOption,
+    topRQ: TopOption,
   ) => {
     setState(prev => ({ ...prev, loading: true }))
     const [inicio, fim] = range
@@ -61,16 +63,17 @@ export function useRelatorios() {
     const df = toIso(fim)
 
     try {
-      const [totalPedidos, valorTotal, ticketMedio, porProduto, porCliente, porCategoria, estoque] = await Promise.all([
+      const [totalPedidos, valorTotal, ticketMedio, porProduto, porReceitaQuantidade, porCliente, porCategoria, estoque] = await Promise.all([
         service.getTotalPedidos(di, df),
         service.getValorTotal(di, df),
         service.getTicketMedio(di, df),
         service.getVendasPorProduto(di, df, topP),
+        service.getVendasPorProduto(di, df, topRQ),
         service.getVendasPorCliente(di, df, topC),
-        service.getVendasPorCategoria(di, df, topCat),
+        service.getVendasPorCategoria(di, df),
         service.getEstoque(),
       ])
-      setState({ totalPedidos, valorTotal, ticketMedio, porProduto, porCliente, porCategoria, estoque, loading: false })
+      setState({ totalPedidos, valorTotal, ticketMedio, porProduto, porReceitaQuantidade, porCliente, porCategoria, estoque, loading: false })
     } catch {
       setState(prev => ({ ...prev, loading: false }))
     }
@@ -82,23 +85,24 @@ export function useRelatorios() {
     setState(prev => ({ ...prev, porProduto: result }))
   }, [dateRange])
 
+  const fetchReceitaQuantidade = useCallback(async (top: TopOption) => {
+    const [inicio, fim] = dateRange
+    const result = await service.getVendasPorProduto(toIso(inicio), toIso(fim), top)
+    setState(prev => ({ ...prev, porReceitaQuantidade: result }))
+  }, [dateRange])
+
   const fetchPorCliente = useCallback(async (top: TopOption) => {
     const [inicio, fim] = dateRange
     const result = await service.getVendasPorCliente(toIso(inicio), toIso(fim), top)
     setState(prev => ({ ...prev, porCliente: result }))
   }, [dateRange])
 
-  const fetchPorCategoria = useCallback(async (top: TopOption) => {
-    const [inicio, fim] = dateRange
-    const result = await service.getVendasPorCategoria(toIso(inicio), toIso(fim), top)
-    setState(prev => ({ ...prev, porCategoria: result }))
-  }, [dateRange])
 
   const handleDateRangeChange = useCallback((range: [Dayjs | null, Dayjs | null] | null) => {
     const newRange: [Dayjs | null, Dayjs | null] = range ?? [null, null]
     setDateRange(newRange)
-    fetchAll(newRange, topProduto, topCliente, topCategoria)
-  }, [fetchAll, topProduto, topCliente, topCategoria])
+    fetchAll(newRange, topProduto, topCliente, topReceitaQuantidade)
+  }, [fetchAll, topProduto, topCliente, topReceitaQuantidade])
 
   const handleTopProdutoChange = useCallback((top: TopOption) => {
     setTopProduto(top)
@@ -110,24 +114,24 @@ export function useRelatorios() {
     fetchPorCliente(top)
   }, [fetchPorCliente])
 
-  const handleTopCategoriaChange = useCallback((top: TopOption) => {
-    setTopCategoria(top)
-    fetchPorCategoria(top)
-  }, [fetchPorCategoria])
+  const handleTopReceitaQuantidadeChange = useCallback((top: TopOption) => {
+    setTopReceitaQuantidade(top)
+    fetchReceitaQuantidade(top)
+  }, [fetchReceitaQuantidade])
 
   useEffect(() => {
-    fetchAll(dateRange, topProduto, topCliente, topCategoria)
+    fetchAll(dateRange, topProduto, topCliente, topReceitaQuantidade)
   }, [])
 
   return {
     ...state,
     dateRange,
     topProduto,
+    topReceitaQuantidade,
     topCliente,
-    topCategoria,
     handleDateRangeChange,
     handleTopProdutoChange,
+    handleTopReceitaQuantidadeChange,
     handleTopClienteChange,
-    handleTopCategoriaChange,
   }
 }
