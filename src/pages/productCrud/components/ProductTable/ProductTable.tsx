@@ -81,43 +81,49 @@ export default function ProductTable({
       title: "Qtd. Mínima",
       dataIndex: ["minimumQuantity", "Value"],
     },
-    {
-      title: "Ações",
-      key: "actions",
-      render: (_, product) => (
-        <Space>
-          <ActionButton
-            onClick={() => editProduct(product)}
-            icon={<EditOutlined />}
-            tooltip="Editar"
-          />
+     {
+       title: "Ações",
+       key: "actions",
+       render: (_, product) => (
+         <Space>
+           <ActionButton
+             onClick={() => editProduct(product)}
+             icon={<EditOutlined />}
+             tooltip="Editar"
+             color="blue"
+           />
 
-          <ActionButton
-            onClick={() => deleteProduct(product)}
-            icon={<DeleteOutlined />}
-            tooltip="Deletar"
-          />
+           <ActionButton
+             onClick={() => deleteProduct(product)}
+             icon={<DeleteOutlined />}
+             tooltip="Deletar"
+             danger
+             color="red"
+           />
 
-          <ActionButton
-            onClick={() => toggleProductStatus(product)}
-            icon={product.active ? <StopOutlined /> : <CheckCircleOutlined />}
-            tooltip={product.active ? "Inativar" : "Ativar"}
-          />
+           <ActionButton
+             onClick={() => toggleProductStatus(product)}
+             icon={product.active ? <StopOutlined /> : <CheckCircleOutlined />}
+             tooltip={product.active ? "Inativar" : "Ativar"}
+             color={product.active ? "red" : "green"}
+           />
 
-          <ActionButton
-            onClick={() => openAddStock(product)}
-            icon={<PlusCircleOutlined />}
-            tooltip="Adicionar estoque"
-          />
+           <ActionButton
+             onClick={() => openAddStock(product)}
+             icon={<PlusCircleOutlined />}
+             tooltip="Adicionar estoque"
+             color="blue"
+           />
 
-          <ActionButton
-            onClick={() => openRemoveStock(product)}
-            icon={<MinusCircleOutlined />}
-            tooltip="Remover estoque"
-          />
-        </Space>
-      ),
-    },
+           <ActionButton
+             onClick={() => openRemoveStock(product)}
+             icon={<MinusCircleOutlined />}
+             tooltip="Remover estoque"
+             color="blue"
+           />
+         </Space>
+       ),
+     },
   ];
 
   const { containerRef, scrollY } = useTableScrollY(56);

@@ -58,31 +58,34 @@ export default function CustomerTable({ editCustomer, deleteCustomer, viewRecomm
       title: 'Endereço',
       render: (_, record) => record.address?.FullAddress || '-'
     },
-    {
-      title: 'Ações',
-      key: 'actions',
-      fixed: 'right',
-      width: 120,
-      render: (_, customer) => (
-        <Space>
-          <ActionButton
-            onClick={() => editCustomer(customer)}
-            icon={<EditOutlined />}
-            tooltip="Editar"
-          />
-          <ActionButton
-            onClick={() => deleteCustomer(customer)}
-            icon={customer.active ? <StopOutlined /> : <CheckCircleOutlined />}
-            tooltip={customer.active ? "Inativar" : "Ativar"}
-          />
-          <ActionButton
-            onClick={() => viewRecommendations(customer)}
-            icon={<StarOutlined />}
-            tooltip="Recomendações"
-          />
-        </Space>
-      )
-    },
+     {
+       title: 'Ações',
+       key: 'actions',
+       fixed: 'right',
+       width: 120,
+       render: (_, customer) => (
+         <Space>
+           <ActionButton
+             onClick={() => editCustomer(customer)}
+             icon={<EditOutlined />}
+             tooltip="Editar"
+             color="blue"
+           />
+           <ActionButton
+             onClick={() => deleteCustomer(customer)}
+             icon={customer.active ? <StopOutlined /> : <CheckCircleOutlined />}
+             tooltip={customer.active ? "Inativar" : "Ativar"}
+             color={customer.active ? "red" : "green"}
+           />
+           <ActionButton
+             onClick={() => viewRecommendations(customer)}
+             icon={<StarOutlined />}
+             tooltip="Recomendações"
+             color="yellow"
+           />
+         </Space>
+       )
+     },
   ]
 
   const { containerRef, scrollY } = useTableScrollY(56);
