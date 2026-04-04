@@ -9,7 +9,6 @@ import TopSelector from './components/TopSelector/TopSelector'
 import { BarChartBuilder } from './components/charts/builders/BarChartBuilder'
 import { PieChartBuilder } from './components/charts/builders/PieChartBuilder'
 import { useRelatorios } from './hooks/useRelatorios'
-import type { TopOption } from './hooks/useRelatorios'
 
 
 const { Title, Paragraph } = Typography
@@ -93,9 +92,9 @@ export default function DashboardPage() {
   return (
     <div className={styles.dashboardPage}>
       <header className={styles.header}>
-        <div>
-          <Title level={2} style={{ margin: 0 }}>Relatórios</Title>
-          <Paragraph style={{ margin: 0 }}>Visão geral do desempenho de vendas</Paragraph>
+        <div className={styles.headerContent}>
+          <Title level={2} style={{ margin: 0, textAlign: 'left' }}>Relatórios</Title>
+          <Paragraph style={{ margin: 0, textAlign: 'left' }}>Visão geral do desempenho de vendas</Paragraph>
         </div>
         <RangePicker
           value={dateRange as [Dayjs, Dayjs] | null}

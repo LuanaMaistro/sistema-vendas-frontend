@@ -2,15 +2,17 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import type RouteConfig from '../../../../routes/RouteConfig'
 import { routesConfigs } from '../../../../routes/routes'
 import styles from './AppLayoutSidebar.module.css'
-import { Avatar, Modal } from 'antd'
-import { LogoutOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons'
+import { Avatar, Button, Modal } from 'antd'
+import { LogoutOutlined, ShopOutlined, UserOutlined, MoonOutlined, SunOutlined } from '@ant-design/icons'
 import { useAuth } from '../../../../hooks/useAuth'
+import { useTheme } from '../../../../hooks/useTheme'
 
 export default function AppLayoutSidebar() {
 
   const navigate = useNavigate()
   const { user } = useAuth()
   const clearToken = useAuth(s => s.clearToken)
+  const { theme, toggleTheme } = useTheme()
 
   function handleLogout() {
     Modal.confirm({
@@ -71,6 +73,13 @@ export default function AppLayoutSidebar() {
           <span className={styles.userName}>{user?.name}</span>
           <span className={styles.userEmail}>{user?.email}</span>
         </div>
+        <Button
+          type="text"
+          icon={theme === 'light' ? <SunOutlined /> : <MoonOutlined />}
+          onClick={toggleTheme}
+          size="small"
+          className={styles.themeButton}
+        />
         <LogoutOutlined className={styles.logoutIcon} onClick={handleLogout} />
       </div>
 

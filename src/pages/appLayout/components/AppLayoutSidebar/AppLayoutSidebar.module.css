@@ -138,6 +138,23 @@
   text-overflow: ellipsis;
 }
 
+.themeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .logoutIcon {
   margin-left: auto;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ant-color-text-secondary);
+  transition: color 0.2s;
+}
+
+.logoutIcon:hover {
+  color: var(--ant-color-text);
 }

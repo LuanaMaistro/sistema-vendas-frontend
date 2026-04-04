@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react'
-import dayjs from 'dayjs'
 import type { Dayjs } from 'dayjs'
 import type {
   TotalPedidosDTO,
@@ -11,10 +10,9 @@ import type {
   RelatorioEstoqueDTO,
 } from '../../../infra/api/api'
 import RelatoriosService from '../../../infra/servicesImp/RelatoriosService'
+import { useDashboardFilterStore, type TopOption } from '../DashboardFilterStore'
 
 const service = new RelatoriosService()
-
-export type TopOption = 5 | 10 | 15 | 30
 
 interface RelatoriosState {
   totalPedidos: TotalPedidosDTO | null
@@ -29,13 +27,16 @@ interface RelatoriosState {
 }
 
 export function useRelatorios() {
-  const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null]>([
-    dayjs().startOf('month'),
-    dayjs().endOf('month'),
-  ])
-  const [topProduto, setTopProduto] = useState<TopOption>(10)
-  const [topReceitaQuantidade, setTopReceitaQuantidade] = useState<TopOption>(10)
-  const [topCliente, setTopCliente] = useState<TopOption>(10)
+  const {
+    dateRange,
+    topProduto,
+    topReceitaQuantidade,
+    topCliente,
+    setDateRange,
+    setTopProduto,
+    setTopReceitaQuantidade,
+    setTopCliente,
+  } = useDashboardFilterStore()
 
   const [state, setState] = useState<RelatoriosState>({
     totalPedidos: null,
@@ -102,22 +103,22 @@ export function useRelatorios() {
     const newRange: [Dayjs | null, Dayjs | null] = range ?? [null, null]
     setDateRange(newRange)
     fetchAll(newRange, topProduto, topCliente, topReceitaQuantidade)
-  }, [fetchAll, topProduto, topCliente, topReceitaQuantidade])
+  }, [fetchAll, topProduto, topCliente, topReceitaQuantidade, setDateRange])
 
   const handleTopProdutoChange = useCallback((top: TopOption) => {
     setTopProduto(top)
     fetchPorProduto(top)
-  }, [fetchPorProduto])
+  }, [fetchPorProduto, setTopProduto])
 
   const handleTopClienteChange = useCallback((top: TopOption) => {
     setTopCliente(top)
     fetchPorCliente(top)
-  }, [fetchPorCliente])
+  }, [fetchPorCliente, setTopCliente])
 
   const handleTopReceitaQuantidadeChange = useCallback((top: TopOption) => {
     setTopReceitaQuantidade(top)
     fetchReceitaQuantidade(top)
-  }, [fetchReceitaQuantidade])
+  }, [fetchReceitaQuantidade, setTopReceitaQuantidade])
 
   useEffect(() => {
     fetchAll(dateRange, topProduto, topCliente, topReceitaQuantidade)

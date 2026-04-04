@@ -1,5 +1,5 @@
 import { Select } from 'antd'
-import type { TopOption } from '../../hooks/useRelatorios'
+import type { TopOption } from '../../DashboardFilterStore'
 
 interface TopSelectorProps {
   value: TopOption
