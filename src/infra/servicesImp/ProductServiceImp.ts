@@ -1,6 +1,7 @@
 import type { ListProductFilters, Product, ProductService, Quantity, Result } from "@luanamaistro/core-lib";
 import createApiClients from '../api/apiClientFactory';
 import { convertProdutoDTOToProduct, convertProductToProdutoCreateDTO, convertProductToProdutoUpdateDTO } from './mappers/productMappers';
+import type { ProdutoDTO } from "../api";
 
 export default class ProductServiceImp implements ProductService {
 
@@ -25,15 +26,32 @@ export default class ProductServiceImp implements ProductService {
 
 
   async ListProducts(filters: ListProductFilters): Promise<Result<Array<Product>>> {
-
-    if(!filters.onlyActives)
-      return await this.List()
+    const nome = filters?.nome ? String(filters.nome).trim() : undefined
+    const categoria = filters?.categoria ? String(filters.categoria).trim() : undefined
+    const onlyActives = !!filters?.onlyActives
 
     const [productApi] = createApiClients('ProdutosApi')
-    const resultApi = await productApi.apiProdutosAtivosGet()
+
+    let resultApi: { data: Array<ProdutoDTO> } | null = null
+
+    if (nome) {
+      resultApi = await productApi.apiProdutosBuscarGet(nome)
+    } else if (categoria) {
+      resultApi = await productApi.apiProdutosCategoriaCategoriaGet(categoria)
+    } else if (onlyActives) {
+      resultApi = await productApi.apiProdutosAtivosGet()
+    } else {
+      resultApi = await productApi.apiProdutosGet()
+    }
+
+    let dtos = resultApi.data ?? []
+
+    if (onlyActives && (nome || categoria)) {
+      dtos = dtos.filter(d => d.ativo === true)
+    }
 
     return {
-      data: resultApi.data.map(convertProdutoDTOToProduct),
+      data: dtos.map(convertProdutoDTOToProduct),
       code: 200,
       success: true,
     }
