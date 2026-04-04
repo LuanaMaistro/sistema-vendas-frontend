@@ -57,6 +57,14 @@ export default function ProductTable({
       dataIndex: "code",
     },
     {
+      title: "Categoria",
+      dataIndex: "category",
+    },
+    {
+      title: "Data de Registro",
+      render: (_, record) => formatDate(record.registrationDate),
+    },
+    {
       title: "Ativo",
       render: (_, record) => {
         const statusText = record.active ? "Sim" : "Não";
@@ -139,7 +147,7 @@ export default function ProductTable({
        <Table<Product>
          columns={columns}
          dataSource={products}
-         scroll={{ x: 1200, y: scrollY }}
+         scroll={{ x: 1400, y: scrollY }}
        />
     </div>
   )
