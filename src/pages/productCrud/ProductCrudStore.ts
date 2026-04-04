@@ -2,9 +2,17 @@ import { fold, type Product } from "@luanamaistro/core-lib";
 import { create } from "zustand";
 import application from "../../infra/applicationInstance";
 
+interface ProductFilters {
+  nome?: string
+  categoria?: string
+  onlyActives: boolean
+}
+
 interface ProductCrudStoreState {
   products: Product[],
-  onlyActives: boolean,
+  filters: ProductFilters,
+  setNomeFilter: (nome?: string) => void,
+  setCategoriaFilter: (categoria?: string) => void,
   setOnlyActives: (onlyActives: boolean) => void,
   loadProducts: () => Promise<void>,
 }
@@ -12,13 +20,24 @@ interface ProductCrudStoreState {
 
 export const useProductCrudStore = create<ProductCrudStoreState>((set, get) => ({
   products: [],
-  onlyActives: false,
+  filters: {
+    onlyActives: false,
+  },
+  setNomeFilter: (nome?: string) => {
+    set(state => ({ filters: { ...state.filters, nome } }))
+    get().loadProducts()
+  },
+  setCategoriaFilter: (categoria?: string) => {
+    set(state => ({ filters: { ...state.filters, categoria } }))
+    get().loadProducts()
+  },
   setOnlyActives: (onlyActives: boolean) => {
-    set({ onlyActives })
+    set(state => ({ filters: { ...state.filters, onlyActives } }))
     get().loadProducts()
   },
   loadProducts: async () => {
-    const response = await application.ListProducts.execute()
+    const { filters } = get()
+    const response = await application.ListProducts.execute(filters)
     const products = fold(response, () => [], (products: Product[]) => products)
 
     set({ products: products })
