@@ -1,5 +1,5 @@
 import type { Product } from "@luanamaistro/core-lib"
-import { Space, Table, Tag, type TableColumnsType } from "antd"
+import { Dropdown, Space, Table, Tag, type TableColumnsType } from "antd"
 import styles from './ProductTable.module.css'
 import { useProductCrudStore } from "../../ProductCrudStore"
 import { CheckCircleOutlined, DeleteOutlined, EditOutlined, MinusCircleOutlined, PlusCircleOutlined, StopOutlined } from "@ant-design/icons"
@@ -22,7 +22,7 @@ export default function ProductTable({
   openAddStock,
   openRemoveStock }: ProductTableProps) {
 
-  const { products, loadProducts } = useProductCrudStore()
+  const { products, loadProducts, setCategoriaFilter } = useProductCrudStore()
 
   useEffect(() => {
     loadProducts()
@@ -59,6 +59,22 @@ export default function ProductTable({
     {
       title: "Categoria",
       dataIndex: "category",
+      render: (_, record) => (
+        <Dropdown
+          menu={{
+            items: [{
+              key: 'filter',
+              label: 'Filtrar por essa categoria',
+              onClick: () => {
+                setCategoriaFilter(record.category)
+              }
+            }]
+          }}
+          trigger={['contextMenu']}
+        >
+          <span>{record.category}</span>
+        </Dropdown>
+      ),
     },
     {
       title: "Data de Registro",
