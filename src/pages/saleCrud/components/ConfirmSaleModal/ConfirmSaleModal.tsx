@@ -1,4 +1,4 @@
-import { PaymentMethod, type Sale } from "@dibimo/core-lib"
+import { PaymentMethod, type Sale } from "@luanamaistro/core-lib"
 import { Modal, Radio, Space, Typography } from "antd"
 
 const { Text } = Typography

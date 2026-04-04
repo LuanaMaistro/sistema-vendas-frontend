@@ -1,4 +1,4 @@
-import { CustomerType } from "@dibimo/core-lib";
+import { CustomerType } from "@luanamaistro/core-lib";
 
 export const CustomerTypeView = {
   [CustomerType.NATURAL_PERSON]: {

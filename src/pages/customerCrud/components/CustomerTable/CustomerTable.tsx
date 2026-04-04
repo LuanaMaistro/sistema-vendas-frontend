@@ -1,4 +1,4 @@
-import type { Customer } from "@dibimo/core-lib"
+import type { Customer } from "@luanamaistro/core-lib"
 import { Space, Table, Tag, type TableColumnsType } from "antd"
 import styles from './CustomerTable.module.css'
 import { useCustomerCrudStore } from "../../CustomerCrudStore"

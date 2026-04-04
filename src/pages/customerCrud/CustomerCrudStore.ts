@@ -1,4 +1,4 @@
-import { fold, type Customer } from "@dibimo/core-lib";
+import { fold, type Customer } from "@luanamaistro/core-lib";
 import { create } from "zustand";
 import application from "../../infra/applicationInstance";
 

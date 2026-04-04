@@ -1,4 +1,4 @@
-import type { Sale } from "@dibimo/core-lib"
+import type { Sale } from "@luanamaistro/core-lib"
 import application from "../../../infra/applicationInstance"
 import useNotification from "../../../hooks/notification/notification"
 import { useSaleCrudStore } from "../SaleCrudStore"

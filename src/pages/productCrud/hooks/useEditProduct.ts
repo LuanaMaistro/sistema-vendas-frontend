@@ -1,5 +1,5 @@
 import application from "@/infra/applicationInstance"
-import type { Product } from "@dibimo/core-lib"
+import type { Product } from "@luanamaistro/core-lib"
 import { useProductCrudStore } from "../ProductCrudStore"
 import useNotification from "@/hooks/notification/notification"
 

@@ -1,4 +1,4 @@
-import type { Product } from "@dibimo/core-lib"
+import type { Product } from "@luanamaistro/core-lib"
 
 export default function useStockMovement() {
   const [showAddStock, setShowAddStock] = useState(false)

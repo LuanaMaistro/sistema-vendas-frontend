@@ -1,4 +1,4 @@
-import type { Sale } from "@dibimo/core-lib"
+import type { Sale } from "@luanamaistro/core-lib"
 import { Modal, Form, InputNumber, Space } from "antd"
 import ProductSelect from "../../../../components/ProductSelect"
 import application from "../../../../infra/applicationInstance"

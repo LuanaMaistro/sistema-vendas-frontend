@@ -1,4 +1,4 @@
-import type { Customer, CustomerService, ListCustomerFilters, Recommendation, Result } from "@dibimo/core-lib";
+import type { Customer, CustomerService, ListCustomerFilters, Recommendation, Result } from "@luanamaistro/core-lib";
 import createApiClients from '../api/apiClientFactory';
 import { convertClienteDTOToCustomer, convertCustomerToClienteCreateDTO, convertCustomerToClienteUpdateDTO } from './mappers/customerMappers';
 import { convertRecomendacaoItemDTOToRecommendation } from './mappers/recommendationMappers';

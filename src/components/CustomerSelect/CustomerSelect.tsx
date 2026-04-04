@@ -1,6 +1,6 @@
 import { Select, type SelectProps } from "antd";
 import { useCallback } from "react";
-import type { Customer } from "@dibimo/core-lib";
+import type { Customer } from "@luanamaistro/core-lib";
 import { useCustomerCrudStore } from "@/pages/customerCrud/CustomerCrudStore";
 
 interface CustomerSelectProps extends Omit<SelectProps, 'options'> {

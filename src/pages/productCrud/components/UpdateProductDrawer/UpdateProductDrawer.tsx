@@ -4,7 +4,7 @@ import application from "../../../../infra/applicationInstance";
 import type ProductFormFields from "../../types/ProductFormFields";
 import { useProductCrudStore } from "../../ProductCrudStore";
 import { eitherToBoolean } from "../../../../tools/either";
-import { type Product } from "@dibimo/core-lib";
+import { type Product } from "@luanamaistro/core-lib";
 import useNotification from "../../../../hooks/notification/notification";
 
 interface UpdateProductDrawerProps {

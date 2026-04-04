@@ -1,4 +1,4 @@
-import type { ListProductFilters, Product, ProductService, Quantity, Result } from "@dibimo/core-lib";
+import type { ListProductFilters, Product, ProductService, Quantity, Result } from "@luanamaistro/core-lib";
 import createApiClients from '../api/apiClientFactory';
 import { convertProdutoDTOToProduct, convertProductToProdutoCreateDTO, convertProductToProdutoUpdateDTO } from './mappers/productMappers';
 

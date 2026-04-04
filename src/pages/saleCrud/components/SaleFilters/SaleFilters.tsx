@@ -1,4 +1,4 @@
-import { SaleStatus } from "@dibimo/core-lib"
+import { SaleStatus } from "@luanamaistro/core-lib"
 import { Card, Space, Select, DatePicker, Button } from "antd"
 import { ClearOutlined } from "@ant-design/icons"
 import { useSaleCrudStore } from "../../SaleCrudStore"

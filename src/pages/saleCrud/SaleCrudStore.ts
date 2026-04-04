@@ -1,4 +1,4 @@
-import { fold, SaleStatus, type Sale } from "@dibimo/core-lib";
+import { fold, SaleStatus, type Sale } from "@luanamaistro/core-lib";
 import { create } from "zustand";
 import application from "../../infra/applicationInstance";
 

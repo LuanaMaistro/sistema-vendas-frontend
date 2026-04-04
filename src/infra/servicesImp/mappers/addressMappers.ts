@@ -1,4 +1,4 @@
-import { Address } from "@dibimo/core-lib";
+import { Address } from "@luanamaistro/core-lib";
 import type { EnderecoDTO } from "../../api";
 
 export const convertEnderecoDTOToAddress = (dto: EnderecoDTO | undefined): Address | undefined => {

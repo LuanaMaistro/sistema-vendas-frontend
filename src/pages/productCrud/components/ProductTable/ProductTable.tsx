@@ -1,4 +1,4 @@
-import type { Product } from "@dibimo/core-lib"
+import type { Product } from "@luanamaistro/core-lib"
 import { Space, Table, Tag, type TableColumnsType } from "antd"
 import styles from './ProductTable.module.css'
 import { useProductCrudStore } from "../../ProductCrudStore"

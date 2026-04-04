@@ -1,4 +1,4 @@
-import { createApplicationInstance } from "@dibimo/core-lib";
+import { createApplicationInstance } from "@luanamaistro/core-lib";
 import { serviceFactory } from "./servicesImp/serviceFactiory";
 
 const application = createApplicationInstance(serviceFactory)

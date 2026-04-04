@@ -14,7 +14,7 @@ export default defineConfig({
       imports: [
         'react',
         {
-          '@dibimo/core-lib': [
+          '@luanamaistro/core-lib': [
             'fold',
             'right',
             'left'

@@ -1,4 +1,4 @@
-import { CustomerType } from "@dibimo/core-lib";
+import { CustomerType } from "@luanamaistro/core-lib";
 import { Col, Form, Input, Row, type FormInstance, type FormProps } from "antd";
 import type CustomerFormFields from "../../types/CustomerFormFields";
 import Paragraph from "antd/es/typography/Paragraph";

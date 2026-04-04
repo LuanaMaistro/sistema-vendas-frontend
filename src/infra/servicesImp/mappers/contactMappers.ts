@@ -1,4 +1,4 @@
-import type { Email, Mobile, Phone } from "@dibimo/core-lib"
+import type { Email, Mobile, Phone } from "@luanamaistro/core-lib"
 import type { ContatoDTO } from "../../api"
 
 export const convertEmailToContatoDTO = (email: Email | undefined): ContatoDTO | undefined => {
