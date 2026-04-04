@@ -81,9 +81,11 @@ export default function ProductTable({
       title: "Qtd. Mínima",
       dataIndex: ["minimumQuantity", "Value"],
     },
-     {
+      {
        title: "Ações",
        key: "actions",
+       fixed: "right",
+       width: 220,
        render: (_, product) => (
          <Space>
            <ActionButton
@@ -134,11 +136,11 @@ export default function ProductTable({
       className={styles.productsTable}
       ref={containerRef}
     >
-      <Table<Product>
-        columns={columns}
-        dataSource={products}
-        scroll={{ y: scrollY }}
-      />
+       <Table<Product>
+         columns={columns}
+         dataSource={products}
+         scroll={{ x: 1200, y: scrollY }}
+       />
     </div>
   )
 }

@@ -62,7 +62,7 @@ export default function CustomerTable({ editCustomer, deleteCustomer, viewRecomm
        title: 'Ações',
        key: 'actions',
        fixed: 'right',
-       width: 120,
+       width: 160,
        render: (_, customer) => (
          <Space>
            <ActionButton
@@ -96,11 +96,11 @@ export default function CustomerTable({ editCustomer, deleteCustomer, viewRecomm
       className={styles.customersTable}
       ref={containerRef}
     >
-      <Table<Customer>
-        columns={columns}
-        dataSource={customers}
-        scroll={{ y: scrollY }}
-      />
+       <Table<Customer>
+         columns={columns}
+         dataSource={customers}
+         scroll={{ x: 1000, y: scrollY }}
+       />
     </div>
 
 
