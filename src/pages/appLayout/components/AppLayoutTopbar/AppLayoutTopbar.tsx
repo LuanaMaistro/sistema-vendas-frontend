@@ -1,7 +1,6 @@
 import { useLocation } from 'react-router-dom'
 import styles from './AppLayoutTopbar.module.css'
 import SwitchTheme from './components/SwitchTheme/SwitchTheme'
-import NotificationsBell from './components/NotificationsBell/NotificationsBell'
 import { routesConfigs } from '../../../../routes/routes'
 
 export default function AppLayoutTopbar() {
@@ -17,7 +16,6 @@ export default function AppLayoutTopbar() {
     <div className={styles.topbarContainer}>
       <span className={styles.pageTitle}>{pageTitle}</span>
       <div className={styles.topbarActions}>
-        <NotificationsBell />
         <SwitchTheme />
       </div>
     </div>
