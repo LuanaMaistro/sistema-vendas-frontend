@@ -5,6 +5,7 @@ import { useProductCrudStore } from "../../ProductCrudStore"
 import { CheckCircleOutlined, DeleteOutlined, EditOutlined, MinusCircleOutlined, PlusCircleOutlined, StopOutlined } from "@ant-design/icons"
 import ActionButton from "@/components/table/ActionButton/ActionButton"
 import useTableScrollY from "@/hooks/useTableScrollY"
+import StockIndicator from "../StockIndicator/StockIndicator"
 
 interface ProductTableProps {
   editProduct: (p: Product) => void,
@@ -28,35 +29,24 @@ export default function ProductTable({
   }, [loadProducts])
 
 
+  const textoEstoque = [
+    'Muito acima do mínimo',
+    'Acima do mínimo',
+    'Levemente acima do mínimo',
+    'Próximo ao mínimo',
+    'No limite mínimo',
+    'Abaixo do mínimo'
+  ]
+
   const columns: TableColumnsType<Product> = [
     {
       title: "Nivel Estoque",
-      render: (_, record) => {
-        const colors = [
-          '#4CAF50',
-          '#8BC34A',
-          '#CDDC39',
-          '#FFC107',
-          '#FF9800',
-          '#F44336'
-        ]
-        const textoEstoque = [
-          'Muito acima do mínimo', //"Estoque ótimo"  
-          'Acima do mínimo', //"Estoque adequado" 
-          'Levemente acima do mínimo', //"Estoque satisfatório"
-          'Próximo ao mínimo', //"Estoque baixo"  
-          'No limite mínimo', //"Estoque crítico"
-          'Abaixo do mínimo' //"Estoque insuficiente"
-        ]
-        const color = colors[record.nivelEstoque]
-        const texto = textoEstoque[record.nivelEstoque]
-        return (
-          <div>
-          <div className={styles.indicator} style={{background: color}}></div>
-          <div>{texto}</div>
-          </div>
-        )
-      },
+      render: (_, record) => (
+        <StockIndicator
+          level={record.nivelEstoque}
+          text={textoEstoque[record.nivelEstoque]}
+        />
+      ),
     },
     {
       title: "Nome",
@@ -70,8 +60,8 @@ export default function ProductTable({
       title: "Ativo",
       render: (_, record) => {
         const statusText = record.active ? "Sim" : "Não";
-        const styles = record.active ? "success" : "red";
-        return <Tag color={styles}>{statusText}</Tag>;
+        const statusStyle = record.active ? "success" : "red";
+        return <Tag color={statusStyle}>{statusText}</Tag>;
       },
     },
     {
@@ -144,7 +134,5 @@ export default function ProductTable({
         scroll={{ y: scrollY }}
       />
     </div>
-
-
   )
 }

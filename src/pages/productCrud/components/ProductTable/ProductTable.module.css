@@ -2,9 +2,3 @@
   flex: 1;
   min-height: 0;
 }
-
-.indicator{
-  height: 24px;
-  width: 24px;
-  border-radius: 100px;
-}
