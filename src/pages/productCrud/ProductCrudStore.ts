@@ -14,6 +14,7 @@ interface ProductCrudStoreState {
   setNomeFilter: (nome?: string) => void,
   setCategoriaFilter: (categoria?: string) => void,
   setOnlyActives: (onlyActives: boolean) => void,
+  clearFilters: () => void,
   loadProducts: () => Promise<void>,
 }
 
@@ -33,6 +34,10 @@ export const useProductCrudStore = create<ProductCrudStoreState>((set, get) => (
   },
   setOnlyActives: (onlyActives: boolean) => {
     set(state => ({ filters: { ...state.filters, onlyActives } }))
+    get().loadProducts()
+  },
+  clearFilters: () => {
+    set({ filters: { onlyActives: false } })
     get().loadProducts()
   },
   loadProducts: async () => {
