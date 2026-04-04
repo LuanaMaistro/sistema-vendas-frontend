@@ -71,7 +71,7 @@ export default function ProductTable({
     {
       title: "Preço",
       dataIndex: ["price", "Value"],
-      render: (value: number) => `R$ ${value.toFixed(2)}`,
+      render: (value: number) => formatCurrency(value),
     },
     {
       title: "Quantidade",
