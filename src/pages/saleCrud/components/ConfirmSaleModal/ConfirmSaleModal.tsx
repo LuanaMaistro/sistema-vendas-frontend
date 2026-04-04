@@ -29,11 +29,6 @@ export default function ConfirmSaleModal({
   onCancel
 }: ConfirmSaleModalProps) {
 
-  const formatCurrency = (value?: number) => {
-    if (value === undefined) return '-'
-    return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-  }
-
   return (
     <Modal
       title="Confirmar Venda"
