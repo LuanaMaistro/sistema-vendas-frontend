@@ -1,6 +1,6 @@
 /* tslint:disable */
 /**
- * Gerenciamento de Vendas API
+ * NexSell API
  * API para gerenciamento de vendas e estoque
  *
  * The version of the OpenAPI document: v1

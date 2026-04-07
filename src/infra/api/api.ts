@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Gerenciamento de Vendas API
+ * NexSell API
  * API para gerenciamento de vendas e estoque
  *
  * The version of the OpenAPI document: v1
@@ -207,6 +207,7 @@ export interface VendaCreateDTO {
 }
 export interface VendaDTO {
     'id'?: string;
+    'numero'?: number;
     'clienteId'?: string;
     'clienteNome'?: string | null;
     'dataVenda'?: string;
@@ -215,10 +216,6 @@ export interface VendaDTO {
     'formaPagamento'?: string | null;
     'observacao'?: string | null;
     'itens'?: Array<ItemVendaDTO> | null;
-}
-export interface VisualizacaoEventoDTO {
-    'clienteId'?: string;
-    'produtoId'?: string;
 }
 
 /**
@@ -2750,41 +2747,6 @@ export const RecomendacoesApiAxiosParamCreator = function (configuration?: Confi
         },
         /**
          * 
-         * @param {VisualizacaoEventoDTO} [visualizacaoEventoDTO] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        apiRecomendacoesEventosVisualizacaoPost: async (visualizacaoEventoDTO?: VisualizacaoEventoDTO, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/Recomendacoes/eventos/visualizacao`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(visualizacaoEventoDTO, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @param {number} [quantidade] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2858,18 +2820,6 @@ export const RecomendacoesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {VisualizacaoEventoDTO} [visualizacaoEventoDTO] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async apiRecomendacoesEventosVisualizacaoPost(visualizacaoEventoDTO?: VisualizacaoEventoDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.apiRecomendacoesEventosVisualizacaoPost(visualizacaoEventoDTO, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RecomendacoesApi.apiRecomendacoesEventosVisualizacaoPost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @param {number} [quantidade] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2911,15 +2861,6 @@ export const RecomendacoesApiFactory = function (configuration?: Configuration, 
         },
         /**
          * 
-         * @param {VisualizacaoEventoDTO} [visualizacaoEventoDTO] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        apiRecomendacoesEventosVisualizacaoPost(visualizacaoEventoDTO?: VisualizacaoEventoDTO, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.apiRecomendacoesEventosVisualizacaoPost(visualizacaoEventoDTO, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {number} [quantidade] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2954,16 +2895,6 @@ export class RecomendacoesApi extends BaseAPI {
      */
     public apiRecomendacoesClienteClienteIdGet(clienteId: string, quantidade?: number, options?: RawAxiosRequestConfig) {
         return RecomendacoesApiFp(this.configuration).apiRecomendacoesClienteClienteIdGet(clienteId, quantidade, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {VisualizacaoEventoDTO} [visualizacaoEventoDTO] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public apiRecomendacoesEventosVisualizacaoPost(visualizacaoEventoDTO?: VisualizacaoEventoDTO, options?: RawAxiosRequestConfig) {
-        return RecomendacoesApiFp(this.configuration).apiRecomendacoesEventosVisualizacaoPost(visualizacaoEventoDTO, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
