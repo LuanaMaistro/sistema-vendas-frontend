@@ -42,7 +42,7 @@ export default function useLogin() {
       }
 
       setToken(token)
-      navigate('/customers', { replace: true })
+      navigate('/dashboard', { replace: true })
     } catch {
       notify({
         type: 'error',
