@@ -52,7 +52,7 @@ export default function SaleList({ onConfirmSale, onCancelSale }: SaleListProps)
     label: (
       <div className={styles.collapseHeader}>
         <Space size="large">
-          <Text strong>Venda # código da venda</Text>
+          <Text strong>Venda #{sale.number}</Text>
           <Text type="secondary">{formatDate(sale.date)}</Text>
           {getStatusTag(sale.status)}
           <Text>Total: {formatCurrency(sale.totalAmount)}</Text>

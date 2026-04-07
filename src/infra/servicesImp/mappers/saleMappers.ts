@@ -10,7 +10,8 @@ export const convertVendaDTOToSale = (dto: VendaDTO): Sale => {
     status: convertStatusToEnum(dto.status!),
     paymentMethod: convertPaymentMethodToEnum(dto.formaPagamento!),
     observations: dto.observacao!,
-    items: dto.itens?.map(convertItemVendaDTOToSaleItem) || []
+    items: dto.itens?.map(convertItemVendaDTOToSaleItem) || [],
+    number: dto.numero,
   }
 }
 
