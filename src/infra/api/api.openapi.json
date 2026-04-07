@@ -1,16 +1,10 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Gerenciamento de Vendas API",
+    "title": "NexSell API",
     "description": "API para gerenciamento de vendas e estoque",
     "version": "v1"
   },
-  "servers": [
-    {
-      "url": "http://localhost:5001",
-      "description": "Servidor Local"
-    }
-  ],
   "paths": {
     "/api/auth/login": {
       "post": {
@@ -1573,37 +1567,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/Recomendacoes/eventos/visualizacao": {
-      "post": {
-        "tags": [
-          "Recomendacoes"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VisualizacaoEventoDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VisualizacaoEventoDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/VisualizacaoEventoDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
           }
         }
       }
@@ -3255,6 +3218,10 @@
             "type": "string",
             "format": "uuid"
           },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
           "clienteId": {
             "type": "string",
             "format": "uuid"
@@ -3292,20 +3259,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "VisualizacaoEventoDTO": {
-        "type": "object",
-        "properties": {
-          "clienteId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "produtoId": {
-            "type": "string",
-            "format": "uuid"
-          }
-        },
-        "additionalProperties": false
       }
     },
     "securitySchemes": {
@@ -3319,7 +3272,7 @@
   },
   "security": [
     {
-      "Bearer": [ ]
+      "Bearer": []
     }
   ]
 }
