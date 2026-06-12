@@ -27,7 +27,7 @@ export default function ProductCrudPage() {
       <PageHeader
         title='Produto'
         subtitle='Gerencie os produtos do sistema'
-        extra={<Button type="primary" onClick={addProduct.open}>Adicionar produto</Button>}
+        extra={<Button type="primary" onClick={addProduct.open} data-tour="adicionar_produto">Adicionar produto</Button>}
       />
 
       <ProductFilters />

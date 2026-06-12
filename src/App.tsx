@@ -9,6 +9,7 @@ import { darkTheme, lightTheme } from './config/theme'
 import styles  from './App.module.css'
 import LoginPage from './pages/login/LoginPage'
 import ProtectedRoute from './routes/ProtectedRoute'
+import TourProvider from './tour/TourProvider'
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           </Route>
         </Route>
       </Routes>
+      <TourProvider />
     </BrowserRouter>
   )
 

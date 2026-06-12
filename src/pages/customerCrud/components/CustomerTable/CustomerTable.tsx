@@ -82,6 +82,7 @@ export default function CustomerTable({ editCustomer, deleteCustomer, viewRecomm
              icon={<StarOutlined />}
              tooltip="Recomendações"
              color="yellow"
+             data-tour="botao_recomendacoes"
            />
          </Space>
        )
@@ -95,6 +96,7 @@ export default function CustomerTable({ editCustomer, deleteCustomer, viewRecomm
     <div
       className={styles.customersTable}
       ref={containerRef}
+      data-tour="tabela_clientes"
     >
        <Table<Customer>
          columns={columns}

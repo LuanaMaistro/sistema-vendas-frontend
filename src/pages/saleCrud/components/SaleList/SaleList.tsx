@@ -75,6 +75,7 @@ export default function SaleList({ onConfirmSale, onCancelSale }: SaleListProps)
                   type="primary"
                   icon={<PlusOutlined />}
                   onClick={() => openAddItemModal(sale)}
+                  data-tour="adicionar_item_venda"
                 >
                   Adicionar Item
                 </Button>

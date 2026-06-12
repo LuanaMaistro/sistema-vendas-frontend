@@ -92,18 +92,20 @@ export default function DashboardPage() {
         title="Relatórios"
         subtitle="Visão geral do desempenho de vendas"
         extra={
-          <RangePicker
-            value={dateRange as [Dayjs, Dayjs] | null}
-            onChange={range => handleDateRangeChange(range as [Dayjs | null, Dayjs | null] | null)}
-            format="DD/MM/YYYY"
-            allowClear
-          />
+          <div data-tour="filtro_data">
+            <RangePicker
+              value={dateRange as [Dayjs, Dayjs] | null}
+              onChange={range => handleDateRangeChange(range as [Dayjs | null, Dayjs | null] | null)}
+              format="DD/MM/YYYY"
+              allowClear
+            />
+          </div>
         }
       />
 
       <Spin spinning={loading}>
         <div className={styles.content}>
-        <Row gutter={[24, 24]}>
+        <Row gutter={[24, 24]} data-tour="indicadores">
           <Col xs={24} sm={12} lg={8}>
             <IndicatorCard
               title="Total de Pedidos"
@@ -133,7 +135,7 @@ export default function DashboardPage() {
           </Col>
         </Row>
 
-        <Row gutter={[24, 24]}>
+        <Row gutter={[24, 24]} data-tour="graficos">
           <Col xs={24} lg={12}>
             <Card
               title="Top Produtos Mais Vendidos"
@@ -164,7 +166,7 @@ export default function DashboardPage() {
           </Col>
         </Row>
 
-        <Row gutter={[24, 24]}>
+        <Row gutter={[24, 24]} data-tour="graficos_1">
           <Col xs={24} lg={12}>
             <Card
               title="Vendas por Categoria"
@@ -189,7 +191,7 @@ export default function DashboardPage() {
           </Col>
         </Row>
 
-        <Row gutter={[24, 24]}>
+        <Row gutter={[24, 24]} data-tour="graficos_2">
           <Col xs={24}>
             <Card
               title={`Estoque em Risco — ${estoque?.produtosAbaixoDoMinimo ?? 0} produto(s) abaixo do mínimo`}

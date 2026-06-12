@@ -26,7 +26,7 @@ export default function CustomerCrudPage() {
       <PageHeader
         title='Cliente'
         subtitle='Gerencie os clientes do sistema'
-        extra={<Button type="primary" onClick={addCustomer.open}>Adicionar cliente</Button>}
+        extra={<Button type="primary" onClick={addCustomer.open} data-tour="adicionar_cliente">Adicionar cliente</Button>}
       />
 
       <CustomerFilters />

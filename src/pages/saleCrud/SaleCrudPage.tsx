@@ -20,7 +20,14 @@ export default function SaleCrudPage() {
       <PageHeader
         title='Vendas'
         subtitle='Gerencie as vendas do sistema'
-        extra={<Button type="primary" onClick={addSale.open}>Nova Venda</Button>}
+        extra={<Button
+          type="primary"
+          onClick={addSale.open}
+          data-tour='adicionar_venda'
+        >
+          Nova Venda
+        </Button>
+        }
       />
 
       <SaleFilters />

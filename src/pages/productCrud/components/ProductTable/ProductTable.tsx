@@ -139,6 +139,7 @@ export default function ProductTable({
              icon={<PlusCircleOutlined />}
              tooltip="Adicionar estoque"
              color="blue"
+             data-tour="botao_estoque"
            />
 
            <ActionButton
@@ -159,6 +160,7 @@ export default function ProductTable({
     <div
       className={styles.productsTable}
       ref={containerRef}
+      data-tour="tabela_produtos"
     >
        <Table<Product>
          columns={columns}

@@ -6,6 +6,7 @@ interface ActionButtonProps {
   tooltip: string
   danger?: boolean
   color?: "blue" | "red" | "yellow" | "green"
+  'data-tour'?: string
 }
 
 const colorMap: Record<string, string> = {
@@ -21,6 +22,7 @@ export default function ActionButton({
   tooltip,
   danger = false,
   color,
+  'data-tour': dataTour,
 }: ActionButtonProps) {
   return (
     <Button
@@ -29,6 +31,7 @@ export default function ActionButton({
       icon={icon}
       onClick={onClick}
       title={tooltip}
+      data-tour={dataTour}
       style={
         color && colorMap[color]
           ? { color: colorMap[color] }

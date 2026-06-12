@@ -79,7 +79,7 @@ export default function CustomerForm({ customerType, form, onFinish, isEditing =
       >
         <Row gutter={16}>
           <Col span={24}>
-            <Title level={5}>Dados báscios</Title>
+            <Title level={5}>Dados básicos</Title>
             <Paragraph>Dados básicos do cliente</Paragraph>
           </Col>
 
