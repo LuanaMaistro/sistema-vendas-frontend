@@ -158,3 +158,30 @@
 .logoutIcon:hover {
   color: var(--ant-color-text);
 }
+
+.iconWrap {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  color: #2dd4bf;
+}
+
+.orbitSvg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.neonRing {
+  fill: none;
+  stroke: #2dd4bf;
+  stroke-width: 0.8;
+  opacity: 0.4;
+  filter: drop-shadow(0 0 2px #2dd4bf);
+}
+
+.neonBeam {
+  fill: #2dd4bf;
+  filter: drop-shadow(0 0 3px #2dd4bf) drop-shadow(0 0 6px rgba(45, 212, 191, 0.6));
+}

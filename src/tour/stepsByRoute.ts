@@ -1,13 +1,18 @@
+import { getTourAction } from "./tourActions"
 
 const mountStep = (target: string, title: string, description: string) => {
   return {
     title,
     description,
     target: () => document.querySelector(`[data-tour=${target}]`) as HTMLElement,
+    onStepChange: () => {
+      const el = document.querySelector(`[data-tour=${target}]`) as HTMLElement
+      getTourAction(el)?.()
+    }
   }
 }
 
-export const stpesByPath: Record<string, any[]> = {
+export const stepsByPath: Record<string, ReturnType<typeof mountStep>[]> = {
   '/products': [
     mountStep(
       'adicionar_produto',
@@ -43,12 +48,12 @@ export const stpesByPath: Record<string, any[]> = {
     ),
     mountStep(
       'graficos_1',
-      'Análises Visuais1',
+      'Análises Visuais',
       'Gráficos de vendas por categoria e receita x quantidade por produto.'
     ),
     mountStep(
       'graficos_2',
-      'Análises Visuais2',
+      'Estoque em risco',
       'Gráficos que indica produtos com estoque em risco.'
     ),
   ],

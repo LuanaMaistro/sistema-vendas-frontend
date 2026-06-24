@@ -9,11 +9,15 @@ import { DeleteConfirmationModal } from '../../components/modals/DeleteConfirmat
 import useAddSale from './hooks/useAddSale'
 import useCancelSale from './hooks/useCancelSale'
 import useConfirmSale from './hooks/useConfirmSale'
+import { useTourAction } from '@/tour/useTourAction'
+
 
 export default function SaleCrudPage() {
   const addSale = useAddSale()
   const cancelSale = useCancelSale()
   const confirmSale = useConfirmSale()
+
+  const ref = useTourAction<HTMLButtonElement>(addSale.open)
 
   return (
     <div className={styles.saleCrudPage}>
@@ -24,6 +28,7 @@ export default function SaleCrudPage() {
           type="primary"
           onClick={addSale.open}
           data-tour='adicionar_venda'
+          ref={ref}
         >
           Nova Venda
         </Button>
